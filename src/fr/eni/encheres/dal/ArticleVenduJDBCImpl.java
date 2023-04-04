@@ -1,6 +1,7 @@
 package fr.eni.encheres.dal;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import fr.eni.encheres.bo.ArticleVendu;
@@ -16,6 +17,18 @@ public class ArticleVenduJDBCImpl implements ArticleVenduDAO {
 	public void creerVenteArticle(ArticleVendu article) {
 		try {
 			Connection cnx = ConnectionProvider.getConnection();
+			
+			PreparedStatement pstmt = cnx.prepareStatement(CREER_VENTE_ARTICLE);
+			pstmt.setString(1, article.getNomArticle());
+			pstmt.setString(2, article.getDescription());
+			pstmt.setDate(3, article.getDateDebutEncheres());
+			pstmt.setDate(4, article.getDateFinEncheres());
+			pstmt.setInt(5, article.getPrixInitial());
+			pstmt.setInt(6, article.getVend().getNoUtilisateur());
+			pstmt.setInt(7, article.getCategorie().getNoCategorie());
+			
+			pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
