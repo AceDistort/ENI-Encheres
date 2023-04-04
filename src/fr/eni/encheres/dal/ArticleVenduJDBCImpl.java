@@ -1,5 +1,8 @@
 package fr.eni.encheres.dal;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import fr.eni.encheres.bo.ArticleVendu;
 
 public class ArticleVenduJDBCImpl implements ArticleVenduDAO {
@@ -11,7 +14,12 @@ public class ArticleVenduJDBCImpl implements ArticleVenduDAO {
 	 */
 	@Override
 	public void creerVenteArticle(ArticleVendu article) {
-		// TODO Auto-generated method stub
+		try {
+			Connection cnx = ConnectionProvider.getConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
