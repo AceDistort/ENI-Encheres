@@ -3,8 +3,13 @@ package fr.eni.encheres.bll;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
 import java.sql.SQLException;
 import java.util.List;
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 import fr.eni.encheres.bo.BusinessException;
 import fr.eni.encheres.bo.Utilisateur;
@@ -129,12 +134,15 @@ public class UtilisateurManager {
 	 */
 	public void seConnecter(Utilisateur utilisateur) throws BusinessException {
 		
-		Utilisateur utilisateurBDD = null;
+		Utilisateur utilisateurBDD = new Utilisateur();
 		utilisateurBDD = utilisateurDAO.selectionnerParPseudo(utilisateur);
-		String salt = getSalt();
-		utilisateur.setMotDePasse(get_SHA_256_SecurePassword(utilisateur.getMotDePasse(), salt));
+		
+		String hash = new String(getPBKDF2WithHmacSHA1(utilisateur.getMotDePasse(),utilisateurBDD.getSalt().getBytes()));
 	    
-	    if(!utilisateurBDD.getMotDePasse().equals(utilisateur.getMotDePasse())) {
+		System.out.println(hash);
+		System.out.println(utilisateurBDD.getMotDePasse());
+		
+		if(!utilisateurBDD.getMotDePasse().equals(hash)) {
 	    	BusinessException be = new BusinessException();
 	    	be.ajouterErreur(CodesResultatBLL.MOT_DE_PASSE_UTILISATEUR_INCORRECT);
 	    	throw be;
@@ -158,37 +166,29 @@ public class UtilisateurManager {
 //		}
 	}
 	
-	//GESTION DE LA SECURITE DES MOTS DE PASSE
-	private static String getSalt() throws BusinessException {
-		try {
-			SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
-        	byte[] salt = new byte[16];
-        	sr.nextBytes(salt);
-            return salt.toString();
-		} catch (NoSuchAlgorithmException e) {
-			BusinessException be = new BusinessException();
-			be.ajouterErreur(CodesResultatBLL.NOSUCHALGORITHM);
-			throw be;
-		}
+	
+	
+
+	public static byte[] getSalt() {
+		SecureRandom random = new SecureRandom();
+		byte[] salt = new byte[16];
+		random.nextBytes(salt);
+		return salt;
     }
-	private static String get_SHA_256_SecurePassword(String passwordToHash,
-            String salt) throws BusinessException {
-        String generatedPassword = null;
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            md.update(salt.getBytes());
-            byte[] bytes = md.digest(passwordToHash.getBytes());
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < bytes.length; i++) {
-                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16)
-                        .substring(1));
-            }
-            generatedPassword = sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            BusinessException be = new BusinessException();
-            be.ajouterErreur(CodesResultatBLL.NOSUCHALGORITHM);
-            throw be;
-        }
-        return generatedPassword;
+	public static byte[] getPBKDF2WithHmacSHA1(String password,
+			byte[] salt) throws BusinessException {
+		byte[] hash = null;
+		try {
+			KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
+			SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+			hash = factory.generateSecret(spec).getEncoded();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidKeySpecException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return hash;
     }
 }
