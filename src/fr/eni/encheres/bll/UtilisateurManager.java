@@ -109,16 +109,12 @@ public class UtilisateurManager {
 	 * @param utilisateur
 	 * @return Vrai si la connection est faite
 	 */
-	public void seConnecter(Utilisateur utilisateur) {
+	public void seConnecter(Utilisateur utilisateur) throws BusinessException {
 		
 		Utilisateur utilisateurBDD = null;
-		try {
-			utilisateurBDD = utilisateurDAO.selectionnerParPseudo(utilisateur);
-		} catch (BusinessException e) {
-			throw e;
-		}
-	    String salt = getSalt();
-	    utilisateur.setMotDePasse(get_SHA_256_SecurePassword(utilisateur.getMotDePasse(), salt));
+		utilisateurBDD = utilisateurDAO.selectionnerParPseudo(utilisateur);
+		String salt = getSalt();
+		utilisateur.setMotDePasse(get_SHA_256_SecurePassword(utilisateur.getMotDePasse(), salt));
 	    
 	    if(!utilisateurBDD.getMotDePasse().equals(utilisateur.getMotDePasse())) {
 	    	BusinessException be = new BusinessException();
@@ -141,11 +137,17 @@ public class UtilisateurManager {
 	}
 	
 	//GESTION DE LA SECURITE DES MOTS DE PASSE
-	private static String getSalt() throws NoSuchAlgorithmException {
-        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
-        byte[] salt = new byte[16];
-        sr.nextBytes(salt);
-        return salt.toString();
+	private static String getSalt() throws BusinessException {
+		try {
+			SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+        	byte[] salt = new byte[16];
+        	sr.nextBytes(salt);
+            return salt.toString();
+		} catch (NoSuchAlgorithmException e) {
+			BusinessException be = new BusinessException();
+			be.ajouterErreur(CodesResultatBLL.NOSUCHALGORITHM);
+			throw be;
+		}
     }
 	private static String get_SHA_256_SecurePassword(String passwordToHash,
             String salt) throws BusinessException {
