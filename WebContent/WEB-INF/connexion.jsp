@@ -15,20 +15,21 @@
 	</header>
 	
 	<section class="centered">
-		<form method="post" action="/connexion">
+		<form method="post" action="connexion">
 			<div class="input-label-box">
 				<label>Identifiant : </label>
-				<input type="text" name="pseudo">
+				<input required type="text" name="identifiant" placeholder="">
 			</div>
 			
 			<div class="input-label-box">
 				<label>Mot de passe : </label>
-				<input type="password" name="motDePasse">
+				<input required type="password" name="motDePasse">
 			</div>
 			<div class="input-label-box">
 				<input class="button" type="submit" value="Connexion" >
 			</div>
 		</form>
+		<p class="error-text"><%=session.getAttribute("erreurConnexion") %></p>
 		
 	</section>
 </body>

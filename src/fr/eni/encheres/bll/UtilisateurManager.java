@@ -108,6 +108,7 @@ public class UtilisateurManager {
 	 * M�thode pour se connecter � l'application. Ajoute les donn�es de l'utilisateur au param�tre d'entr�e.
 	 * @param utilisateur
 	 * @return Vrai si la connection est faite
+	 * @throws BusinessException
 	 */
 	public void seConnecter(Utilisateur utilisateur) throws BusinessException {
 		

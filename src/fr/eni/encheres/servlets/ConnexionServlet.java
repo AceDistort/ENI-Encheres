@@ -9,12 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.encheres.bll.UtilisateurManager;
+import fr.eni.encheres.bo.BusinessException;
+import fr.eni.encheres.bo.Utilisateur;
+
 /**
  * Servlet implementation class ConnexionServlet
  */
 @WebServlet("/connexion")
 public class ConnexionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private UtilisateurManager utilisateurManager;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -40,8 +45,19 @@ public class ConnexionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		try {
+			UtilisateurManager.getUtilisateurManager();
+			
+			Utilisateur utilisateur = new Utilisateur(request.getParameter("identifiant"),request.getParameter("motDePasse"));
+			
+			utilisateurManager.seConnecter(utilisateur);
+			request.getSession().setAttribute("sessionUtilisateur", utilisateur);
+			((HttpServletResponse) response).sendRedirect("/encheres");
+		} catch (BusinessException e) {
+			request.getSession().setAttribute("erreurConnexion", "Erreur");
+			request.getRequestDispatcher("WEB-INF/connexion.jsp").forward(request, response);
+		}
+			
 	}
 
 }

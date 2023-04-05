@@ -20,6 +20,11 @@ public class Utilisateur {
 	public Utilisateur() {
 	}
 	
+	public Utilisateur(String pseudo, String motDePasse) {
+		setPseudo(pseudo);
+		setMotDePasse(motDePasse);
+	}
+	
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String rue, String codePostal,
 			String ville, String motDePasse, int credit, boolean administrateur, String salt) {
 		setPseudo(pseudo);
