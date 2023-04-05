@@ -17,9 +17,12 @@ public interface UtilisateurDAO {
 	//Supprimer un utilisateur
 	public void supprimerUtilisateur(Utilisateur utilisateur) throws BusinessException;
 	
-	//Afficher un utilisateur
-	public void afficher(Utilisateur utilisateur) throws BusinessException;
+	//Afficher un utilisateur par ID
+	public Utilisateur selectionnerParId(Utilisateur utilisateur) throws BusinessException;
 	
 	//Lister tous les utilisateurs
 	public List<Utilisateur> lister() throws BusinessException;
+	
+	//Afficher un utilisateur par pseudo
+	public Utilisateur selectionnerParPseudo(Utilisateur utilisateur) throws BusinessException; 
 }

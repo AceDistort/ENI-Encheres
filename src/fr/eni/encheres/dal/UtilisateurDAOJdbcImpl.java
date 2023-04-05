@@ -17,8 +17,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String AJOUTER = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
 	private static final String MODIFIER = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? WHERE no_utilisateur=?;";
 	private static final String SUPPRIMER = "DELETE FROM UTILISATEURS WHERE no_utilisateur=?;";
-	private static final String AFFICHER_UN_UTILISATEUR = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administeur FROM UTILISATEUR WHERE no_utilisateur=?;";
+	private static final String AFFICHER_UTILISATEUR_PAR_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administeur FROM UTILISATEUR WHERE no_utilisateur=?;";
 	private static final String AFFICHER_TOUS_LES_UTILISATEURS = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administeur FROM UTILISATEUR;";
+	private static final String AFFICHER_UTILISATEUR_PAR_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administeur FROM UTILISATEUR WHERE pseudo=?, mot_de_passe=?;";
 
 	@Override
 	public void creerUtilisateur(Utilisateur utilisateur) throws SQLException, BusinessException {
@@ -116,40 +117,44 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public void afficher(Utilisateur utilisateur) throws BusinessException {
+	public Utilisateur selectionnerParId(Utilisateur utilisateur) throws BusinessException {
+		Utilisateur unUtilisateur = null; 
 		if (utilisateur == null) {
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.OBJET_NULL_AFFICHER_UN_UTILISATEUR);
+			businessException.ajouterErreur(CodesResultatDAL.OBJET_NULL_AFFICHER_UTILISATEUR_PAR_ID);
 			throw businessException;
 		}
 		
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
-			PreparedStatement pstmt = cnx.prepareStatement(AFFICHER_UN_UTILISATEUR);
+			PreparedStatement pstmt = cnx.prepareStatement(AFFICHER_UTILISATEUR_PAR_ID);
 			pstmt.setInt(1, utilisateur.getNoUtilisateur());
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
-				utilisateur.setPseudo(rs.getString("pseudo"));
-				utilisateur.setNom(rs.getString("nom"));
-				utilisateur.setPrenom(rs.getString("prenom"));
-				utilisateur.setEmail(rs.getString("email"));
-				utilisateur.setTelephone(rs.getString("telephone"));
-				utilisateur.setRue(rs.getString("rue"));
-				utilisateur.setCodePostal(rs.getString("code_postal"));
-				utilisateur.setVille(rs.getString("ville"));
-				utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
-				utilisateur.setCredit(rs.getInt("credit"));
-				utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+				unUtilisateur = new Utilisateur();
+				unUtilisateur.setPseudo(rs.getString("pseudo"));
+				unUtilisateur.setNom(rs.getString("nom"));
+				unUtilisateur.setPrenom(rs.getString("prenom"));
+				unUtilisateur.setEmail(rs.getString("email"));
+				unUtilisateur.setTelephone(rs.getString("telephone"));
+				unUtilisateur.setRue(rs.getString("rue"));
+				unUtilisateur.setCodePostal(rs.getString("code_postal"));
+				unUtilisateur.setVille(rs.getString("ville"));
+				unUtilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+				unUtilisateur.setCredit(rs.getInt("credit"));
+				unUtilisateur.setAdministrateur(rs.getBoolean("administrateur"));
 			}
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.AUTRE_ERREUR_AFFICHER_UN_UTILISATEUR);
+			businessException.ajouterErreur(CodesResultatDAL.AUTRE_ERREUR_AFFICHER_UTILISATEUR_PAR_ID);
 			throw businessException;
 		}
+		
+		return unUtilisateur;
 	}
 
 	@Override
@@ -190,4 +195,44 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		return utilisateurs;
 	}
 
+	@Override
+	public Utilisateur selectionnerParPseudo(Utilisateur utilisateur) throws BusinessException {
+		Utilisateur unUtilisateur = null;
+		if (utilisateur == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.OBJET_NULL_AFFICHER_UTILISATEUR_PAR_PSEUDO);
+			throw businessException;
+		}
+		
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(AFFICHER_UTILISATEUR_PAR_PSEUDO);
+			pstmt.setString(1, utilisateur.getPseudo());
+			pstmt.setString(2, utilisateur.getMotDePasse());
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				unUtilisateur = new Utilisateur();
+				unUtilisateur.setPseudo(rs.getString("pseudo"));
+				unUtilisateur.setNom(rs.getString("nom"));
+				unUtilisateur.setPrenom(rs.getString("prenom"));
+				unUtilisateur.setEmail(rs.getString("email"));
+				unUtilisateur.setTelephone(rs.getString("telephone"));
+				unUtilisateur.setRue(rs.getString("rue"));
+				unUtilisateur.setCodePostal(rs.getString("code_postal"));
+				unUtilisateur.setVille(rs.getString("ville"));
+				unUtilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+				unUtilisateur.setCredit(rs.getInt("credit"));
+				unUtilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.AUTRE_ERREUR_AFFICHER_UTILISATEUR_PAR_PSEUDO);
+			throw businessException;
+		}
+		return unUtilisateur;
+	}
 }
