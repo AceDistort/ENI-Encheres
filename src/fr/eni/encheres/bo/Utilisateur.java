@@ -113,7 +113,7 @@ public class Utilisateur {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
+		result = prime * result + ((pseudo == null) ? 0 : pseudo.hashCode());
 		return result;
 	}
 
@@ -131,10 +131,10 @@ public class Utilisateur {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (prenom == null) {
-			if (other.prenom != null)
+		if (pseudo == null) {
+			if (other.pseudo != null)
 				return false;
-		} else if (!prenom.equals(other.prenom))
+		} else if (!pseudo.equals(other.pseudo))
 			return false;
 		return true;
 	}
