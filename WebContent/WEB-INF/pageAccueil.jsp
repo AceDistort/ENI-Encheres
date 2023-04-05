@@ -18,7 +18,7 @@
 		<ul>
 			<c:if test="${empty sessionScope['sessionUtilisateur']}">
 				<li><a href="inscription">S'inscrire</a></li>
-				<li><a href="connection">Se connecter</a></li>
+				<li><a href="connexion">Se connecter</a></li>
 			</c:if>
 			<c:if test="${not empty sessionScope['sessionUtilisateur']}">
 				<li><a href="">Enchères</a></li>
