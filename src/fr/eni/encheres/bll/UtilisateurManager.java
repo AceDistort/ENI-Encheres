@@ -69,7 +69,7 @@ public class UtilisateurManager {
 		
 		try
 		{
-			//recuperer l'eleve en cours
+			//recuperer l'utilisateur en cours
 			utilisateurEnCours = utilisateurs.get(index);
 			if (!utilisateur.equals(utilisateurEnCours)) {
 				businessException.ajouterErreur(CodesResultatBLL.ERREUR_EQUALS_MODIF_UTILISATEUR);
@@ -105,7 +105,7 @@ public class UtilisateurManager {
 	}
 	
 	/**
-	 * Méthode pour se connecter à l'application. Ajoute les données de l'utilisateur au paramètre d'entrée.
+	 * Mï¿½thode pour se connecter ï¿½ l'application. Ajoute les donnï¿½es de l'utilisateur au paramï¿½tre d'entrï¿½e.
 	 * @param utilisateur
 	 * @return Vrai si la connection est faite
 	 */

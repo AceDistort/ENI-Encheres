@@ -35,23 +35,23 @@ public abstract class CodesResultatDAL {
 	public static final int AUTRE_ERREUR_SUPPRESSION_UTILISATEUR=10005;
 	
 	/**
-	 * Echec général quand tentative affichage un objet null
+	 * Echec général quand tentative affichage par ID un objet null
 	 */
 	public static final int OBJET_NULL_AFFICHER_UTILISATEUR_PAR_ID=10006;
 	/**
-	 * Echec général quand erreur non gérée à affichage
+	 * Echec général quand erreur non gérée à affichage par ID
 	 */
 	public static final int AUTRE_ERREUR_AFFICHER_UTILISATEUR_PAR_ID=10007;
 	/**
-	 * Echec général quand erreur non gérée à affichage
+	 * Echec général quand erreur non gérée à affichage tous les utilisateurs
 	 */
 	public static final int AUTRE_ERREUR_AFFICHER_TOUS_LES_UTILISATEURS=10008;
 	/**
-	 * Echec général quand tentative affichage un objet null
+	 * Echec général quand tentative affichage un objet null par pseudo
 	 */
 	public static final int OBJET_NULL_AFFICHER_UTILISATEUR_PAR_PSEUDO=10009;
 	/**
-	 * Echec général quand erreur non gérée à affichage
+	 * Echec général quand erreur non gérée à affichage par pseudo
 	 */
 	public static final int AUTRE_ERREUR_AFFICHER_UTILISATEUR_PAR_PSEUDO=10010;
 	
