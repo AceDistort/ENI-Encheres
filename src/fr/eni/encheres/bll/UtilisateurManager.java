@@ -15,6 +15,7 @@ import fr.eni.encheres.bo.BusinessException;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.UtilisateurDAO;
+import fr.eni.encheres.util.HashMotDePasse;
 
 public class UtilisateurManager {
 	//Attributs d'instance
@@ -137,17 +138,26 @@ public class UtilisateurManager {
 		Utilisateur utilisateurBDD = new Utilisateur();
 		utilisateurBDD = utilisateurDAO.selectionnerParPseudo(utilisateur);
 		
-		String hash = new String(getPBKDF2WithHmacSHA1(utilisateur.getMotDePasse(),utilisateurBDD.getSalt().getBytes()));
-	    
-		System.out.println(hash);
-		System.out.println(utilisateurBDD.getMotDePasse());
+		if(utilisateurBDD == null) {
+			BusinessException be = new BusinessException();
+			be.ajouterErreur(CodesResultatBLL.UTILISATEUR_INCORNNU);
+			throw be;
+		}
 		
-		if(!utilisateurBDD.getMotDePasse().equals(hash)) {
-	    	BusinessException be = new BusinessException();
-	    	be.ajouterErreur(CodesResultatBLL.MOT_DE_PASSE_UTILISATEUR_INCORRECT);
-	    	throw be;
-	    }
-	    
+		try {
+			if(!HashMotDePasse.validatePassword(utilisateur.getMotDePasse(), utilisateurBDD.getMotDePasse())) {
+				BusinessException be = new BusinessException();
+				be.ajouterErreur(CodesResultatBLL.MOT_DE_PASSE_UTILISATEUR_INCORRECT);
+				throw be;
+			}
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidKeySpecException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	    utilisateur = utilisateurBDD;
 	    utilisateur.setMotDePasse(null);
 		
@@ -165,30 +175,4 @@ public class UtilisateurManager {
 //			
 //		}
 	}
-	
-	
-	
-
-	public static byte[] getSalt() {
-		SecureRandom random = new SecureRandom();
-		byte[] salt = new byte[16];
-		random.nextBytes(salt);
-		return salt;
-    }
-	public static byte[] getPBKDF2WithHmacSHA1(String password,
-			byte[] salt) throws BusinessException {
-		byte[] hash = null;
-		try {
-			KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
-			SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-			hash = factory.generateSecret(spec).getEncoded();
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidKeySpecException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return hash;
-    }
 }

@@ -9,6 +9,14 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
 public class HashMotDePasse {
+	
+	/**
+	 * Methode pour créer le hash d'un mot de passe lors de la création d'un utilisateur
+	 * @param password
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
+	 */
 	public static String generateStorngPasswordHash(String password) 
 		    throws NoSuchAlgorithmException, InvalidKeySpecException
 		{
@@ -45,6 +53,15 @@ public class HashMotDePasse {
 		    }
 		}
 		
+		
+		/**
+		 * Méthode pour vérifier si le hash dans la bdd correspond au mdp du formulaire lors de la connexion
+		 * @param originalPassword
+		 * @param storedPassword
+		 * @return
+		 * @throws NoSuchAlgorithmException
+		 * @throws InvalidKeySpecException
+		 */
 		public static boolean validatePassword(String originalPassword, String storedPassword) 
 			    throws NoSuchAlgorithmException, InvalidKeySpecException
 			{

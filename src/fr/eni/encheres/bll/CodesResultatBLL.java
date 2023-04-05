@@ -86,4 +86,8 @@ public abstract class CodesResultatBLL {
 	public static final int AUTRE_ERREUR_AFFICHER_UTILISATEUR_PAR_PSEUDO=20016;
 	
 	
+	/**
+	 * Erreur si l'utilisateur n'est pas connu lors de la connection
+	 */
+	public static final int UTILISATEUR_INCORNNU = 20012;
 }
