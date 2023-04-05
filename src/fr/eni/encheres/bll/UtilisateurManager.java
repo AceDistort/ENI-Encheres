@@ -96,7 +96,24 @@ public class UtilisateurManager {
 		}
 	}
 	
-	public void supprimer(Utilisateur utilisateur) {
+	public void supprimer(Utilisateur utilisateur) throws BusinessException {
+		BusinessException businessException = new BusinessException();
+		if (utilisateur==null) {
+			businessException.ajouterErreur(CodesResultatBLL.OBJET_NULL_SUPPRESSION_UTILISATEUR);
+			throw businessException;
+		}
+		
+		try
+		{
+			utilisateurDAO.supprimerUtilisateur(utilisateur);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			businessException.ajouterErreur(CodesResultatBLL.AUTRE_ERREUR_SUPPRESSION_UTILISATEUR);
+			throw businessException;
+		}
+		
 		
 	}
 	
@@ -135,7 +152,10 @@ public class UtilisateurManager {
 //		if (utilisateur.getNom().trim().isEmpty()) {
 //			//businessException.ajouterErreur(CodesResultatBLL.);
 //		}
-		
+//		
+//		if (utilisateur.get) {
+//			
+//		}
 	}
 	
 	//GESTION DE LA SECURITE DES MOTS DE PASSE

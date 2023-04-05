@@ -14,7 +14,6 @@ public class Utilisateur {
 	private String motDePasse;
 	private int credit;
 	private boolean administrateur;
-	private String salt;
 
 	//Constructeurs
 	public Utilisateur() {
@@ -26,7 +25,7 @@ public class Utilisateur {
 	}
 	
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String rue, String codePostal,
-			String ville, String motDePasse, int credit, boolean administrateur, String salt) {
+			String ville, String motDePasse, int credit, boolean administrateur) {
 		setPseudo(pseudo);
 		setNom(nom);
 		setPrenom(prenom);
@@ -37,7 +36,6 @@ public class Utilisateur {
 		setMotDePasse(motDePasse);
 		setCredit(credit);
 		setAdministrateur(administrateur);
-		setSalt(salt);
 	}
 
 	//Getter et Setter
@@ -112,12 +110,6 @@ public class Utilisateur {
 	}
 	public void setAdministrateur(boolean administrateur) {
 		this.administrateur = administrateur;
-	}
-	public String getSalt() {
-		return salt;
-	}
-	public void setSalt(String salt) {
-		this.salt = salt;
 	}
 	
 	//Autres méthodes
