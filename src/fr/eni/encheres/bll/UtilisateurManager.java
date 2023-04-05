@@ -123,6 +123,7 @@ public class UtilisateurManager {
 	    }
 	    
 	    utilisateur = utilisateurBDD;
+	    utilisateur.setMotDePasse(null);
 		
 	}
 	
