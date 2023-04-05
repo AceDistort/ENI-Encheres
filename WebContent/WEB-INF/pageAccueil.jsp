@@ -17,14 +17,14 @@
 		</c:if>
 		<ul>
 			<c:if test="${empty sessionScope['sessionUtilisateur']}">
-				<li><a href="/inscription">S'inscrire</a></li>
-				<li><a href="/connection">Se connecter</a></li>
+				<li><a href="inscription">S'inscrire</a></li>
+				<li><a href="connection">Se connecter</a></li>
 			</c:if>
 			<c:if test="${not empty sessionScope['sessionUtilisateur']}">
 				<li><a href="">Enchères</a></li>
-				<li><a href="/vente/vendre">Vendre un article</a></li>
-				<li><a href="/profil">Mon profil</a></li>
-				<li><a href="/deconnexion">Déconnexion</a></li>
+				<li><a href="vente/vendre">Vendre un article</a></li>
+				<li><a href="profil">Mon profil</a></li>
+				<li><a href="deconnexion">Déconnexion</a></li>
 			</c:if>
 		</ul>
 	</header>
