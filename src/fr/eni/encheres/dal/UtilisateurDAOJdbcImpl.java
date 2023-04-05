@@ -14,12 +14,12 @@ import fr.eni.encheres.bo.Utilisateur;
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 	//Attributs d'instance
-	private static final String AJOUTER = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+	private static final String AJOUTER = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur, salt) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
 	private static final String MODIFIER = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? WHERE no_utilisateur=?;";
 	private static final String SUPPRIMER = "DELETE FROM UTILISATEURS WHERE no_utilisateur=?;";
-	private static final String AFFICHER_UTILISATEUR_PAR_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE no_utilisateur=?;";
-	private static final String AFFICHER_TOUS_LES_UTILISATEURS = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS;";
-	private static final String AFFICHER_UTILISATEUR_PAR_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE pseudo=?;";
+	private static final String AFFICHER_UTILISATEUR_PAR_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur, salt FROM UTILISATEURS WHERE no_utilisateur=?;";
+	private static final String AFFICHER_TOUS_LES_UTILISATEURS = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur, salt FROM UTILISATEURS;";
+	private static final String AFFICHER_UTILISATEUR_PAR_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur, salt FROM UTILISATEURS WHERE pseudo=?;";
 
 	@Override
 	public void creerUtilisateur(Utilisateur utilisateur) throws SQLException, BusinessException {
@@ -43,6 +43,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			pstmt.setString(9, utilisateur.getMotDePasse());
 			pstmt.setInt(10, utilisateur.getCredit());
 			pstmt.setBoolean(11, utilisateur.isAdministrateur());
+			pstmt.setString(12, utilisateur.getSalt());
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if(rs.next())
@@ -133,6 +134,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			
 			if (rs.next()) {
 				unUtilisateur = new Utilisateur();
+				unUtilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
 				unUtilisateur.setPseudo(rs.getString("pseudo"));
 				unUtilisateur.setNom(rs.getString("nom"));
 				unUtilisateur.setPrenom(rs.getString("prenom"));
@@ -144,6 +146,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				unUtilisateur.setMotDePasse(rs.getString("mot_de_passe"));
 				unUtilisateur.setCredit(rs.getInt("credit"));
 				unUtilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+				unUtilisateur.setSalt(rs.getString("salt"));
 			}
 		}
 		catch(Exception e)
@@ -169,6 +172,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			
 			while (rs.next()) {
 				utilisateur = new Utilisateur();
+				utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
 				utilisateur.setPseudo(rs.getString("pseudo"));
 				utilisateur.setNom(rs.getString("nom"));
 				utilisateur.setPrenom(rs.getString("prenom"));
@@ -212,6 +216,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			
 			if (rs.next()) {
 				unUtilisateur = new Utilisateur();
+				unUtilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
 				unUtilisateur.setPseudo(rs.getString("pseudo"));
 				unUtilisateur.setNom(rs.getString("nom"));
 				unUtilisateur.setPrenom(rs.getString("prenom"));
@@ -223,6 +228,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				unUtilisateur.setMotDePasse(rs.getString("mot_de_passe"));
 				unUtilisateur.setCredit(rs.getInt("credit"));
 				unUtilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+				unUtilisateur.setSalt(rs.getString("salt"));
 			}
 		}
 		catch(Exception e)
