@@ -46,18 +46,15 @@ public class ConnexionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			UtilisateurManager.getUtilisateurManager();
-			
-			Utilisateur utilisateur = new Utilisateur(request.getParameter("identifiant"),request.getParameter("motDePasse"));
-			
-			utilisateurManager.seConnecter(utilisateur);
-			request.getSession().setAttribute("sessionUtilisateur", utilisateur);
-			((HttpServletResponse) response).sendRedirect("/encheres");
+			Utilisateur utilisateur = new Utilisateur();
+			utilisateur.setPseudo(request.getParameter("pseudo"));
+			utilisateur.setMotDePasse(request.getParameter("motDePasse"));
+			UtilisateurManager.getUtilisateurManager().seConnecter(utilisateur);
+			System.out.println("nom - " + utilisateur.getNom());
 		} catch (BusinessException e) {
-			request.getSession().setAttribute("erreurConnexion", "Erreur");
-			request.getRequestDispatcher("WEB-INF/connexion.jsp").forward(request, response);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-			
 	}
 
 }
