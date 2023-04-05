@@ -1,5 +1,8 @@
 package fr.eni.encheres.bll;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -101,6 +104,32 @@ public class UtilisateurManager {
 		
 	}
 	
+	/**
+	 * Méthode pour se connecter à l'application. Ajoute les données de l'utilisateur au paramètre d'entrée.
+	 * @param utilisateur
+	 * @return Vrai si la connection est faite
+	 */
+	public void seConnecter(Utilisateur utilisateur) {
+		
+		Utilisateur utilisateurBDD = null;
+		try {
+			utilisateurBDD = utilisateurDAO.selectionnerParPseudo(Utilisateur utilisateur);
+		} catch (BusinessException e) {
+			throw e;
+		}
+	    String salt = getSalt();
+	    utilisateur.setMotDePasse(get_SHA_256_SecurePassword(utilisateur.getMotDePasse(), salt));
+	    
+	    if(!utilisateurBDD.getMotDePasse().equals(utilisateur.getMotDePasse())) {
+	    	BusinessException be = new BusinessException();
+	    	be.ajouterErreur(CodesResultatBLL.MOT_DE_PASSE_UTILISATEUR_INCORRECT);
+	    	throw be;
+	    }
+	    
+	    utilisateur = utilisateurBDD;
+		
+	}
+	
 	public void controlerUtilisateur(Utilisateur utilisateur) {
 //		boolean valide = true;
 //		BusinessException businessException = new BusinessException();
@@ -110,4 +139,32 @@ public class UtilisateurManager {
 //		}
 		
 	}
+	
+	//GESTION DE LA SECURITE DES MOTS DE PASSE
+	private static String getSalt() throws NoSuchAlgorithmException {
+        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+        byte[] salt = new byte[16];
+        sr.nextBytes(salt);
+        return salt.toString();
+    }
+	private static String get_SHA_256_SecurePassword(String passwordToHash,
+            String salt) throws BusinessException {
+        String generatedPassword = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(salt.getBytes());
+            byte[] bytes = md.digest(passwordToHash.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16)
+                        .substring(1));
+            }
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            BusinessException be = new BusinessException();
+            be.ajouterErreur(CodesResultatBLL.NOSUCHALGORITHM);
+            throw be;
+        }
+        return generatedPassword;
+    }
 }

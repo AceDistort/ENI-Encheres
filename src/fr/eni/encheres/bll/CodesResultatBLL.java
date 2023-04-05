@@ -54,5 +54,15 @@ public abstract class CodesResultatBLL {
 	 */
 	public static final int ERREUR_EQUALS_MODIF_UTILISATEUR=20009;
 	
+	/**
+	 * Erreur methode SHA
+	 */
+	public static final int NOSUCHALGORITHM = 20010;
+	
+	/**
+	 * Erreur si le mot de passe est incorrect lors de la connection
+	 */
+	public static final int MOT_DE_PASSE_UTILISATEUR_INCORRECT = 20011;
+	
 	
 }

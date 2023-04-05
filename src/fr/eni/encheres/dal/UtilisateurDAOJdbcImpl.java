@@ -116,8 +116,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public Utilisateur afficher(Utilisateur utilisateur) throws BusinessException {
-		Utilisateur unUtilisateur = null; 
+	public void afficher(Utilisateur utilisateur) throws BusinessException {
 		if (utilisateur == null) {
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.OBJET_NULL_AFFICHER_UN_UTILISATEUR);
@@ -131,18 +130,17 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
-				unUtilisateur = new Utilisateur();
-				unUtilisateur.setPseudo(rs.getString("pseudo"));
-				unUtilisateur.setNom(rs.getString("nom"));
-				unUtilisateur.setPrenom(rs.getString("prenom"));
-				unUtilisateur.setEmail(rs.getString("email"));
-				unUtilisateur.setTelephone(rs.getString("telephone"));
-				unUtilisateur.setRue(rs.getString("rue"));
-				unUtilisateur.setCodePostal(rs.getString("code_postal"));
-				unUtilisateur.setVille(rs.getString("ville"));
-				unUtilisateur.setMotDePasse(rs.getString("mot_de_passe"));
-				unUtilisateur.setCredit(rs.getInt("credit"));
-				unUtilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+				utilisateur.setPseudo(rs.getString("pseudo"));
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setEmail(rs.getString("email"));
+				utilisateur.setTelephone(rs.getString("telephone"));
+				utilisateur.setRue(rs.getString("rue"));
+				utilisateur.setCodePostal(rs.getString("code_postal"));
+				utilisateur.setVille(rs.getString("ville"));
+				utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+				utilisateur.setCredit(rs.getInt("credit"));
+				utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
 			}
 		}
 		catch(Exception e)
@@ -152,8 +150,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			businessException.ajouterErreur(CodesResultatDAL.AUTRE_ERREUR_AFFICHER_UN_UTILISATEUR);
 			throw businessException;
 		}
-		
-		return unUtilisateur;
 	}
 
 	@Override
