@@ -17,9 +17,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String AJOUTER = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
 	private static final String MODIFIER = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? WHERE no_utilisateur=?;";
 	private static final String SUPPRIMER = "DELETE FROM UTILISATEURS WHERE no_utilisateur=?;";
-	private static final String AFFICHER_UTILISATEUR_PAR_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administeur FROM UTILISATEUR WHERE no_utilisateur=?;";
-	private static final String AFFICHER_TOUS_LES_UTILISATEURS = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administeur FROM UTILISATEUR;";
-	private static final String AFFICHER_UTILISATEUR_PAR_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administeur FROM UTILISATEUR WHERE pseudo=?, mot_de_passe=?;";
+	private static final String AFFICHER_UTILISATEUR_PAR_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE no_utilisateur=?;";
+	private static final String AFFICHER_TOUS_LES_UTILISATEURS = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS;";
+	private static final String AFFICHER_UTILISATEUR_PAR_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE pseudo=?;";
 
 	@Override
 	public void creerUtilisateur(Utilisateur utilisateur) throws SQLException, BusinessException {
@@ -208,7 +208,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(AFFICHER_UTILISATEUR_PAR_PSEUDO);
 			pstmt.setString(1, utilisateur.getPseudo());
-			pstmt.setString(2, utilisateur.getMotDePasse());
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
