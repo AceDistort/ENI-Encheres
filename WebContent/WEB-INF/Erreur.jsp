@@ -15,7 +15,7 @@
 		if(listeCodesErreur!=null)
 		{
 	%>
-			<p style="color:red;">Erreur, l'avis n'a pas pu être ajouté :</p>
+			<p style="color:red;">Erreur :</p>
 	<%
 			for(int codeErreur:listeCodesErreur)
 			{

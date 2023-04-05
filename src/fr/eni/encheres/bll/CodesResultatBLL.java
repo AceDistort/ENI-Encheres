@@ -64,5 +64,26 @@ public abstract class CodesResultatBLL {
 	 */
 	public static final int MOT_DE_PASSE_UTILISATEUR_INCORRECT = 20011;
 	
+	/**
+	 * Echec général quand tentative affichage par ID un objet null
+	 */
+	public static final int OBJET_NULL_AFFICHER_UTILISATEUR_PAR_ID=20012;
+	/**
+	 * Echec général quand erreur non gérée à affichage par ID
+	 */
+	public static final int AUTRE_ERREUR_AFFICHER_UTILISATEUR_PAR_ID=20013;
+	/**
+	 * Echec général quand erreur non gérée à affichage tous les utilisateurs
+	 */
+	public static final int AUTRE_ERREUR_AFFICHER_TOUS_LES_UTILISATEURS=20014;
+	/**
+	 * Echec général quand tentative affichage un objet null par pseudo
+	 */
+	public static final int OBJET_NULL_AFFICHER_UTILISATEUR_PAR_PSEUDO=20015;
+	/**
+	 * Echec général quand erreur non gérée à affichage par pseudo
+	 */
+	public static final int AUTRE_ERREUR_AFFICHER_UTILISATEUR_PAR_PSEUDO=20016;
+	
 	
 }
