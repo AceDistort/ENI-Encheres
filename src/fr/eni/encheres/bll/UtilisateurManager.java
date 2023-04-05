@@ -113,7 +113,7 @@ public class UtilisateurManager {
 		
 		Utilisateur utilisateurBDD = null;
 		try {
-			utilisateurBDD = utilisateurDAO.selectionnerParPseudo(Utilisateur utilisateur);
+			utilisateurBDD = utilisateurDAO.selectionnerParPseudo(utilisateur);
 		} catch (BusinessException e) {
 			throw e;
 		}
