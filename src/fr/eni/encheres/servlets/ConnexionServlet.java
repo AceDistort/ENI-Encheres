@@ -47,9 +47,11 @@ public class ConnexionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			Utilisateur utilisateur = new Utilisateur();
+			//TODO remplir pseudo ou email
 			utilisateur.setPseudo(request.getParameter("identifiant"));
+			
 			utilisateur.setMotDePasse(request.getParameter("motDePasse"));
-			UtilisateurManager.getUtilisateurManager().seConnecter(utilisateur);
+			utilisateur = UtilisateurManager.getUtilisateurManager().seConnecter(utilisateur);
 			
 			request.getSession().setAttribute("sessionUtilisateur", utilisateur);
 			
@@ -59,8 +61,8 @@ public class ConnexionServlet extends HttpServlet {
 			if(e.getListeCodesErreur().contains(CodesResultatBLL.MOT_DE_PASSE_UTILISATEUR_INCORRECT)) {
 				request.setAttribute("erreurConnexion", LecteurMessage.getMessageErreur(CodesResultatBLL.MOT_DE_PASSE_UTILISATEUR_INCORRECT));
 				request.getRequestDispatcher("WEB-INF/connexion.jsp").forward(request, response);
-			} else if(e.getListeCodesErreur().contains(CodesResultatBLL.UTILISATEUR_INCORNNU)) {
-				request.setAttribute("erreurConnexion", LecteurMessage.getMessageErreur(CodesResultatBLL.UTILISATEUR_INCORNNU));
+			} else if(e.getListeCodesErreur().contains(CodesResultatBLL.OBJET_NULL_AFFICHER_UTILISATEUR_PAR_ID)) {
+				request.setAttribute("erreurConnexion", LecteurMessage.getMessageErreur(CodesResultatBLL.OBJET_NULL_AFFICHER_UTILISATEUR_PAR_ID));
 				request.getRequestDispatcher("WEB-INF/connexion.jsp").forward(request, response);
 			} else {
 				//TODO
