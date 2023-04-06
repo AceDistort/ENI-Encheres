@@ -47,8 +47,14 @@ public class ConnexionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			Utilisateur utilisateur = new Utilisateur();
-			//TODO remplir pseudo ou email
-			utilisateur.setPseudo(request.getParameter("identifiant"));
+			
+			//Vérification si identifiant = mdp ou email
+			String identifiant = request.getParameter("identifiant");
+			if(identifiant.indexOf('@') == -1) {
+				utilisateur.setPseudo(request.getParameter("identifiant"));
+			} else {
+				utilisateur.setEmail(request.getParameter("identifiant"));
+			}
 			
 			utilisateur.setMotDePasse(request.getParameter("motDePasse"));
 			utilisateur = UtilisateurManager.getUtilisateurManager().seConnecter(utilisateur);

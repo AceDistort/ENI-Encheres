@@ -20,7 +20,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String SUPPRIMER = "DELETE FROM UTILISATEURS WHERE no_utilisateur=?;";
 	private static final String AFFICHER_UTILISATEUR_PAR_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE no_utilisateur=?;";
 	private static final String AFFICHER_TOUS_LES_UTILISATEURS = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS;";
-	private static final String AFFICHER_UTILISATEUR_PAR_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE pseudo=?;";
+	private static final String AFFICHER_UTILISATEUR_PAR_PSEUDO_OU_EMAIL = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE pseudo=? OR email=?;";
 
 	@Override
 	public void creerUtilisateur(Utilisateur utilisateur) throws SQLException, BusinessException {
@@ -206,8 +206,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
-			PreparedStatement pstmt = cnx.prepareStatement(AFFICHER_UTILISATEUR_PAR_PSEUDO);
+			PreparedStatement pstmt = cnx.prepareStatement(AFFICHER_UTILISATEUR_PAR_PSEUDO_OU_EMAIL);
 			pstmt.setString(1, utilisateur.getPseudo());
+			pstmt.setString(2, utilisateur.getEmail());
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
