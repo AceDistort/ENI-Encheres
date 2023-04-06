@@ -1,7 +1,6 @@
 package fr.eni.encheres.test;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
@@ -11,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.eni.encheres.bll.UtilisateurManager;
-import fr.eni.encheres.bo.BusinessException;
 import fr.eni.encheres.util.HashMotDePasse;
 
 /**
