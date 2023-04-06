@@ -18,7 +18,7 @@
 		<form method="post" action="inscription">
 			<div class="input-label-box">
 				<label>Pseudo : </label>
-				<input required type="text" name="identifiant" placeholder="">
+				<input required type="text" name="pseudo" placeholder="">
 			</div>
 			
 			<div class="input-label-box">
@@ -35,6 +35,7 @@
 				<label>Email : </label>
 				<input required type="text" name="email">
 			</div>
+			<p class="error-text"><%=session.getAttribute("erreurEmail") %></p>
 			
 			<div class="input-label-box">
 				<label>Téléphone : </label>
@@ -48,8 +49,9 @@
 			
 			<div class="input-label-box">
 				<label>Code Postal : </label>
-				<input required type="text" name="code_postal">
+				<input required type="text" name="codePostal">
 			</div>
+			<p class="error-text"><%=session.getAttribute("erreurCodePostal") %></p>
 			
 			<div class="input-label-box">
 				<label>Ville : </label>
@@ -58,14 +60,24 @@
 			
 			<div class="input-label-box">
 				<label>Mot de passe : </label>
-				<input required type="password" name="mot_de_passe">
+				<input required type="password" name="motDePasse">
+			</div>
+			<p class="error-text"><%=session.getAttribute("erreurMotDePasse") %></p>
+			
+			<div class="input-label-box">
+				<label>Confirmation : </label>
+				<input required type="password" name="confirmation">
+			</div>
+			<p class="error-text"><%=session.getAttribute("erreurMotDePasse") %></p>
+			
+			<div class="input-label-box">
+				<input class="button" type="submit" value="Créer" >
 			</div>
 			
 			<div class="input-label-box">
-				<input class="button" type="submit" value="Inscription" >
+				<input class="button" type="submit" value="Annuler" >
 			</div>
 		</form>
-		<p class="error-text"><%=session.getAttribute("erreurInscription") %></p>
 		
 	</section>
 </body>
