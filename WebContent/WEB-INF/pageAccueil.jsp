@@ -1,5 +1,6 @@
 <%@page import="fr.eni.encheres.bo.Utilisateur"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+	isErrorPage="false" errorPage="Erreur.jsp"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,7 +19,7 @@
 		<ul>
 			<c:if test="${empty sessionScope['sessionUtilisateur']}">
 				<li><a href="inscription">S'inscrire</a></li>
-				<li><a href="connection">Se connecter</a></li>
+				<li><a href="connexion">Se connecter</a></li>
 			</c:if>
 			<c:if test="${not empty sessionScope['sessionUtilisateur']}">
 				<li><a href="">Enchères</a></li>
