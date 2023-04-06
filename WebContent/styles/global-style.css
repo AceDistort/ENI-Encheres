@@ -69,6 +69,9 @@ header{
 .text{
 	color: #000;
 }
+.red{
+	color: red
+}
 
 .input-label-box{
 	margin: 15px 0;
