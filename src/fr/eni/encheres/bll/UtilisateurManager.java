@@ -117,8 +117,18 @@ public class UtilisateurManager {
 		
 	}
 	
-	public void afficher(Utilisateur utilisateur) {
-		
+	public Utilisateur afficher(Utilisateur utilisateur) throws BusinessException {
+		if(utilisateur == null) {
+			BusinessException be = new BusinessException();
+			be.ajouterErreur(CodesResultatBLL.OBJET_NULL_AFFICHER_UTILISATEUR_PAR_ID);
+			throw be;
+		}
+		try {
+			return utilisateurDAO.selectionnerParId(utilisateur);
+		} catch (BusinessException e) {
+			e.ajouterErreur(CodesResultatBLL.ERREUR_AFFICHER_SELECTIONNER_PAR_ID);
+			throw e;
+		}	
 	}
 	
 	/**
@@ -127,14 +137,14 @@ public class UtilisateurManager {
 	 * @return Vrai si la connection est faite
 	 * @throws BusinessException
 	 */
-	public void seConnecter(Utilisateur utilisateur) throws BusinessException {
+	public Utilisateur seConnecter(Utilisateur utilisateur) throws BusinessException {
 		
 		Utilisateur utilisateurBDD = new Utilisateur();
 		utilisateurBDD = utilisateurDAO.selectionnerParPseudo(utilisateur);
 		
 		if(utilisateurBDD == null) {
 			BusinessException be = new BusinessException();
-			be.ajouterErreur(CodesResultatBLL.UTILISATEUR_INCORNNU);
+			be.ajouterErreur(CodesResultatBLL.OBJET_NULL_AFFICHER_UTILISATEUR_PAR_ID);
 			throw be;
 		}
 		
@@ -154,6 +164,7 @@ public class UtilisateurManager {
 		
 	    utilisateur = utilisateurBDD;
 	    utilisateur.setMotDePasse(null);
+	    return utilisateur;
 		
 	}
 	
