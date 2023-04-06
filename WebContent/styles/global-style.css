@@ -1,0 +1,42 @@
+@charset "ISO-8859-1";
+
+.title{
+	font-size: 27px;
+	font-family: sans-serif;
+	margin: 70px
+}
+
+.centered{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.button{
+	border-radius: 5px;
+	border: solid 1px #5e5b52;
+	background-color: #96f551;
+}
+
+.input-label-box{
+	margin: 15px 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.input-label-box label{
+	margin-right: 20px;
+	flex: 1
+}
+
+.input-label-box input{
+	flex: 1
+}
+
+.error-text{
+	color: red;
+	font-size: 15px;
+}
