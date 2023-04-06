@@ -21,6 +21,7 @@
 			<p class="col-4">Prénom</p>
 			<p class="col-8">${requestScope['profil'].getPrenom()}</p>
 		</div>
+		<c:if test="${requestScope['profil'].equals(sessionScope['sessionUtilisateur']) || sessionScope['sessionUtilisateur'].isAdministrateur()}">
 		<div class="row">
 			<p class="col-4">Email</p>
 			<p class="col-8">${requestScope['profil'].getEmail()}</p>
@@ -41,8 +42,9 @@
 			<p class="col-4">Ville</p>
 			<p class="col-8">${requestScope['profil'].getVille()}</p>
 		</div>
+		</c:if>
 	</div>
-	<c:if test="${requestScope['profil'].equals(sessionScope['sessionUtilisateur'])}">
+	<c:if test="${requestScope['profil'].equals(sessionScope['sessionUtilisateur']) || sessionScope['sessionUtilisateur'].isAdministrateur()}">
 		<a href="profil/modifier">Modifier</a>
 	</c:if>
 </body>
