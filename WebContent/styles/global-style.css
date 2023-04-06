@@ -37,7 +37,7 @@ header{
 	padding: 8px 20px 
 }
 
-.button a,p{
+.button a,.button p{
 	text-decoration: none;
 }
 
@@ -45,7 +45,7 @@ header{
 	background-color: #96f551;
 }
 
-.green-background a,p{
+.green-background a,.green-background p{
 	color: #000;
 }
 
@@ -54,7 +54,7 @@ header{
 	color: #fff;
 }
 
-.orange-background a,p{
+.orange-background a,.orange-background p{
 	color: #fff;
 }
 
