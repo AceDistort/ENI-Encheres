@@ -1,9 +1,29 @@
 @charset "ISO-8859-1";
 
+header{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.header-nav{
+	margin: 30px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	list-style: none;
+}
+
+.header-nav li{
+	margin: 0 15px
+}
+
 .title{
 	font-size: 27px;
 	font-family: sans-serif;
-	margin: 70px
+	margin: 50px
 }
 
 .centered{
@@ -14,8 +34,40 @@
 
 .button{
 	border-radius: 5px;
-	border: solid 1px #5e5b52;
+	padding: 8px 20px 
+}
+
+.button a,p{
+	text-decoration: none;
+}
+
+.green-background{
 	background-color: #96f551;
+}
+
+.green-background a,p{
+	color: #000;
+}
+
+.orange-background{
+	background-color: #fb8537;
+	color: #fff;
+}
+
+.orange-background a,p{
+	color: #fff;
+}
+
+.orange-background{
+	background-color: #fb8537;
+}
+
+.no-text-decoration{
+	text-decoration: none;
+}
+
+.text{
+	color: #000;
 }
 
 .input-label-box{

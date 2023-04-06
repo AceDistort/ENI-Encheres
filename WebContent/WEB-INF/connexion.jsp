@@ -27,7 +27,7 @@
 				<input required type="password" name="motDePasse">
 			</div>
 			<div class="input-label-box">
-				<input class="button" type="submit" value="Connexion" >
+				<input class="button green-background" style="border: none" type="submit" value="Connexion" >
 			</div>
 		</form>
 		<c:if test="${not empty requestScope['erreurConnexion']}">
