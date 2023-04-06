@@ -84,10 +84,12 @@ public abstract class CodesResultatBLL {
 	 * Echec général quand erreur non gérée à affichage par pseudo
 	 */
 	public static final int AUTRE_ERREUR_AFFICHER_UTILISATEUR_PAR_PSEUDO=20016;
-	
-	
+	/**
+	 * Echec afficher selectionnerParId
+	 */
+	public static final int ERREUR_AFFICHER_SELECTIONNER_PAR_ID=20017;
 	/**
 	 * Erreur si l'utilisateur n'est pas connu lors de la connection
 	 */
-	public static final int UTILISATEUR_INCORNNU = 20012;
+	public static final int UTILISATEUR_INCORNNU = 20018;
 }
