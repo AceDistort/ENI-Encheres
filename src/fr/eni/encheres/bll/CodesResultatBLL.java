@@ -89,7 +89,17 @@ public abstract class CodesResultatBLL {
 	 */
 	public static final int ERREUR_AFFICHER_SELECTIONNER_PAR_ID=20017;
 	/**
-	 * Erreur si l'utilisateur n'est pas connu lors de la connection
+	 * Erreur si l'utilisateur renseigne une adresse mail non valide
 	 */
-	public static final int UTILISATEUR_INCORNNU = 20018;
+	public static final int EMAIL_UTILISATEUR_NON_VALIDE = 20018;
+	
+	/**
+	 * Erreur si l'utilisateur renseigne un mot de passe non conforme aux règles imposées pour celui-ci.
+	 */
+	public static final int MOT_DE_PASSE_UTILISATEUR_NON_VALIDE = 20019;
+	
+	/**
+	 * Erreur si l'utilisateur renseigne un mot de passe non valide
+	 */
+	public static final int CODE_POSTAL_UTILISATEUR_NON_VALIDE = 20020;
 }

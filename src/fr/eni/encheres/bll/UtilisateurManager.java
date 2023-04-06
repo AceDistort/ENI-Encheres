@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import fr.eni.encheres.bo.BusinessException;
 import fr.eni.encheres.bo.Utilisateur;
@@ -53,29 +54,16 @@ public class UtilisateurManager {
 		
 	}
 	
-	public void modifier(int index, Utilisateur utilisateur) throws BusinessException {
+	public void modifier(Utilisateur utilisateur) throws BusinessException {
 		//controle des champs passes en parametre
-		Utilisateur utilisateurEnCours = null;
 		BusinessException businessException = new BusinessException();
 		if (utilisateur==null) {
 			businessException.ajouterErreur(CodesResultatBLL.OBJET_NULL_MODIF_UTILISATEUR);
 			throw businessException;
 		}
 		
-		if (index<0 || index>utilisateurs.size()) {
-			businessException.ajouterErreur(CodesResultatBLL.ERREUR_TAILLE_LISTE_MODIF_UTILISATEUR);
-			throw businessException;
-		}
-		
 		try
-		{
-			//recuperer l'utilisateur en cours
-			utilisateurEnCours = utilisateurs.get(index);
-			if (!utilisateur.equals(utilisateurEnCours)) {
-				businessException.ajouterErreur(CodesResultatBLL.ERREUR_EQUALS_MODIF_UTILISATEUR);
-				throw businessException;
-			}
-			
+		{	
 			//validation des donnees
 			controlerUtilisateur(utilisateur);
 			
@@ -83,10 +71,17 @@ public class UtilisateurManager {
 			utilisateurDAO.modifierUtilisateur(utilisateur);
 			
 			//modifier les infos dans la liste
-			utilisateurEnCours.setPseudo(utilisateur.getPseudo());
-			utilisateurEnCours.setNom(utilisateur.getNom());
-			utilisateurEnCours.setPrenom(utilisateur.getPrenom());
-			utilisateurEnCours.setEmail(utilisateur.getEmail());
+			utilisateur.setPseudo(utilisateur.getPseudo());
+			utilisateur.setNom(utilisateur.getNom());
+			utilisateur.setPrenom(utilisateur.getPrenom());
+			utilisateur.setEmail(utilisateur.getEmail());
+			utilisateur.setTelephone(utilisateur.getTelephone());
+			utilisateur.setRue(utilisateur.getRue());
+			utilisateur.setCodePostal(utilisateur.getCodePostal());
+			utilisateur.setVille(utilisateur.getVille());
+			utilisateur.setMotDePasse(utilisateur.getMotDePasse());
+			
+			//TODO
 		}
 		catch(Exception e)
 		{
@@ -169,15 +164,34 @@ public class UtilisateurManager {
 	}
 	
 	public void controlerUtilisateur(Utilisateur utilisateur) {
-//		boolean valide = true;
-//		BusinessException businessException = new BusinessException();
-//		
-//		if (utilisateur.getNom().trim().isEmpty()) {
-//			//businessException.ajouterErreur(CodesResultatBLL.);
-//		}
-//		
-//		if (utilisateur.get) {
-//			
-//		}
+		String RegexEmail = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" 
+		        + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+		//String RegexMotDePasse = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){​​​​​​​}​​​​​​​[]:;<>,.?/~_+-=|\\]).{​​​​​​​12,32}​​​​​​​$";
+		String RegexMotDePasse = "^(?:(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])|" +
+	            "(?=.*\\d)(?=.*[^A-Za-z0-9])(?=.*[a-z])|" +
+	            "(?=.*[^A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z])|" +
+	            "(?=.*\\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9]))(?!.*(.)\\1{2,})" +
+	            "[A-Za-z0-9!~<>,;:_=?*+#.\"&§%°()\\|\\[\\]\\-\\$\\^\\@\\/]" +
+	            "{12,32}$";
+		String RegexCodePostal = "^[0-9]{5}(?:-[0-9]{4})?$";
+		BusinessException businessException = new BusinessException();
+		
+		if (!patternMatches(utilisateur.getEmail(), RegexEmail)) {
+			businessException.ajouterErreur(CodesResultatBLL.EMAIL_UTILISATEUR_NON_VALIDE);
+		}
+		
+		if(!patternMatches(utilisateur.getMotDePasse(), RegexMotDePasse)){
+			businessException.ajouterErreur(CodesResultatBLL.MOT_DE_PASSE_UTILISATEUR_NON_VALIDE);
+		}
+		
+		if (!patternMatches(utilisateur.getCodePostal(), RegexCodePostal)) {
+			businessException.ajouterErreur(CodesResultatBLL.CODE_POSTAL_UTILISATEUR_NON_VALIDE);
+		}
+	}
+	
+	public static boolean patternMatches(String chaineDeCaracteres, String pattern) {
+	    return Pattern.compile(pattern)
+	      .matcher(chaineDeCaracteres)
+	      .matches();
 	}
 }
