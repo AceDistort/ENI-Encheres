@@ -37,7 +37,7 @@ public class ConnexionServlet extends HttpServlet {
 		if(request.getSession().getAttribute("sessionUtilisateur") == null) {
 			request.getRequestDispatcher("WEB-INF/connexion.jsp").forward(request, response);
 		} else {
-			request.getRequestDispatcher("WEB-INF/pageAccueil.jsp").forward(request, response);
+			((HttpServletResponse) response).sendRedirect("encheres");
 		}
 	}
 
@@ -48,7 +48,7 @@ public class ConnexionServlet extends HttpServlet {
 		try {
 			Utilisateur utilisateur = new Utilisateur();
 			
-			//Vérification si identifiant = mdp ou email
+			//Vï¿½rification si identifiant = mdp ou email
 			String identifiant = request.getParameter("identifiant");
 			if(identifiant.indexOf('@') == -1) {
 				utilisateur.setPseudo(request.getParameter("identifiant"));
