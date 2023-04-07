@@ -77,6 +77,10 @@ public class ModifierProfilServlet extends HttpServlet {
 			if (!request.getParameter("motDePasse").equals(request.getParameter("confirmation"))) {
 				businessException.ajouterErreur(CodesResultatServlet.MOTS_DE_PASSE_NON_IDENTIQUES);
 			}
+			else
+			{
+				utilisateur.setMotDePasse(request.getParameter("motDePasse"));
+			}
 			
 			UtilisateurManager.getUtilisateurManager().modifier(utilisateur);
 		}
