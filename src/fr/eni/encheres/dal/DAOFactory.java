@@ -5,8 +5,12 @@ public class DAOFactory {
 		return new ArticleVenduJDBCImpl();
 	}
 	
-	public static UtilisateurDAO getUtilisateurDAO()
-	{
+	public static UtilisateurDAO getUtilisateurDAO() {
 		return new UtilisateurDAOJdbcImpl();
 	}
+	
+	public static CategorieDAO getCategorieDAO() {
+		return new CategorieDAOJdbcImpl();
+	}
+	
 }

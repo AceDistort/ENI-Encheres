@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.BusinessException;
 
 public class ArticleVenduJDBCImpl implements ArticleVenduDAO {
 	
@@ -12,9 +13,10 @@ public class ArticleVenduJDBCImpl implements ArticleVenduDAO {
 
 	/**
 	 * {@inheritDoc}
+	 * @throws BusinessException 
 	 */
 	@Override
-	public void creerVenteArticle(ArticleVendu article) {
+	public void creerVenteArticle(ArticleVendu article) throws BusinessException {
 		try {
 			Connection cnx = ConnectionProvider.getConnection();
 			
@@ -30,8 +32,8 @@ public class ArticleVenduJDBCImpl implements ArticleVenduDAO {
 			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			throw be;
 		}
 
 	}
