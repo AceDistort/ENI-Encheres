@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 
 import fr.eni.encheres.bo.BusinessException;
 import fr.eni.encheres.bo.Utilisateur;
+import fr.eni.encheres.util.HashMotDePasse;
 import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.UtilisateurDAO;
-import fr.eni.encheres.util.HashMotDePasse;
 
 public class UtilisateurManager {
 	//Attributs d'instance
@@ -42,6 +42,7 @@ public class UtilisateurManager {
 		try
 		{
 			controlerUtilisateur(utilisateur);
+			utilisateur.setMotDePasse(HashMotDePasse.generateStorngPasswordHash(utilisateur.getMotDePasse()));
 			utilisateurDAO.creerUtilisateur(utilisateur);
 		}
 		catch(Exception e)
@@ -166,7 +167,6 @@ public class UtilisateurManager {
 	public void controlerUtilisateur(Utilisateur utilisateur) {
 		String RegexEmail = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" 
 		        + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
-		//String RegexMotDePasse = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){​​​​​​​}​​​​​​​[]:;<>,.?/~_+-=|\\]).{​​​​​​​12,32}​​​​​​​$";
 		String RegexMotDePasse = "^(?:(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])|" +
 	            "(?=.*\\d)(?=.*[^A-Za-z0-9])(?=.*[a-z])|" +
 	            "(?=.*[^A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z])|" +
@@ -187,6 +187,28 @@ public class UtilisateurManager {
 		if (!patternMatches(utilisateur.getCodePostal(), RegexCodePostal)) {
 			businessException.ajouterErreur(CodesResultatBLL.CODE_POSTAL_UTILISATEUR_NON_VALIDE);
 		}
+		
+		if (utilisateur.getPseudo() == null) {
+			businessException.ajouterErreur(CodesResultatBLL.PSEUDO_UTILISATEUR_INEXISTANT);
+		}
+		if (utilisateur.getNom() == null) {
+			businessException.ajouterErreur(CodesResultatBLL.NOM_UTILISATEUR_INEXISTANT);
+		}
+		if (utilisateur.getPrenom() == null) {
+			businessException.ajouterErreur(CodesResultatBLL.PRENOM_UTILISATEUR_INEXISTANT);
+		}
+		if (utilisateur.getRue() == null) {
+			businessException.ajouterErreur(CodesResultatBLL.RUE_UTILISATEUR_INEXISTANT);
+		}
+		if (utilisateur.getVille() == null) {
+			businessException.ajouterErreur(CodesResultatBLL.VILLE_UTILISATEUR_INEXISTANT);
+		}
+		if (utilisateur.getCredit() == 0) {
+			businessException.ajouterErreur(CodesResultatBLL.CREDIT_UTILISATEUR_INCORRECT);
+		}
+//		if (utilisateur.isAdministrateur() == false) {
+//			businessException.ajouterErreur(CodesResultatBLL.STATUT_ADMIN_UTILISATEUR_INEXISTANT);
+//		}
 	}
 	
 	public static boolean patternMatches(String chaineDeCaracteres, String pattern) {
