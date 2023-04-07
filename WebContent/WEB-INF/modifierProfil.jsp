@@ -17,16 +17,18 @@
 	</header>
 	
 	<section class="centered" style="margin: 0 50px">
-		<form method="post" action="inscription">
+		<form method="post" action="modifier">
 			<input hidden name="noUtilisateur" value="${requestScope['profil'].getNoUtilisateur()}">
 			<div class="input-label-box">
 				<label>Pseudo <span class="red">*</span> </label>
 				<input required type="text" name="pseudo" pattern="\b\w{4,30}\b" value="${requestScope['profil'].getPseudo()}">
 			</div>
-						
+			<input hidden name="nomUtilisateur" value="${requestScope['profil'].getNom()}">
+			<input hidden name="prenomUtilisateur" value="${requestScope['profil'].getPrenom()}">
+			<input hidden name="emailUtilisateur" value="${requestScope['profil'].getEmail()}">						
 			<div class="input-label-box">
 				<label>Téléphone </label>
-				<input type="text" name="telephone" pattern="^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$" value="${requestScope['profil'].getTelephone()}">
+				<input type="text" name="telephone" pattern="^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{​​​2}​​​){​​​4}​​​$" value="${requestScope['profil'].getTelephone()}">
 			</div>
 			
 			<div class="input-label-box">
@@ -36,7 +38,7 @@
 			
 			<div class="input-label-box">
 				<label>Code Postal <span class="red">*</span> </label>
-				<input required type="text" name="codePostal" input="^\d{​5}​(?:[\s-]\w{​2}​)?$" value="${requestScope['profil'].getCodePostal()}">
+				<input required type="text" name="codePostal" input="^\d{​​​​​​​​​​​​​​​​​​5}​​​​​​​​​​​​​​​​​​(?:[\s-]\w{​​​​​​​​​​​​​​​​​​2}​​​​​​​​​​​​​​​​​​)?$" value="${requestScope['profil'].getCodePostal()}">
 			</div>
 			<c:if test="${not empty requestScope['erreurCodePostal']}">
 				<p class="error-text">${requestScope['erreurCodePostal']}</p>
@@ -49,7 +51,7 @@
 			
 			<div class="input-label-box">
 				<label>Mot de passe <span class="red">*</span> </label>
-				<input required type="password" name="motDePasse" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\s]).{12,50}$">
+				<input required type="password" name="motDePasse" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\s]).{​​​​​​​​​​​​​​​​​​​​​​​​12,50}​​​​​​​​​​​​​​​​​​​​​​​​$">
 			</div>
 			<p class="info-text">** 12 caractères minimum, au moins une majuscule, au moins une minuscule, au moins un chiffre, au moins un caractère spécial<p>
 			<c:if test="${not empty requestScope['erreurMotDePasse']}">
@@ -58,7 +60,7 @@
 			
 			<div class="input-label-box">
 				<label>Confirmation <span class="red">*</span> </label>
-				<input required type="password" name="confirmation" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\s]).{12,50}$">
+				<input required type="password" name="confirmation" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\s]).{​​​​​​​​​​​​​​​​​​​​​​​​12,50}​​​​​​​​​​​​​​​​​​​​​​​​$">
 			</div>
 			<c:if test="${not empty requestScope['erreurMotDePasse']}">
 				<p class="error-text">${requestScope['erreurMotDePasse']}</p>

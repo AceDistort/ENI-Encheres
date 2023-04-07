@@ -67,22 +67,10 @@ public class UtilisateurManager {
 		{	
 			//validation des donnees
 			controlerUtilisateur(utilisateur);
-			
+			utilisateur.setMotDePasse(HashMotDePasse.generateStorngPasswordHash(utilisateur.getMotDePasse()));
 			//modification en BDD
 			utilisateurDAO.modifierUtilisateur(utilisateur);
 			
-			//modifier les infos dans la liste
-			utilisateur.setPseudo(utilisateur.getPseudo());
-			utilisateur.setNom(utilisateur.getNom());
-			utilisateur.setPrenom(utilisateur.getPrenom());
-			utilisateur.setEmail(utilisateur.getEmail());
-			utilisateur.setTelephone(utilisateur.getTelephone());
-			utilisateur.setRue(utilisateur.getRue());
-			utilisateur.setCodePostal(utilisateur.getCodePostal());
-			utilisateur.setVille(utilisateur.getVille());
-			utilisateur.setMotDePasse(utilisateur.getMotDePasse());
-			
-			//TODO
 		}
 		catch(Exception e)
 		{
@@ -128,7 +116,7 @@ public class UtilisateurManager {
 	}
 	
 	/**
-	 * M�thode pour se connecter � l'application. Ajoute les donn�es de l'utilisateur au param�tre d'entr�e.
+	 * Méthode pour se connecter à l'application. Ajoute les données de l'utilisateur au paramètre d'entrée.
 	 * @param utilisateur
 	 * @return Vrai si la connection est faite
 	 * @throws BusinessException

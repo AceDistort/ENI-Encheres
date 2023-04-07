@@ -27,7 +27,6 @@ public class ModifierProfilServlet extends HttpServlet {
      */
     public ModifierProfilServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -70,6 +69,9 @@ public class ModifierProfilServlet extends HttpServlet {
 			BusinessException businessException = new BusinessException();
 			Utilisateur utilisateur = new Utilisateur();
 			utilisateur.setPseudo(request.getParameter("pseudo"));
+			utilisateur.setNom(request.getParameter("nomUtilisateur"));
+			utilisateur.setPrenom(request.getParameter("prenomUtilisateur"));
+			utilisateur.setEmail(request.getParameter("emailUtilisateur"));
 			utilisateur.setTelephone(request.getParameter("telephone"));
 			utilisateur.setRue(request.getParameter("rue"));
 			utilisateur.setCodePostal(request.getParameter("codePostal"));
@@ -83,6 +85,16 @@ public class ModifierProfilServlet extends HttpServlet {
 			}
 			
 			UtilisateurManager.getUtilisateurManager().modifier(utilisateur);
+			if (utilisateur.getNoUtilisateur() == ((Utilisateur) request.getSession().getAttribute("sessionUtilisateur")).getNoUtilisateur()) {
+				((Utilisateur) request.getSession().getAttribute("sessionUtilisateur")).setPseudo(request.getParameter("pseudo"));
+				((Utilisateur) request.getSession().getAttribute("sessionUtilisateur")).setTelephone(request.getParameter("telephone"));
+				((Utilisateur) request.getSession().getAttribute("sessionUtilisateur")).setRue(request.getParameter("rue"));
+				((Utilisateur) request.getSession().getAttribute("sessionUtilisateur")).setCodePostal(request.getParameter("codePostal"));
+				((Utilisateur) request.getSession().getAttribute("sessionUtilisateur")).setVille(request.getParameter("ville"));
+				((Utilisateur) request.getSession().getAttribute("sessionUtilisateur")).setMotDePasse(request.getParameter("motDePasse"));
+				request.getSession().setAttribute("sessionUtilisateur", utilisateur);
+			}
+			((HttpServletResponse) response).sendRedirect("/ENI-Encheres/encheres");
 		}
 		catch (BusinessException e) {
 			if(e.getListeCodesErreur().contains(CodesResultatBLL.CODE_POSTAL_UTILISATEUR_NON_VALIDE)) {
