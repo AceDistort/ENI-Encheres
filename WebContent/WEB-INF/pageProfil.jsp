@@ -1,3 +1,4 @@
+<%@page import="fr.eni.encheres.bo.Utilisateur"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isErrorPage="false" errorPage="Erreur.jsp"
@@ -54,7 +55,7 @@
 		<!-- Bouton modifier  -->
 		<c:if test="${requestScope['profil'].equals(sessionScope['sessionUtilisateur']) || sessionScope['sessionUtilisateur'].isAdministrateur()}">
 			<div style="margin-top: 10px">
-				<a class="button orange-background no-text-decoration" style="margin-top: 10px" href="profil/modifier">Modifier</a>
+				<a class="button orange-background no-text-decoration" style="margin-top: 10px" href="profil/modifier?id=${requestScope['profil'].getNoUtilisateur() }">Modifier</a>
 			</div>
 		</c:if>
 	</div>
