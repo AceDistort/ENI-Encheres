@@ -18,8 +18,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	private static final String LISTER_VENTES_ARTICLE = "SELECT no_article, nom_article, description, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie " + 
 														"FROM ARTICLES_VENDUS " + 
 														"INNER JOIN UTILISATEURS ON (UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur);";
-	//private static final String LISTER_VENTES_ARTICLES = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente FROM ARTICLES_VENDUS;";
-
+	
 	/**
 	 * {@inheritDoc}
 	 * @throws BusinessException 
@@ -57,35 +56,6 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 
 	}
 
-	@Override
-	public List<ArticleVendu> listerVentesDeconnecte(String texte) throws BusinessException {
-		List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
-		for(ArticleVendu article: listerVentesDeconnecte()) {
-			if(article.getNomArticle().contains(texte)) {
-				articles.add(article);
-			}
-		}
-		return articles;
-	}
-
-	@Override
-	public List<ArticleVendu> listerVentesDeconnecte(int noCategorie) throws BusinessException {
-		List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
-		for(ArticleVendu article: listerVentesDeconnecte()) {
-			if(article.getCategorie().getNoCategorie() == noCategorie) {
-				articles.add(article);
-			}
-		}
-		return articles;
-	}
-			
-		} catch(Exception e){
-			e.printStackTrace();
-			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.AUTRE_ERREUR_AJOUT_ARTICLE);
-			throw businessException;
-		}
-	}
 
 	@Override
 	public List<ArticleVendu> listerVentesDeconnecte() throws BusinessException {
@@ -117,6 +87,28 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.AUTRE_ERREUR_LISTER_ARTICLE);
 			throw businessException;
+		}
+		return articles;
+	}
+
+	@Override
+	public List<ArticleVendu> listerVentesDeconnecte(String texte) throws BusinessException {
+		List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
+		for(ArticleVendu article: listerVentesDeconnecte()) {
+			if(article.getNomArticle().contains(texte)) {
+				articles.add(article);
+			}
+		}
+		return articles;
+	}
+
+	@Override
+	public List<ArticleVendu> listerVentesDeconnecte(int noCategorie) throws BusinessException {
+		List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
+		for(ArticleVendu article: listerVentesDeconnecte()) {
+			if(article.getCategorie().getNoCategorie() == noCategorie) {
+				articles.add(article);
+			}
 		}
 		return articles;
 	}

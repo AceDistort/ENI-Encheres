@@ -19,7 +19,7 @@ public interface ArticleVenduDAO {
 	 * @return une liste d'articleVendu
 	 * @throws BusinessException 
 	 */
-	public List<ArticleVendu>  listerVentesDeconnecte() throws BusinessException;
+	public List<ArticleVendu> listerVentesDeconnecte() throws BusinessException;
 	
 	public List<ArticleVendu> listerVentesDeconnecte(String texte) throws BusinessException;
 	
