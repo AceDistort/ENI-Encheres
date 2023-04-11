@@ -2,6 +2,7 @@ package fr.eni.encheres.dal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import fr.eni.encheres.bo.ArticleVendu;
@@ -20,7 +21,7 @@ public class ArticleVenduJDBCImpl implements ArticleVenduDAO {
 		try {
 			Connection cnx = ConnectionProvider.getConnection();
 			
-			PreparedStatement pstmt = cnx.prepareStatement(CREER_VENTE_ARTICLE);
+			PreparedStatement pstmt = cnx.prepareStatement(CREER_VENTE_ARTICLE,PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, article.getNomArticle());
 			pstmt.setString(2, article.getDescription());
 			pstmt.setDate(3, article.getDateDebutEncheres());
@@ -30,6 +31,11 @@ public class ArticleVenduJDBCImpl implements ArticleVenduDAO {
 			pstmt.setInt(7, article.getCategorie().getNoCategorie());
 			
 			pstmt.executeUpdate();
+			ResultSet rs = pstmt.getGeneratedKeys();
+			
+			if(rs.next()) {
+				article.setNoArticle(rs.getInt(1));
+			}
 			
 		} catch (SQLException e) {
 			BusinessException be = new BusinessException();

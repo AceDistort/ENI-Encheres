@@ -21,6 +21,7 @@ import fr.eni.encheres.bo.BusinessException;
 import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.bo.Utilisateur;
+import fr.eni.encheres.messages.LecteurMessage;
 
 /**
  * Servlet implementation class NouvelleVenteServlet
@@ -127,8 +128,15 @@ public class NouvelleVenteServlet extends HttpServlet {
 			ArticleVenduManager.getCategorieManager().nouvelleVente(article);
 			
 			Retrait retrait = new Retrait(rue,codePostal,ville,article);
+			System.out.println("Retrait");
+			System.out.println(retrait.getRue());
+			System.out.println(retrait.getCodePostal());
+			System.out.println(retrait.getVille());
+			System.out.println(retrait.getConcerne().getNoArticle());
 			
 			RetraitManager.getRetraitManager().creer(retrait);
+			
+			((HttpServletResponse) response).sendRedirect("encheres");
 			
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block

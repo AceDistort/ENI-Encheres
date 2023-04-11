@@ -9,7 +9,7 @@ import fr.eni.encheres.bo.Retrait;
 
 public class RetraitDAOJdbcImpl implements RetraitDAO {
 
-	private static final String CREER = "INSERT INTO RETRAIT (no_article,rue,code_postal,ville) VALUES (?,?,?,?);";
+	private static final String CREER = "INSERT INTO RETRAITS (no_article,rue,code_postal,ville) VALUES (?,?,?,?);";
 	
 	@Override
 	public void creer(Retrait retrait) throws BusinessException {

@@ -6,7 +6,7 @@ import fr.eni.encheres.bo.BusinessException;
 public interface ArticleVenduDAO {
 	
 	/**
-	 * Méthode pour créer une nouvelle vente.
+	 * Mï¿½thode pour crï¿½er une nouvelle vente.
 	 * @param article
 	 * @throws BusinessException 
 	 */
