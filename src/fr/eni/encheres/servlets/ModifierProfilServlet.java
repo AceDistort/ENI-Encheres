@@ -1,7 +1,6 @@
 package fr.eni.encheres.servlets;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -68,6 +67,7 @@ public class ModifierProfilServlet extends HttpServlet {
 		{
 			BusinessException businessException = new BusinessException();
 			Utilisateur utilisateur = new Utilisateur();
+			utilisateur.setNoUtilisateur(((Utilisateur) request.getSession().getAttribute("sessionUtilisateur")).getNoUtilisateur());
 			utilisateur.setPseudo(request.getParameter("pseudo"));
 			utilisateur.setNom(request.getParameter("nomUtilisateur"));
 			utilisateur.setPrenom(request.getParameter("prenomUtilisateur"));
