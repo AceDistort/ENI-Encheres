@@ -2,7 +2,7 @@ package fr.eni.encheres.dal;
 
 public class DAOFactory {
 	public static ArticleVenduDAO getArticleVenduDAO() {
-		return new ArticleVenduJDBCImpl();
+		return new ArticleVenduDAOJdbcImpl();
 	}
 	
 	public static UtilisateurDAO getUtilisateurDAO()

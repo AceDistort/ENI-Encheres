@@ -11,7 +11,7 @@ import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.BusinessException;
 import fr.eni.encheres.bo.Utilisateur;
 
-public class ArticleVenduJDBCImpl implements ArticleVenduDAO {
+public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	
 	private static final String CREER_VENTE_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,no_utilisateur,no_categorie) VALUES (?,?,?,?,?,?,?);";
 	private static final String LISTER_VENTES_ARTICLE = "SELECT no_article, nom_article, description, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie " + 
