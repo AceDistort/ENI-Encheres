@@ -20,8 +20,4 @@ public interface ArticleVenduDAO {
 	 * @throws BusinessException 
 	 */
 	public List<ArticleVendu> listerVentesDeconnecte() throws BusinessException;
-	
-	public List<ArticleVendu> listerVentesDeconnecte(String texte) throws BusinessException;
-	
-	public List<ArticleVendu> listerVentesDeconnecte(int noCategorie) throws BusinessException;
 }

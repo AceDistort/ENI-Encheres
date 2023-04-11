@@ -10,14 +10,13 @@ import java.util.List;
 
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.BusinessException;
+import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Utilisateur;
 
 public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	
 	private static final String CREER_VENTE_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,no_utilisateur,no_categorie) VALUES (?,?,?,?,?,?,?);";
-	private static final String LISTER_VENTES_ARTICLE = "SELECT no_article, nom_article, description, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie " + 
-														"FROM ARTICLES_VENDUS " + 
-														"INNER JOIN UTILISATEURS ON (UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur);";
+	private static final String LISTER_VENTES_ARTICLE = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente, u.no_utilisateur, c.no_categorie, c.libelle, u.pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON (u.no_utilisateur = a.no_utilisateur) INNER JOIN CATEGORIES c ON (c.no_categorie = a.no_categorie);";
 	
 	/**
 	 * {@inheritDoc}
@@ -70,45 +69,30 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			while (rs.next()) {
 				Utilisateur utilisateur = new Utilisateur();
 				utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+				utilisateur.setPseudo(rs.getString("pseudo"));
+				
+				Categorie categorie = new Categorie();
+				categorie.setLibelle(rs.getString("libelle"));
+				categorie.setNoCategorie(rs.getInt("no_categorie"));
+				
 				article = new ArticleVendu();
 				article.setNoArticle(rs.getInt("no_article"));
 				article.setNomArticle(rs.getString("nom_article"));
 				article.setDescription(rs.getString("description"));
-				article.setDateDebutEncheres(rs.getDate("date_devut_encheres"));
+				article.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
 				article.setDateFinEncheres(rs.getDate("date_fin_encheres"));
 				article.setPrixInitial(rs.getInt("prix_initial"));
 				article.setPrixVente(rs.getInt("prix_vente"));
 				article.setVend(utilisateur);
+				article.setCategorie(categorie);
+				articles.add(article);
 			}
-			articles.add(article);
 		}
 		catch(Exception e){
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.AUTRE_ERREUR_LISTER_ARTICLE);
 			throw businessException;
-		}
-		return articles;
-	}
-
-	@Override
-	public List<ArticleVendu> listerVentesDeconnecte(String texte) throws BusinessException {
-		List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
-		for(ArticleVendu article: listerVentesDeconnecte()) {
-			if(article.getNomArticle().contains(texte)) {
-				articles.add(article);
-			}
-		}
-		return articles;
-	}
-
-	@Override
-	public List<ArticleVendu> listerVentesDeconnecte(int noCategorie) throws BusinessException {
-		List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
-		for(ArticleVendu article: listerVentesDeconnecte()) {
-			if(article.getCategorie().getNoCategorie() == noCategorie) {
-				articles.add(article);
-			}
 		}
 		return articles;
 	}

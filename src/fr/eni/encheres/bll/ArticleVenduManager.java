@@ -1,5 +1,7 @@
 package fr.eni.encheres.bll;
 
+import java.util.List;
+
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.BusinessException;
 import fr.eni.encheres.dal.ArticleVenduDAO;
@@ -26,5 +28,9 @@ public class ArticleVenduManager {
 			throw be;
 		}
 		articleVenduDAO.creerVenteArticle(article);
+	}
+	
+	public List<ArticleVendu> listerVentesDeconnecte() throws BusinessException {
+		return articleVenduDAO.listerVentesDeconnecte();
 	}
 }

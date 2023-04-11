@@ -29,7 +29,32 @@
 		</ul>
 	</header>
 	<body>
-		
+		<form method="POST" action="encheres">
+			<div>
+				<label for="texte">Le nom de l'article contient</label>
+				<input id="texte" name="texte" type="text" value="${param.texte}"/>
+			</div>
+			<div>
+				<label for="categorie">Catégorie</label>
+				<select id="categorie" name="categorie">
+					<option value="">Toutes</option>
+					<c:forEach var="categorie" items="${requestScope['categories']}">
+						<option ${param.categorie == categorie.getNoCategorie() ? "selected" : ""} value="${categorie.getNoCategorie()}">${categorie.getLibelle()}</option>
+					</c:forEach>
+				</select>
+			</div>
+			<input type="submit" value="Rechercher"/>
+		</form>
+		<section>
+			<c:forEach var="article" items="${requestScope['articles']}">
+				<div>
+					<p>${article.getNomArticle()}</p>
+					<p>Prix: ${article.getPrixVente()} points</p>
+					<p>Fin de l'enchère: ${article.getDateFinEncheres()}</p>
+					<p>Vendeur: ${article.getVend().getPseudo()}</p>
+				</div>
+			</c:forEach>
+		</section>
 	</body>
 </body>
 </html>
