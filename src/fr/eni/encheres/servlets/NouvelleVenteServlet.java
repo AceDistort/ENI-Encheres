@@ -15,9 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.encheres.bll.ArticleVenduManager;
 import fr.eni.encheres.bll.CategoriesManager;
+import fr.eni.encheres.bll.RetraitManager;
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.BusinessException;
 import fr.eni.encheres.bo.Categorie;
+import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.bo.Utilisateur;
 
 /**
@@ -39,7 +41,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Redirection vers page connexion si utilisateur non connecté
+		//Redirection vers page connexion si utilisateur non connectï¿½
 		if(request.getSession().getAttribute("sessionUtilisateur") == null) {
 			((HttpServletResponse) response).sendRedirect("connexion");
 		} else {
@@ -122,7 +124,12 @@ public class NouvelleVenteServlet extends HttpServlet {
 			ArticleVendu article = new ArticleVendu(nomArticle, description, dateDebutEncheres, dateFinEncheres, vend, categorie);
 			article.setPrixInitial(prixInitial);
 			
-			//ArticleVenduManager.getCategorieManager().nouvelleVente(article);
+			ArticleVenduManager.getCategorieManager().nouvelleVente(article);
+			
+			Retrait retrait = new Retrait(rue,codePostal,ville,article);
+			
+			RetraitManager.getRetraitManager().creer(retrait);
+			
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -56,9 +56,14 @@ public abstract class CodesResultatDAL {
 	public static final int AUTRE_ERREUR_AFFICHER_UTILISATEUR_PAR_PSEUDO=10010;
 	
 	/**
-	 * Echec méthode lister catégories
+	 * Echec mï¿½thode lister catï¿½gories
 	 */
 	public static final int ERREUR_LISTER_CATEGORIES=10011;
+	
+	/**
+	 * Echec mÃ©thode creer retrait
+	 */
+	public static final int ERREUR_CREER_RETRAIT=10012;
 	
 	
 }
