@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.BusinessException;
 
-public class ArticleVenduJDBCImpl implements ArticleVenduDAO {
+public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	
 	private static final String CREER_VENTE_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,no_utilisateur,no_categorie) VALUES (?,?,?,?,?,?,?);";
 
@@ -42,6 +45,28 @@ public class ArticleVenduJDBCImpl implements ArticleVenduDAO {
 			throw be;
 		}
 
+	}
+
+	@Override
+	public List<ArticleVendu> listerVentesDeconnecte(String texte) throws BusinessException {
+		List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
+		for(ArticleVendu article: listerVentesDeconnecte()) {
+			if(article.getNomArticle().contains(texte)) {
+				articles.add(article);
+			}
+		}
+		return articles;
+	}
+
+	@Override
+	public List<ArticleVendu> listerVentesDeconnecte(int noCategorie) throws BusinessException {
+		List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
+		for(ArticleVendu article: listerVentesDeconnecte()) {
+			if(article.getCategorie().getNoCategorie() == noCategorie) {
+				articles.add(article);
+			}
+		}
+		return articles;
 	}
 
 }

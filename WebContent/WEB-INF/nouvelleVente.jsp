@@ -23,6 +23,7 @@
 			<label for="description">Description</label>
 			<input id="description" name="description" type="text" required/>
 		</div>
+		
 		<div>
 			<label>Catégorie</label>
 			<select id="categorie" name="categorie" required>
