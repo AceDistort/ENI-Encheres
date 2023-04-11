@@ -60,8 +60,13 @@ public class InscriptionServlet extends HttpServlet {
 			if (!request.getParameter("motDePasse").equals(request.getParameter("confirmation"))) {
 				businessException.ajouterErreur(CodesResultatServlet.MOTS_DE_PASSE_NON_IDENTIQUES);
 			}
+			else
+			{
+				utilisateur.setMotDePasse(request.getParameter("motDePasse"));
+			}
 			
 			UtilisateurManager.getUtilisateurManager().creer(utilisateur);
+			((HttpServletResponse) response).sendRedirect("encheres");
 		}
 		catch (BusinessException e) {
 			if(e.getListeCodesErreur().contains(CodesResultatBLL.EMAIL_UTILISATEUR_NON_VALIDE)) {

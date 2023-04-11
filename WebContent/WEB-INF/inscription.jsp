@@ -34,7 +34,7 @@
 			
 			<div class="input-label-box">
 				<label>Email <span class="red">*</span> </label>
-				<input required type="text" name="email" pattern="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b">
+				<input required type="text" name="email" pattern="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{​​​2,}​​​​​​​​​​​​​​​​​​​​​​​​\b">
 			</div>
 			<c:if test="${not empty requestScope['erreurEmail']}">
 				<p class="error-text">${requestScope['erreurEmail']}</p>
@@ -42,7 +42,7 @@
 						
 			<div class="input-label-box">
 				<label>Téléphone </label>
-				<input type="text" name="telephone" pattern="^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$">
+				<input type="text" name="telephone" pattern="^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{​​​2}​​​){​​​4}​​​$">
 			</div>
 			
 			<div class="input-label-box">
@@ -52,7 +52,7 @@
 			
 			<div class="input-label-box">
 				<label>Code Postal <span class="red">*</span> </label>
-				<input required type="text" name="codePostal" input="^\d{​5}​(?:[\s-]\w{​2}​)?$">
+				<input required type="text" name="codePostal" input="^\d{​​​​​​​​​​​​​​​​​​5}​​​​​​​​​​​​​​​​​​(?:[\s-]\w{​​​​​​​​​​​​​​​​​​2}​​​​​​​​​​​​​​​​​​)?$">
 			</div>
 			<c:if test="${not empty requestScope['erreurCodePostal']}">
 				<p class="error-text">${requestScope['erreurCodePostal']}</p>
@@ -65,7 +65,7 @@
 			
 			<div class="input-label-box">
 				<label>Mot de passe <span class="red">*</span> </label>
-				<input required type="password" name="motDePasse" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\s]).{12,50}$">
+				<input required type="password" name="motDePasse" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\s]).{​​​​​​​​​​​​​​​​​​​​​​​​12,50}​​​​​​​​​​​​​​​​​​​​​​​​$">
 			</div>
 			<p class="info-text">** 12 caractères minimum, au moins une majuscule, au moins une minuscule, au moins un chiffre, au moins un caractère spécial<p>
 			<c:if test="${not empty requestScope['erreurMotDePasse']}">
@@ -74,7 +74,7 @@
 			
 			<div class="input-label-box">
 				<label>Confirmation <span class="red">*</span> </label>
-				<input required type="password" name="confirmation" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\s]).{12,50}$">
+				<input required type="password" name="confirmation" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\s]).{​​​​​​​​​​​​​​​​​​​​​​​​12,50}​​​​​​​​​​​​​​​​​​​​​​​​$">
 			</div>
 			<c:if test="${not empty requestScope['erreurMotDePasse']}">
 				<p class="error-text">${requestScope['erreurMotDePasse']}</p>

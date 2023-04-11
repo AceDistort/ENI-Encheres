@@ -102,4 +102,39 @@ public abstract class CodesResultatBLL {
 	 * Erreur si l'utilisateur renseigne un mot de passe non valide
 	 */
 	public static final int CODE_POSTAL_UTILISATEUR_NON_VALIDE = 20020;
+	
+	/**
+	 * Erreur si pseudo utilisateur est null
+	 */
+	public static final int PSEUDO_UTILISATEUR_INEXISTANT = 20021;
+	
+	/**
+	 * Erreur si nom utilisateur est null
+	 */
+	public static final int NOM_UTILISATEUR_INEXISTANT = 20022;
+	
+	/**
+	 * Erreur si prenom utilisateur est null
+	 */
+	public static final int PRENOM_UTILISATEUR_INEXISTANT = 20023;
+	
+	/**
+	 * Erreur si rue utilisateur est null
+	 */
+	public static final int RUE_UTILISATEUR_INEXISTANT = 20024;
+	
+	/**
+	 * Erreur si ville utilisateur est null
+	 */
+	public static final int VILLE_UTILISATEUR_INEXISTANT = 20025;
+	
+	/**
+	 * Erreur si credit utilisateur est null
+	 */
+	public static final int CREDIT_UTILISATEUR_INCORRECT = 20026;
+	
+	/**
+	 * Erreur si admin utilisateur est null
+	 */
+	public static final int STATUT_ADMIN_UTILISATEUR_INEXISTANT = 20027;
 }

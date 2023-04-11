@@ -12,7 +12,7 @@
 </head>
 <body>
 	<header>
-		<h1 class="title">ENI-EnchÃ¨res</h1>
+		<h1 class="title">ENI-Enchères</h1>
 	</header>
 	
 	<section class="centered">
