@@ -22,7 +22,7 @@
 			</c:if>
 			<c:if test="${not empty sessionScope['sessionUtilisateur']}">
 				<li><a class="no-text-decoration text" href="">Enchères</a></li>
-				<li><a class="no-text-decoration text" href="vente/vendre">Vendre un article</a></li>
+				<li><a class="no-text-decoration text" href="vendre">Vendre un article</a></li>
 				<li><a class="no-text-decoration text" href="profil">Mon profil</a></li>
 				<li><a class="no-text-decoration text" href="deconnexion">Déconnexion</a></li>
 			</c:if>

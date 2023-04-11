@@ -56,18 +56,29 @@ public abstract class CodesResultatDAL {
 	public static final int AUTRE_ERREUR_AFFICHER_UTILISATEUR_PAR_PSEUDO=10010;
 	
 	/**
+	 * Echec m�thode lister cat�gories
+	 */
+	public static final int ERREUR_LISTER_CATEGORIES=10011;
+	
+	/**
+	 * Echec méthode creer retrait
+	 */
+	public static final int ERREUR_CREER_RETRAIT=10012;
+	
+	/**
 	 * Echec général quand tentative d'ajouter un objet null
 	 */
-	public static final int OBJET_NULL_AJOUT_ARTICLE=10011;
+	public static final int OBJET_NULL_AJOUT_ARTICLE=10013;
 	
 	/**
 	 * Echec général quand erreur non gérée à l'insertion 
 	 */
-	public static final int AUTRE_ERREUR_AJOUT_ARTICLE=10012;
+	public static final int AUTRE_ERREUR_AJOUT_ARTICLE=10014;
 	
 	/**
 	 * Autre erreur quand affichage de tous les utilisateurs
 	 */
-	public static final int AUTRE_ERREUR_LISTER_ARTICLE=10013;
+	public static final int AUTRE_ERREUR_LISTER_ARTICLE=10015;
+	
 	
 }
