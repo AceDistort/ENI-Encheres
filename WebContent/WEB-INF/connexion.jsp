@@ -18,18 +18,16 @@
 	
 	<section class="centered">
 		<form method="post" action="connexion">
-			<div class="input-label-box">
-				<label>Identifiant : </label>
-				<input required type="text" name="identifiant" placeholder="">
+			<div class="mb-3">
+			  <label class="form-label">Login (adresse mail ou pseudo)</label>
+			  <input required type="text" name="identifiant" class="form-control">
 			</div>
-			
-			<div class="input-label-box">
-				<label>Mot de passe : </label>
-				<input required type="password" name="motDePasse">
+			<div class="mb-3">
+			  <label class="form-label">Mot de passe</label>
+			  <input required type="password" name="motDePasse" class="form-control">
 			</div>
-			<div class="input-label-box">
-				<input class="button green-background" style="border: none" type="submit" value="Connexion" >
-			</div>
+
+			<button class="btn btn-primary orange-background" style="margin: 20px 0; border: none" type="submit">Connexion</button>
 		</form>
 		<c:if test="${not empty requestScope['erreurConnexion']}">
 			<p class="error-text">${requestScope['erreurConnexion']}</p>

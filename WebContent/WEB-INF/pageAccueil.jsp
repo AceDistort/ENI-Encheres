@@ -34,7 +34,7 @@
 		
 		<div style="display: flex; flex-direction: row; flex-wrap: wrap">
 			<!-- Section filtres et recherche -->
-			<section class="mx-5" style="min-width: 300px; flex: 1">
+			<section class="mx-3" style="min-width: 300px; flex: 1">
 				<form method="POST" action="encheres">
 					<div class="mb-3">
 						<label class="form-label" for="texte">Le nom de l'article contient</label>
@@ -95,15 +95,14 @@
 			</section>
 			
 			<!-- Section filtres et recherche -->
-			<section class="mx-5" style="flex: 2">
+			<section class="mx-3" style="flex: 2">
 				<div class="card-group">
 					<c:forEach var="article" items="${requestScope['articles']}">
-						<div class="card mb-3 mx-2" style="max-width: 500px; min-width: 400px;">
-						  <div class="row g-0">
-						    <div class="col-md-4">
-						      <img src="images/article-exemple.png" class="img-fluid rounded-start" alt="...">
+						<div class="card mb-3 d-flex flex-row flex-nowrap" style="max-width: 400px; min-width: 350px;">
+						    <div class="flex-1">
+						      <img src="images/article-exemple.png" class="img-fluid rounded-start" style="height: 100%; object-fit: cover">
 						    </div>
-						    <div class="col-md-8">
+						    <div class="flex-2">
 						      <div class="card-body">
 						        <h5 class="card-title">${article.getNomArticle()}</h5>
 						        <p class="card-text">${article.getPrixVente()} points</p>
@@ -111,7 +110,6 @@
 						        <p class="card-text">Vendu par ${article.getVend().getPseudo()}</p>
 						      </div>
 						    </div>
-						  </div>
 						</div>
 					</c:forEach>
 				</div>
