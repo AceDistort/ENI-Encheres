@@ -39,14 +39,28 @@ public class PageAccueilServlet extends HttpServlet {
 			List<Categorie> categories = CategoriesManager.getCategorieManager().lister();
 			request.setAttribute("categories", categories);
 			
-			List<ArticleVendu> articles = ArticleVenduManager.getCategorieManager().listerVentesDeconnecte();
+			List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
+			
+			if (request.getSession().getAttribute("sessionUtilisateur") != null) {
+				String[] achats = request.getParameterValues("achats");
+				String[] mesVentes = request.getParameterValues("mesVentes");
+				if(achats != null) {
+					for(String achat: achats) {
+						
+					}
+				} else if(mesVentes != null) {
+					
+				} else {
+					articles = ArticleVenduManager.getCategorieManager().listerVentesDeconnecte();
+				}
+			} else {
+				articles = ArticleVenduManager.getCategorieManager().listerVentesDeconnecte();
+			}
+			
 			List<ArticleVendu> articlesFiltres = new ArrayList<ArticleVendu>(articles);
 
 			for(ArticleVendu article: articles) {
 				if(request.getParameter("texte") != null) {
-					System.out.println(article.getNomArticle());
-					System.out.println(request.getParameter("texte"));
-					System.out.println(!article.getNomArticle().contains(request.getParameter("texte")));
 					if(!article.getNomArticle().contains(request.getParameter("texte"))) {
 						articlesFiltres.remove(article);
 					}
@@ -73,6 +87,22 @@ public class PageAccueilServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<String> listeParametres = new ArrayList<String>();
 		
+		if(request.getSession().getAttribute("sessionUtilisateur") != null) {
+			String[] achats = request.getParameterValues("achats");
+			if(achats != null) {
+				for(String achat: achats) {
+					listeParametres.add(String.format("achats=%s", achat));
+				}
+			}
+			
+			String[] mesVentes = request.getParameterValues("mesVentes");
+			if(mesVentes != null) {
+				for(String vente: mesVentes) {
+					listeParametres.add(String.format("mesVentes=%s", vente));
+				}
+			}
+		}
+		
 		if(!"".equals(request.getParameter("texte"))) {
 			listeParametres.add(String.format("texte=%s", request.getParameter("texte")));
 		}
@@ -80,7 +110,7 @@ public class PageAccueilServlet extends HttpServlet {
 			listeParametres.add(String.format("categorie=%s", request.getParameter("categorie")));
 		}
 		String parametres = String.join("&", listeParametres);
-		if(!parametres.equals("")) {
+		if(listeParametres.size() != 0) {
 			parametres = String.format("?%s", parametres);
 		}
 		((HttpServletResponse) response).sendRedirect(String.format("encheres%s", parametres));
