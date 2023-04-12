@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fr.eni.encheres.bo.BusinessException;
@@ -200,8 +201,6 @@ public class UtilisateurManager {
 	}
 	
 	public static boolean patternMatches(String chaineDeCaracteres, String pattern) {
-	    return Pattern.compile(pattern)
-	      .matcher(chaineDeCaracteres)
-	      .matches();
+	    return Pattern.compile(pattern).matcher(chaineDeCaracteres).matches();
 	}
 }

@@ -56,7 +56,7 @@ public abstract class CodesResultatDAL {
 	public static final int AUTRE_ERREUR_AFFICHER_UTILISATEUR_PAR_PSEUDO=10010;
 	
 	/**
-	 * Echec m�thode lister cat�gories
+	 * Echec méthode lister cat�gories
 	 */
 	public static final int ERREUR_LISTER_CATEGORIES=10011;
 	
@@ -79,6 +79,28 @@ public abstract class CodesResultatDAL {
 	 * Autre erreur quand affichage de tous les utilisateurs
 	 */
 	public static final int AUTRE_ERREUR_LISTER_ARTICLE=10015;
+	
+	/**
+	 * Echec général quand tentative d'ajouter un objet null
+	 * + Autre erreur non gérée à l'ajout d'une enchere
+	 */
+	public static final int OBJET_NULL_AJOUT_ENCHERE = 10016;
+	public static final int AUTRE_ERREUR_AJOUT_ENCHERE = 10017;
+	
+	/**
+	 * Echec général quand tentative de modif d'un objet null
+	 * + Autre erreur non gérée à la modif d'une enchere
+	 */
+	public static final int OBJET_NULL_MODIF_ENCHERE = 10018;
+	public static final int AUTRE_ERREUR_MODIF_ENCHERE = 10019;
+	
+	/**
+	 * Echec général quand tentative de suppression d'un objet null
+	 * + Autre erreur non gérée à la suppression d'une enchere
+	 */
+	public static final int OBJET_NULL_SUPP_ENCHERE = 10020;
+	public static final int AUTRE_ERREUR_SUPP_ENCHERE = 10021;
+	
 	
 	
 }

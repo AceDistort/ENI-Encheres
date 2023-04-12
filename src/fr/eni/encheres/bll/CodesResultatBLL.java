@@ -137,4 +137,25 @@ public abstract class CodesResultatBLL {
 	 * Erreur si admin utilisateur est null
 	 */
 	public static final int STATUT_ADMIN_UTILISATEUR_INEXISTANT = 20027;
+	
+	/**
+	 * Echec général quand tentative d'ajouter un objet null
+	 * + Autre erreur non gérée lors de l'ajout d'un objet
+	 */
+	public static final int OBJET_NULL_AJOUT_ENCHERE = 20028;
+	public static final int AUTRE_ERREUR_AJOUT_ENCHERE = 20029;
+	
+	/**
+	 * Echec général quand tentative de modif d'un objet null
+	 * + Autre erreur non gérée lors de la modif d'un objet
+	 */
+	public static final int OBJET_NULL_MODIF_ENCHERE = 20030;
+	public static final int AUTRE_ERREUR_MODIF_ENCHERE = 20031;
+	
+	/**
+	 * Echec général quand tentative de suppression d'un objet null
+	 * + Autre erreur non gérée lors de la suppression d'un objet
+	 */
+	public static final int OBJET_NULL_SUPP_ENCHERE = 20032;
+	public static final int AUTRE_ERREUR_SUPP_ENCHERE = 20033;
 }
