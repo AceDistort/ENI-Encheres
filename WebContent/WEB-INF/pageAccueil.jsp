@@ -161,7 +161,9 @@
 							        <h5 class="card-title">${article.getNomArticle()}</h5>
 							        <p class="card-text">${article.getPrixVente()} points</p>
 							        <p class="card-text"><small class="text-body-secondary">Fin le ${article.getDateFinEncheres()}</small></p>
-							        <p class="card-text">Vendu par <a href="profil?id=${article.getVend().getNoUtilisateur()}">${article.getVend().getPseudo()}</a></p>
+							        <p class="card-text">
+							        	Vendu par <a href="profil?id=${article.getVend().getNoUtilisateur()}">${article.getVend().getPseudo()}</a>
+							        </p>
 							      </div>
 							    </div>
 							</div>

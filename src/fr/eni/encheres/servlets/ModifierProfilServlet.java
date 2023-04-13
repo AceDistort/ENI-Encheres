@@ -43,6 +43,8 @@ public class ModifierProfilServlet extends HttpServlet {
 		}
 		
 		//Admin + modif de compte utilisateur
+		System.out.println(sessionUtilisateur != null);
+		System.out.println(sessionUtilisateur.isAdministrateur());
 		if(sessionUtilisateur != null && sessionUtilisateur.isAdministrateur() && idUtilisateur > 0) {
 			profil.setNoUtilisateur(idUtilisateur);
 			try {

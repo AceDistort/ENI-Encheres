@@ -66,7 +66,7 @@ public class InscriptionServlet extends HttpServlet {
 			}
 			
 			UtilisateurManager.getUtilisateurManager().creer(utilisateur);
-			((HttpServletResponse) response).sendRedirect("encheres");
+			((HttpServletResponse) response).sendRedirect("connexion");
 		}
 		catch (BusinessException e) {
 			if(e.getListeCodesErreur().contains(CodesResultatBLL.EMAIL_UTILISATEUR_NON_VALIDE)) {

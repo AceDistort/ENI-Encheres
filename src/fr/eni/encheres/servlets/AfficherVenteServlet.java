@@ -43,7 +43,7 @@ public class AfficherVenteServlet extends HttpServlet {
 		}
 		else {
 			ArticleVendu article = new ArticleVendu();
-			article.setNoArticle(Integer.parseInt(request.getParameter("noArticle")));
+			article.setNoArticle(Integer.parseInt(request.getParameter("id")));
 			Utilisateur utilisateur = new Utilisateur();
 			utilisateur.setNoUtilisateur(article.getVend().getNoUtilisateur());
 			Enchere enchere = new Enchere();
