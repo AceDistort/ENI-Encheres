@@ -149,6 +149,7 @@
 			<section class="mx-3" style="flex: 2">
 				<div class="card-group">
 					<c:forEach var="article" items="${requestScope['articles']}">
+					<a style="text-decoration:none;color:inherit" href="vente?id=${article.getNoArticle()}">
 						<div class="card mb-3 d-flex flex-row flex-nowrap" style="max-width: 400px; min-width: 350px;">
 						    <div class="flex-1">
 						      <img src="https://picsum.photos/127/164" class="img-fluid rounded-start" style="height: 100%; object-fit: cover">
@@ -162,6 +163,7 @@
 						      </div>
 						    </div>
 						</div>
+					</a>
 					</c:forEach>
 				</div>
 			</section>
