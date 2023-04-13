@@ -17,4 +17,6 @@ public interface EnchereDAO {
 	//Affichage de la dernière enchère par Utilisateur et Article
 	public Enchere afficherParUtilEtArt(Enchere enchere) throws BusinessException;
 	
+	//Enchérir by Procédure stockée
+	public void encherir(Enchere enchere) throws BusinessException;
 }

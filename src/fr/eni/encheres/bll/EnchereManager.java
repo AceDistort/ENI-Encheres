@@ -39,6 +39,22 @@ public class EnchereManager {
 		}	
 	}
 	
+	public void encherir(Enchere enchere) throws BusinessException {
+		if (enchere == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatBLL.OBJET_NULL_ENCHERIR_ENCHERE);
+		}
+		
+		try {
+			enchereDAO.encherir(enchere);
+			
+		} catch(Exception e) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatBLL.AUTRE_ERREUR_ENCHERIR_ENCHERE);
+			throw businessException;
+		}	
+	}
+	
 	public void modifier (Enchere enchere) throws BusinessException {
 		if (enchere == null) {
 			BusinessException businessException = new BusinessException();

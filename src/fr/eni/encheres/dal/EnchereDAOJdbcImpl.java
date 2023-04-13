@@ -1,5 +1,6 @@
 package fr.eni.encheres.dal;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +16,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private static final String MODIFIER="UPDATE ENCHERES SET montant_enchere=? WHERE no_utilisateur=? AND no_article=?;";
 	private static final String SUPPRIMER="DELETE FROM ENCHERE WHERE no_utilisateur=? AND no_article=?;";
 	private static final String AFFICHER_PAR_UTIL_ET_ARTICLE = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES WHERE no_utilisateur=? AND no_article=?;";
+	private static final String ENCHERIR_PROCEDURE="{ call ajout_enchere(?, ?, ?) }";
 
 	@Override
 	public void creerEnchere(Enchere enchere) throws BusinessException {
@@ -35,6 +37,27 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		} catch(Exception e) {
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.AUTRE_ERREUR_AJOUT_ENCHERE);
+			throw businessException;
+		}
+	}
+	
+	@Override
+	public void encherir(Enchere enchere) throws BusinessException {
+		if (enchere == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.OBJET_NULL_ENCHERIR_ENCHERE);
+			throw businessException;
+		}
+		
+		try(Connection cnx = ConnectionProvider.getConnection()){
+			CallableStatement callstmt = cnx.prepareCall(ENCHERIR_PROCEDURE);
+			callstmt.setInt(1, enchere.getArticle().getNoArticle());
+			callstmt.setInt(2, enchere.getUtilisateur().getNoUtilisateur());
+			callstmt.execute();
+			
+		} catch(Exception e) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.AUTRE_ERREUR_ENCHERIR_ENCHERE);
 			throw businessException;
 		}
 	}

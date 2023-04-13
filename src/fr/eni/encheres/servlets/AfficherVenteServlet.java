@@ -77,7 +77,19 @@ public class AfficherVenteServlet extends HttpServlet {
 			((HttpServletResponse) response).sendRedirect("encheres");
 		}
 		else {
-			
+			try {
+				ArticleVendu article = new ArticleVendu();
+				article.setNoArticle(Integer.parseInt(request.getParameter("id")));
+				article = ArticleVenduManager.getArticleVenduManager().afficherArticle(article);
+				
+				Enchere enchere = new Enchere();
+				enchere.setArticle(article);
+				enchere.setUtilisateur(sessionUtilisateur);
+				enchere.setMontantEnchere((int) request.getAttribute("valeur"));
+				EnchereManager.getEnchereManager().encherir(enchere);
+			} catch (BusinessException e) {
+				//TODO
+			}
 		}
 	}
 
