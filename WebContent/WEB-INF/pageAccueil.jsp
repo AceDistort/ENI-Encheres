@@ -16,7 +16,7 @@
 </head>
 <body>
 	<header>
-		<img style="margin: 30px" src="images/logoENIEncheres.png">
+		<img style="margin: 30px; width: 230px" src="images/logoENIEncheres.png">
 		<ul class="header-nav">
 			<c:if test="${empty sessionScope['sessionUtilisateur']}">
 				<li><a class="no-text-decoration text" href="connexion">Se connecter</a></li>
@@ -33,17 +33,17 @@
 	<main>
 		<h2 style="text-align: center; margin-bottom: 50px">Liste des enchères</h2>
 		
-		<div style="display: flex; flex-direction: row; flex-wrap: wrap">
+		<div style="display: flex; flex-direction: row; flex-wrap: wrap; margin: 0 30px">
 			<!-- Section filtres et recherche -->
 			<section class="mx-3" style="min-width: 300px; margin-bottom: 10px; flex: 1">
 				<form method="POST" action="encheres">
 					<div class="mb-3">
 						<label class="form-label" for="texte">Le nom de l'article contient</label>
-  						<input class="form-control" id="texte" name="texte" type="text" value="${param.texte}">
+  						<input class="form-control" style="box-shadow: 1px 1px 5px 1px #b5b5b5" id="texte" name="texte" type="text" value="${param.texte}">
 					</div>
 					<div>
 						<label class="form-label" for="categorie">Catégorie</label>
-						<select id="categorie" name="categorie" class="form-select">
+						<select id="categorie" name="categorie" class="form-select" style="box-shadow: 1px 1px 5px 1px #b5b5b5"">
 							<option value="">Toutes</option>
 							<c:forEach var="categorie" items="${requestScope['categories']}">
 								<option ${param.categorie == categorie.getNoCategorie() ? "selected" : ""} value="${categorie.getNoCategorie()}">${categorie.getLibelle()}</option>
@@ -152,7 +152,7 @@
 				<div class="card-group">
 					<c:forEach var="article" items="${requestScope['articles']}">
 						<a style="text-decoration:none;color:inherit" href="vente?id=${article.getNoArticle()}">
-							<div class="card mb-3 mx-2 d-flex flex-row flex-nowrap" style="max-width: 400px; min-width: 350px; flex: 1">
+							<div class="card mb-3 mx-2 d-flex flex-row flex-nowrap" style="width: 80%; min-width: 400px; box-shadow: 1px 1px 5px 1px #b5b5b5; border-radius: 5px">
 							    <div class="flex-1">
 							      <img src="https://picsum.photos/127/164" class="img-fluid rounded-start" style="height: 100%; object-fit: cover">
 							    </div>

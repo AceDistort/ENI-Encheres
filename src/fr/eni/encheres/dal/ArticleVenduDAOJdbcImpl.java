@@ -11,13 +11,25 @@ import java.util.List;
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.BusinessException;
 import fr.eni.encheres.bo.Categorie;
+import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.bo.Utilisateur;
 
 public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	
 	private static final String CREER_VENTE_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,no_utilisateur,no_categorie) VALUES (?,?,?,?,?,?,?);";
 	private static final String LISTER_VENTES_ARTICLE = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente, u.no_utilisateur, c.no_categorie, c.libelle, u.pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON (u.no_utilisateur = a.no_utilisateur) INNER JOIN CATEGORIES c ON (c.no_categorie = a.no_categorie);";
-	private static final String AFFICHER_ARTICLE_PAR_ID = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS WHERE no_article=?;";
+	//private static final String AFFICHER_ARTICLE_PAR_ID = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS WHERE no_article=?;";
+	private static final String AFFICHER_ARTICLE_PAR_ID = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente,\r\n" + 
+			"u.no_utilisateur, u.pseudo, u.nom, u.prenom, u.email, u.telephone, u.rue as u_rue, u.code_postal as u_code_postal, u.ville as u_ville, u.mot_de_passe, u.credit, u.administrateur,\r\n" + 
+			"r.rue as r_rue, r.code_postal as r_code_postal, r.ville as r_ville,\r\n" + 
+			"c.no_categorie, c.libelle,\r\n" + 
+			"e.date_enchere, e.montant_enchere\r\n" + 
+			"FROM ARTICLES_VENDUS a\r\n" + 
+			"INNER JOIN UTILISATEURS u ON (u.no_utilisateur = a.no_utilisateur)\r\n" + 
+			"INNER JOIN CATEGORIES c ON (c.no_categorie = a.no_categorie)\r\n" + 
+			"INNER JOIN ENCHERES e ON (e.no_article = a.no_article AND e.no_utilisateur = u.no_utilisateur)\r\n" + 
+			"LEFT OUTER JOIN RETRAITS r ON (r.no_article = a.no_article)\r\n" + 
+			"WHERE a.no_article=?;";
 	private static final String LISTER_ENCHERES_OUVERTES = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente, u.no_utilisateur, c.no_categorie, c.libelle, u.pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON (u.no_utilisateur = a.no_utilisateur) INNER JOIN CATEGORIES c ON (c.no_categorie = a.no_categorie) WHERE date_debut_encheres <= GETDATE() AND GETDATE() < date_fin_encheres;";
 	private static final String LISTER_MES_ENCHERES_EN_COURS = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente, u.no_utilisateur, c.no_categorie, c.libelle, u.pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON (u.no_utilisateur = a.no_utilisateur) INNER JOIN CATEGORIES c ON (c.no_categorie = a.no_categorie) WHERE a.no_article IN (SELECT a.no_article FROM ENCHERES e INNER JOIN ARTICLES_VENDUS a ON e.no_article = a.no_article WHERE date_debut_encheres <= GETDATE() AND GETDATE() < date_fin_encheres AND e.no_utilisateur = ?);";
 	private static final String LISTER_MES_ENCHERES_REMPORTEES = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente, u.no_utilisateur, c.no_categorie, c.libelle, u.pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON (u.no_utilisateur = a.no_utilisateur) INNER JOIN CATEGORIES c ON (c.no_categorie = a.no_categorie) INNER JOIN ENCHERES e ON (e.no_article = a.no_article AND e.no_utilisateur = u.no_utilisateur) INNER JOIN (SELECT no_article, MAX(date_enchere) AS date_enchere_max FROM ENCHERES WHERE no_utilisateur = ? GROUP BY no_article) dmax ON e.no_article = dmax.no_article AND e.date_enchere = dmax.date_enchere_max WHERE e.no_utilisateur = ?;";
@@ -269,9 +281,19 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			if (rs.next()) {
 				Utilisateur utilisateur = new Utilisateur();
 				utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+				utilisateur.setPseudo(rs.getString("pseudo"));
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setEmail(rs.getString("email"));
+				utilisateur.setTelephone(rs.getString("telephone"));
+				utilisateur.setRue(rs.getString("u_rue"));
+				utilisateur.setCodePostal(rs.getString("u_code_postal"));
+				utilisateur.setVille(rs.getString("u_ville"));
+				utilisateur.setCredit(rs.getInt("credit"));
 				
 				Categorie categorie = new Categorie();
 				categorie.setNoCategorie(rs.getInt("no_categorie"));
+				categorie.setLibelle(rs.getString("libelle"));
 				
 				article.setNoArticle(rs.getInt("no_article"));
 				article.setNomArticle(rs.getString("nom_article"));

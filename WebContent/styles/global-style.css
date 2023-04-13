@@ -70,6 +70,10 @@ header{
 .text{
 	color: #000;
 }
+.info-text{
+	font-size: 10px;
+	color: #939393
+}
 .red{
 	color: red
 }

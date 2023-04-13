@@ -14,16 +14,18 @@
 </head>
 <body>	
 	<section class="mx-auto p-2" style="width: 300px; margin-top: 150px">
-		<img src="images/logoENIEncheres.png" style="margin-bottom: 50px">
+		<img src="images/logoENIEncheres.png" style="margin-bottom: 50px; width: 230px">
 		<form method="post" action="connexion">
 			<div class="mb-3">
-			  <label class="form-label">Login (adresse mail ou pseudo)</label>
+			  <label class="form-label">Login (adresse mail ou pseudo) <span class="red">*</span></label>
 			  <input required type="text" name="identifiant" class="form-control">
 			</div>
 			<div class="mb-3">
-			  <label class="form-label">Mot de passe</label>
+			  <label class="form-label">Mot de passe <span class="red">*</span></label>
 			  <input required type="password" name="motDePasse" class="form-control">
 			</div>
+			
+			<p style="margin-top: 30px; margin-bottom: 5px"" class="info-text"><span class="red">*</span> Champs obligatoires</p>
 
 			<button class="btn btn-secondary" style="margin: 20px 0; border: none" onclick="retourAction()">Retour</button>
 			<button class="btn btn-primary orange-background" style="margin: 20px 0; border: none" type="submit">Connexion</button>
