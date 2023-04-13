@@ -43,7 +43,7 @@
 					<div class="mb-3">
 						<label class="form-label">Prix de départ <span class="red">*</span></label>
 						<div class="input-group mb-3 ombreInputs" style="border-radius: 5px">
-							<input min="0" type="number" class="form-control" aria-describedby="prixAddon" style="box-shadow: none">
+							<input name="prixInitial" min="0" type="number" class="form-control" aria-describedby="prixAddon" style="box-shadow: none">
 							<span class="input-group-text" id="prixAddon">points</span>
 						</div>
 					</div>

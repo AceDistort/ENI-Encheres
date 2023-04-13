@@ -17,38 +17,33 @@
 	<section class="mx-auto p-2" style="width: 80%; max-width: 500px; margin-top: 100px">
 		<img src="../images/logoENIEncheres.png" style="margin-bottom: 50px; width: 230px">
 		<form method="post" action="modifier">
-		
-			<input hidden name="noUtilisateur" value="${requestScope['profil'].getNoUtilisateur()}">
-			<input hidden name="nomUtilisateur" value="${requestScope['profil'].getNom()}">
-			<input hidden name="prenomUtilisateur" value="${requestScope['profil'].getPrenom()}">
-			<input hidden name="emailUtilisateur" value="${requestScope['profil'].getEmail()}">
 			
 			<div class="mb-3">
 			  <label class="form-label">Pseudo <span class="red">*</span></label>
-			  <input required type="text" name="pseudo" pattern="\b\w{4,30}\b" value="${requestScope['profil'].getPseudo()}" class="form-control">
+			  <input required type="text" name="pseudo" pattern="\b\w{4,30}\b" value="${sessionScope['sessionUtilisateur'].getPseudo()}" class="form-control">
 			</div>
 			
 			<div class="mb-3">
 			  <label class="form-label">Téléphone</label>
-			  <input type="text" name="telephone" pattern="^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{​​​2}​​​){​​​4}​​​$" value="${requestScope['profil'].getTelephone()}" class="form-control">
+			  <input type="text" name="telephone" pattern="^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{​​​2}​​​){​​​4}​​​$" value="${sessionScope['sessionUtilisateur'].getTelephone()}" class="form-control">
 			</div>
 			
 			<div class="mb-3">
 			  <label class="form-label">Rue <span class="red">*</span></label>
-			  <input required type="text" name="rue" pattern="^\d+\s+[a-zA-Z]+(?:\s+[a-zA-Z]+)*$" value="${requestScope['profil'].getRue()}" class="form-control">
+			  <input required type="text" name="rue" pattern="^\d+\s+[a-zA-Z]+(?:\s+[a-zA-Z]+)*$" value="${sessionScope['sessionUtilisateur'].getRue()}" class="form-control">
 			</div>
 			
 			<div class="mb-3">
 			  <label class="form-label">Code postal <span class="red">*</span></label>
-			  <input required type="text" name="codePostal" input="^\d{​​​​​​​​​​​​​​​​​​5}​​​​​​​​​​​​​​​​​​(?:[\s-]\w{​​​​​​​​​​​​​​​​​​2}​​​​​​​​​​​​​​​​​​)?$" value="${requestScope['profil'].getCodePostal()}" class="form-control">
+			  <input required type="text" name="codePostal" input="^\d{​​​​​​​​​​​​​​​​​​5}​​​​​​​​​​​​​​​​​​(?:[\s-]\w{​​​​​​​​​​​​​​​​​​2}​​​​​​​​​​​​​​​​​​)?$" value="${sessionScope['sessionUtilisateur'].getCodePostal()}" class="form-control">
 			</div>
 			<c:if test="${not empty requestScope['erreurCodePostal']}">
-				<p class="error-text">${requestScope['erreurCodePostal']}</p>
+				<p class="error-text">${sessionScope['sessionUtilisateur']}</p>
 			</c:if>
 			
 			<div class="mb-3">
 			  <label class="form-label">Ville <span class="red">*</span></label>
-			  <input required type="text" name="ville" pattern="^[a-zA-ZÀ-ÖØ-öø-ÿ]+(?:[\s-']+[a-zA-ZÀ-ÖØ-öø-ÿ]+)*$" value="${requestScope['profil'].getVille()}" class="form-control">
+			  <input required type="text" name="ville" pattern="^[a-zA-ZÀ-ÖØ-öø-ÿ]+(?:[\s-']+[a-zA-ZÀ-ÖØ-öø-ÿ]+)*$" value="${sessionScope['sessionUtilisateur'].getVille()}" class="form-control">
 			</div>
 			
 			<div class="mx-auto" style="width: 95%; height: 1px; background-color: #d9d9d9; margin-bottom: 20px"></div>

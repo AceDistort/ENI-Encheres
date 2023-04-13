@@ -53,9 +53,9 @@
 		</div>
 	
 		<!-- Bouton modifier  -->
-		<c:if test="${requestScope['profil'].equals(sessionScope['sessionUtilisateur']) || sessionScope['sessionUtilisateur'].isAdministrateur()}">
+		<c:if test="${requestScope['profil'].equals(sessionScope['sessionUtilisateur'])}">
 			<div style="margin-top: 10px">
-				<a class="button orange-background no-text-decoration" style="margin-top: 10px" href="profil/modifier?id=${requestScope['profil'].getNoUtilisateur() }">Modifier</a>
+				<a class="button orange-background no-text-decoration" style="margin-top: 10px" href="profil/modifier">Modifier</a>
 			</div>
 		</c:if>
 		

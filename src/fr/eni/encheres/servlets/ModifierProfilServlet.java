@@ -1,6 +1,8 @@
 package fr.eni.encheres.servlets;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +15,7 @@ import fr.eni.encheres.bll.UtilisateurManager;
 import fr.eni.encheres.bo.BusinessException;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.messages.LecteurMessage;
+import fr.eni.encheres.util.HashMotDePasse;
 
 /**
  * Servlet implementation class ModifierProfilServlet
@@ -32,33 +35,12 @@ public class ModifierProfilServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Utilisateur sessionUtilisateur = (Utilisateur) request.getSession().getAttribute("sessionUtilisateur");
-		int idUtilisateur = -1;
-		Utilisateur profil = new Utilisateur();
-		try {
-			//idUtilisateur = Integer.parseInt(request.getParameter("id"));
-			idUtilisateur = Integer.parseInt(request.getParameter("noUtilisateur"));
-		} catch (NumberFormatException e) {
-			//Normalement il ne faut rien faire
-		}
 		
-		//Admin + modif de compte utilisateur
-		System.out.println(sessionUtilisateur != null);
-		System.out.println(sessionUtilisateur.isAdministrateur());
-		if(sessionUtilisateur != null && sessionUtilisateur.isAdministrateur() && idUtilisateur > 0) {
-			profil.setNoUtilisateur(idUtilisateur);
-			try {
-				profil = UtilisateurManager.getUtilisateurManager().afficher(profil);
-				request.setAttribute("profil", profil);
-			} catch (BusinessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		if(request.getSession().getAttribute("sessionUtilisateur") == null) {
+			((HttpServletResponse) response).sendRedirect("connexion");
+		} else {
 			request.getRequestDispatcher("/WEB-INF/modifierProfil.jsp").forward(request, response);
-		} else { //Modif compte perso
-			profil = sessionUtilisateur;
-			request.setAttribute("profil", profil);
-			request.getRequestDispatcher("/WEB-INF/modifierProfil.jsp").forward(request, response);
+			
 		}
 	}
 
@@ -66,52 +48,49 @@ public class ModifierProfilServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try
-		{
-			BusinessException businessException = new BusinessException();
-			Utilisateur utilisateur = new Utilisateur();
-			utilisateur.setNoUtilisateur(((Utilisateur) request.getSession().getAttribute("sessionUtilisateur")).getNoUtilisateur());
-			utilisateur.setPseudo(request.getParameter("pseudo"));
-			utilisateur.setNom(request.getParameter("nomUtilisateur"));
-			utilisateur.setPrenom(request.getParameter("prenomUtilisateur"));
-			utilisateur.setEmail(request.getParameter("emailUtilisateur"));
-			utilisateur.setTelephone(request.getParameter("telephone"));
-			utilisateur.setRue(request.getParameter("rue"));
-			utilisateur.setCodePostal(request.getParameter("codePostal"));
-			utilisateur.setVille(request.getParameter("ville"));
-			if (!request.getParameter("motDePasse").equals(request.getParameter("confirmation"))) {
-				businessException.ajouterErreur(CodesResultatServlet.MOTS_DE_PASSE_NON_IDENTIQUES);
-			}
-			else
-			{
+		
+		if(request.getSession().getAttribute("sessionUtilisateur") == null) {
+			((HttpServletResponse) response).sendRedirect("connexion");
+		} else {
+			try {
+				Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("sessionUtilisateur");
+				if(request.getParameter("confirmation") == null) {
+					BusinessException businessException = new BusinessException();
+					throw businessException;
+				}
+				
+				if(!HashMotDePasse.validatePassword(request.getParameter("confirmation"), utilisateur.getMotDePasse())) {
+					BusinessException businessException = new BusinessException();
+					throw businessException;
+				}
+				utilisateur.setPseudo(request.getParameter("pseudo"));
+				utilisateur.setTelephone(request.getParameter("telephone"));
+				utilisateur.setRue(request.getParameter("rue"));
+				utilisateur.setCodePostal(request.getParameter("codePostal"));
+				utilisateur.setVille(request.getParameter("ville"));
 				utilisateur.setMotDePasse(request.getParameter("motDePasse"));
-			}
-			
-			UtilisateurManager.getUtilisateurManager().modifier(utilisateur);
-			if (utilisateur.getNoUtilisateur() == ((Utilisateur) request.getSession().getAttribute("sessionUtilisateur")).getNoUtilisateur()) {
-				((Utilisateur) request.getSession().getAttribute("sessionUtilisateur")).setPseudo(request.getParameter("pseudo"));
-				((Utilisateur) request.getSession().getAttribute("sessionUtilisateur")).setTelephone(request.getParameter("telephone"));
-				((Utilisateur) request.getSession().getAttribute("sessionUtilisateur")).setRue(request.getParameter("rue"));
-				((Utilisateur) request.getSession().getAttribute("sessionUtilisateur")).setCodePostal(request.getParameter("codePostal"));
-				((Utilisateur) request.getSession().getAttribute("sessionUtilisateur")).setVille(request.getParameter("ville"));
-				((Utilisateur) request.getSession().getAttribute("sessionUtilisateur")).setMotDePasse(request.getParameter("motDePasse"));
-				request.getSession().setAttribute("sessionUtilisateur", utilisateur);
-			}
-			((HttpServletResponse) response).sendRedirect("/ENI-Encheres/encheres");
-		}
-		catch (BusinessException e) {
-			if(e.getListeCodesErreur().contains(CodesResultatBLL.CODE_POSTAL_UTILISATEUR_NON_VALIDE)) {
-				request.setAttribute("erreurCodePostal", LecteurMessage.getMessageErreur(CodesResultatBLL.CODE_POSTAL_UTILISATEUR_NON_VALIDE));
-				request.getRequestDispatcher("WEB-INF/inscription.jsp").forward(request, response);
-			} else if(e.getListeCodesErreur().contains(CodesResultatBLL.MOT_DE_PASSE_UTILISATEUR_NON_VALIDE)) {
-				request.setAttribute("erreurMotDePasse", LecteurMessage.getMessageErreur(CodesResultatBLL.MOT_DE_PASSE_UTILISATEUR_NON_VALIDE));
-				request.getRequestDispatcher("WEB-INF/inscription.jsp").forward(request, response);
-			} else if(e.getListeCodesErreur().contains(CodesResultatServlet.MOTS_DE_PASSE_NON_IDENTIQUES)) {
-				request.setAttribute("erreurMotDePasse", LecteurMessage.getMessageErreur(CodesResultatServlet.MOTS_DE_PASSE_NON_IDENTIQUES));
-				request.getRequestDispatcher("WEB-INF/inscription.jsp").forward(request, response);
-			} else {
-				//TODO
-				((HttpServletResponse) response).sendError(1);
+				
+				((HttpServletResponse) response).sendRedirect("/ENI-Encheres/encheres");
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvalidKeySpecException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (BusinessException e) {
+				if(e.getListeCodesErreur().contains(CodesResultatBLL.CODE_POSTAL_UTILISATEUR_NON_VALIDE)) {
+					request.setAttribute("erreurCodePostal", LecteurMessage.getMessageErreur(CodesResultatBLL.CODE_POSTAL_UTILISATEUR_NON_VALIDE));
+					request.getRequestDispatcher("WEB-INF/inscription.jsp").forward(request, response);
+				} else if(e.getListeCodesErreur().contains(CodesResultatBLL.MOT_DE_PASSE_UTILISATEUR_NON_VALIDE)) {
+					request.setAttribute("erreurMotDePasse", LecteurMessage.getMessageErreur(CodesResultatBLL.MOT_DE_PASSE_UTILISATEUR_NON_VALIDE));
+					request.getRequestDispatcher("WEB-INF/inscription.jsp").forward(request, response);
+				} else if(e.getListeCodesErreur().contains(CodesResultatServlet.MOTS_DE_PASSE_NON_IDENTIQUES)) {
+					request.setAttribute("erreurMotDePasse", LecteurMessage.getMessageErreur(CodesResultatServlet.MOTS_DE_PASSE_NON_IDENTIQUES));
+					request.getRequestDispatcher("WEB-INF/inscription.jsp").forward(request, response);
+				} else {
+					//TODO
+					((HttpServletResponse) response).sendError(1);
+				}
 			}
 		}
 	}
