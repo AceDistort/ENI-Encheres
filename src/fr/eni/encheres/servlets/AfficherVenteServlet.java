@@ -87,6 +87,8 @@ public class AfficherVenteServlet extends HttpServlet {
 				enchere.setUtilisateur(sessionUtilisateur);
 				enchere.setMontantEnchere((int) request.getAttribute("valeur"));
 				EnchereManager.getEnchereManager().encherir(enchere);
+				
+				((HttpServletResponse) response).sendRedirect("encheres");
 			} catch (BusinessException e) {
 				//TODO
 			}
