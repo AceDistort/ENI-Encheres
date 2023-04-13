@@ -36,7 +36,8 @@ public class ModifierProfilServlet extends HttpServlet {
 		int idUtilisateur = -1;
 		Utilisateur profil = new Utilisateur();
 		try {
-			idUtilisateur = Integer.parseInt(request.getParameter("id"));
+			//idUtilisateur = Integer.parseInt(request.getParameter("id"));
+			idUtilisateur = Integer.parseInt(request.getParameter("noUtilisateur"));
 		} catch (NumberFormatException e) {
 			//Normalement il ne faut rien faire
 		}

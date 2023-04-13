@@ -101,6 +101,31 @@ public abstract class CodesResultatDAL {
 	public static final int OBJET_NULL_SUPP_ENCHERE = 10020;
 	public static final int AUTRE_ERREUR_SUPP_ENCHERE = 10021;
 	
+	/**
+	 * Echec général quand tentative d'affichage d'un objet null
+	 * + Autre erreur non gérée à l'affichage d'un retrait
+	 */
+	public static final int OBJET_NULL_AFFICHAGE_RETRAIT = 10022;
+	public static final int AUTRE_ERREUR_AFFICHAGE_RETRAIT = 10023;
 	
+	/**
+	 * Echec général quand tentative d'affichage par ID d'un objet null
+	 * + Autre erreur non gérée à l'affichage d'un article par ID
+	 */
+	public static final int OBJET_NULL_AFFICHER_ARTICLE = 10024;
+	public static final int AUTRE_ERREUR_AFFICHER_ARTICLE = 10025;
 	
+	/**
+	 * Echec général quand tentative d'affichage par ID d'un objet null
+	 * + Autre erreur non gérée à l'affichage d'un article par ID
+	 */
+	public static final int OBJET_NULL_AFFICHER_CATEGORIE = 10026;
+	public static final int AUTRE_ERREUR_AFFICHER_CATEGORIE = 10027;
+	
+	/**
+	 * Echec général quand tentative d'affichage d'une enchere par IDUtil et IDArt d'un objet null
+	 * + Autre erreur non gérée à l'affichage d'une enchere par ID
+	 */
+	public static final int OBJET_NULL_AFFICHER_ENCHERE_PAR_IDUTIL_ET_IDART = 10028;
+	public static final int AUTRE_ERREUR_AFFICHAGE_ENCHERE_PAR_IDUTIL_ET_IDART = 10029;
 }

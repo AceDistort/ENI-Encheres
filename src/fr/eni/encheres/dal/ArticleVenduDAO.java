@@ -22,6 +22,15 @@ public interface ArticleVenduDAO {
 	 */
 	public List<ArticleVendu> listerVentesDeconnecte() throws BusinessException;
 	
+	/**
+	 * Méthode pour afficher un article par ID
+	 * @param article
+	 * @param utilisateur
+	 * @param categorie
+	 * @return
+	 * @throws BusinessException
+	 */
+	public ArticleVendu afficherArticleParID(ArticleVendu article) throws BusinessException;
 	public List<ArticleVendu> listerEncheresOuvertes() throws BusinessException;
 	
 	public List<ArticleVendu> listerMesEncheresEnCours() throws BusinessException;

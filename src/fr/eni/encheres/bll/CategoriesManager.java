@@ -26,4 +26,20 @@ public class CategoriesManager {
 		return categorieDAO.lister();
 	}
 	
+	public Categorie afficherCategorie(Categorie categorie) throws BusinessException {
+		BusinessException businessException = new BusinessException();
+		if(categorie == null) {
+			businessException.ajouterErreur(CodesResultatBLL.OBJET_NULL_AFFICHER_CATEGORIE_PAR_ID);
+			throw businessException;
+		}
+		
+		try {
+			return categorieDAO.afficherCategorieParID(categorie);
+		} catch(Exception e) {
+			e.printStackTrace();
+			businessException.ajouterErreur(CodesResultatBLL.AUTRE_ERREUR_AFFICHER_CATEGORIE_PAR_ID);
+			throw businessException;
+		}
+	}
+	
 }

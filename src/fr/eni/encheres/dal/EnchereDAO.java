@@ -1,7 +1,5 @@
 package fr.eni.encheres.dal;
 
-import java.util.List;
-
 import fr.eni.encheres.bo.BusinessException;
 import fr.eni.encheres.bo.Enchere;
 
@@ -15,5 +13,8 @@ public interface EnchereDAO {
 	
 	//Suppression d'une enchère
 	public void supprimerEnchere(Enchere enchere) throws BusinessException;
+	
+	//Affichage de la dernière enchère par Utilisateur et Article
+	public Enchere afficherParUtilEtArt(Enchere enchere) throws BusinessException;
 	
 }

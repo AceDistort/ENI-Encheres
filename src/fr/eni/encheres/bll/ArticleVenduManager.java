@@ -4,6 +4,7 @@ import java.util.List;
 
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.BusinessException;
+import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ArticleVenduDAO;
 import fr.eni.encheres.dal.DAOFactory;
@@ -16,7 +17,7 @@ public class ArticleVenduManager {
 		this.articleVenduDAO = DAOFactory.getArticleVenduDAO();
 	}
 
-	public static ArticleVenduManager getCategorieManager() {
+	public static ArticleVenduManager getArticleVenduManager() {
 		if(articleVenduManager == null) {
 			articleVenduManager = new ArticleVenduManager();
 		}
@@ -54,5 +55,19 @@ public class ArticleVenduManager {
 			throw be;
 		}
 		return articleVenduDAO.listerMesVentesEnCours(utilisateur);
+	public ArticleVendu afficherArticle(ArticleVendu article) throws BusinessException {
+		BusinessException businessException = new BusinessException();
+		if(article == null) {
+			businessException.ajouterErreur(CodesResultatBLL.OBJET_NULL_AFFICHER_ARTICLE_PAR_ID);
+			throw businessException;
+		}
+		
+		try {
+			return articleVenduDAO.afficherArticleParID(article);
+		} catch(Exception e) {
+			e.printStackTrace();
+			businessException.ajouterErreur(CodesResultatBLL.AUTRE_ERREUR_AFFICHER_ARTICLE_PAR_ID);
+			throw businessException;
+		}
 	}
 }

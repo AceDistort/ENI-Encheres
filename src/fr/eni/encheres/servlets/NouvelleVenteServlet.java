@@ -125,7 +125,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 			ArticleVendu article = new ArticleVendu(nomArticle, description, dateDebutEncheres, dateFinEncheres, vend, categorie);
 			article.setPrixInitial(prixInitial);
 			
-			ArticleVenduManager.getCategorieManager().nouvelleVente(article);
+			ArticleVenduManager.getArticleVenduManager().nouvelleVente(article);
 			
 			Retrait retrait = new Retrait(rue,codePostal,ville,article);
 			

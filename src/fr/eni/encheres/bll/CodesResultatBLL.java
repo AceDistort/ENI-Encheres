@@ -158,4 +158,32 @@ public abstract class CodesResultatBLL {
 	 */
 	public static final int OBJET_NULL_SUPP_ENCHERE = 20032;
 	public static final int AUTRE_ERREUR_SUPP_ENCHERE = 20033;
+	
+	/**
+	 * Echec général quand tentative d'affichage d'un objet null
+	 * + Autre erreur non gérée lors de l'affichage d'un objet
+	 */
+	public static final int OBJET_NULL_AFFICHER_RETRAIT_PAR_ID = 20034;
+	public static final int AUTRE_ERREUR_AFFICHER_RETRAIT_PAR_ID = 20035;
+	
+	/**
+	 * Echec général quand tentative d'affichage par ID d'un objet null
+	 * + Autre erreur non gérée lors de l'affichage par ID d'un objet
+	 */
+	public static final int OBJET_NULL_AFFICHER_ARTICLE_PAR_ID = 20036;
+	public static final int AUTRE_ERREUR_AFFICHER_ARTICLE_PAR_ID = 20037;
+	
+	/**
+	 * Echec général quand tentative d'affichage par ID d'un objet null
+	 * + Autre erreur non gérée lors de l'affichage par ID d'un objet
+	 */
+	public static final int OBJET_NULL_AFFICHER_CATEGORIE_PAR_ID = 20038;
+	public static final int AUTRE_ERREUR_AFFICHER_CATEGORIE_PAR_ID = 20039;
+	
+	/**
+	 * Echec général quand tentative d'affichage par IDS d'un objet null
+	 * + Autre erreur non gérée lors de l'affichage par IDS d'un objet
+	 */
+	public static final int OBJET_NULL_AFFICHER_ENCHERE_PAR_IDS = 20040;
+	public static final int AUTRE_ERREUR_AFFICHER_ENCHERE_PAR_IDS = 20041;
 }

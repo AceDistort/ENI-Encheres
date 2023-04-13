@@ -2,12 +2,18 @@ package fr.eni.encheres.bll;
 
 import fr.eni.encheres.bo.BusinessException;
 import fr.eni.encheres.bo.Enchere;
+import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.EnchereDAO;
 
 public class EnchereManager {
 	//Attributs d'instances
 	private static EnchereManager enchereManager;
 	private EnchereDAO enchereDAO;
+	
+	//Constructeur
+	public EnchereManager() {
+		enchereDAO = DAOFactory.getEnchereDAO();
+	}
 	
 	//Getter
 	public static EnchereManager getEnchereManager() throws BusinessException {
@@ -61,5 +67,21 @@ public class EnchereManager {
 			businessException.ajouterErreur(CodesResultatBLL.AUTRE_ERREUR_SUPP_ENCHERE);
 			throw businessException;
 		}	
+	}
+	
+	public Enchere afficherEnchere(Enchere enchere) throws BusinessException {
+		BusinessException businessException = new BusinessException();
+		if(enchere == null) {
+			businessException.ajouterErreur(CodesResultatBLL.OBJET_NULL_AFFICHER_ENCHERE_PAR_IDS);
+			throw businessException;
+		}
+		
+		try {
+			return enchereDAO.afficherParUtilEtArt(enchere);
+		} catch(Exception e) {
+			e.printStackTrace();
+			businessException.ajouterErreur(CodesResultatBLL.AUTRE_ERREUR_AFFICHER_ENCHERE_PAR_IDS);
+			throw businessException;
+		}
 	}
 }
