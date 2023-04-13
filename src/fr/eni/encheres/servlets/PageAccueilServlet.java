@@ -56,11 +56,11 @@ public class PageAccueilServlet extends HttpServlet {
 							break;
 							
 						case "1":
-							
+							articles.addAll(ArticleVenduManager.getArticleVenduManager().listerMesEncheresEnCours((Utilisateur)request.getSession().getAttribute("sessionUtilisateur")));
 							break;
 
 						case "2":
-							
+							articles.addAll(ArticleVenduManager.getArticleVenduManager().listerMesEncheresRemportees((Utilisateur)request.getSession().getAttribute("sessionUtilisateur")));
 							break;
 						}
 					}

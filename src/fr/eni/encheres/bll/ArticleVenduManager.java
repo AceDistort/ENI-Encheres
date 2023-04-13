@@ -56,6 +56,25 @@ public class ArticleVenduManager {
 		}
 		return articleVenduDAO.listerMesVentesEnCours(utilisateur);
 	}
+	
+	public List<ArticleVendu> listerMesEncheresEnCours(Utilisateur utilisateur) throws BusinessException {
+		if(utilisateur == null) {
+			BusinessException be = new BusinessException();
+			//TODO
+			throw be;
+		}
+		return articleVenduDAO.listerMesEncheresEnCours(utilisateur);
+	}
+	
+	public List<ArticleVendu> listerMesEncheresRemportees(Utilisateur utilisateur) throws BusinessException {
+		if(utilisateur == null) {
+			BusinessException be = new BusinessException();
+			//TODO
+			throw be;
+		}
+		return articleVenduDAO.listerMesEncheresRemportees(utilisateur);
+	}
+	
 	public ArticleVendu afficherArticle(ArticleVendu article) throws BusinessException {
 		BusinessException businessException = new BusinessException();
 		if(article == null) {

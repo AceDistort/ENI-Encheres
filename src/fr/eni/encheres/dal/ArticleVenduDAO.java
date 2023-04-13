@@ -33,9 +33,9 @@ public interface ArticleVenduDAO {
 	public ArticleVendu afficherArticleParID(ArticleVendu article) throws BusinessException;
 	public List<ArticleVendu> listerEncheresOuvertes() throws BusinessException;
 	
-	public List<ArticleVendu> listerMesEncheresEnCours() throws BusinessException;
+	public List<ArticleVendu> listerMesEncheresEnCours(Utilisateur utilisateur) throws BusinessException;
 	
-	public List<ArticleVendu> listerMesEncheresRemportees() throws BusinessException;
+	public List<ArticleVendu> listerMesEncheresRemportees(Utilisateur utilisateur) throws BusinessException;
 	
 	public List<ArticleVendu> listerMesVentesEnCours(Utilisateur utilisateur) throws BusinessException;
 	

@@ -19,8 +19,8 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	private static final String LISTER_VENTES_ARTICLE = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente, u.no_utilisateur, c.no_categorie, c.libelle, u.pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON (u.no_utilisateur = a.no_utilisateur) INNER JOIN CATEGORIES c ON (c.no_categorie = a.no_categorie);";
 	private static final String AFFICHER_ARTICLE_PAR_ID = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS WHERE no_article=?;";
 	private static final String LISTER_ENCHERES_OUVERTES = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente, u.no_utilisateur, c.no_categorie, c.libelle, u.pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON (u.no_utilisateur = a.no_utilisateur) INNER JOIN CATEGORIES c ON (c.no_categorie = a.no_categorie) WHERE date_debut_encheres <= GETDATE() AND GETDATE() < date_fin_encheres;";
-	
-	
+	private static final String LISTER_MES_ENCHERES_EN_COURS = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente, u.no_utilisateur, c.no_categorie, c.libelle, u.pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON (u.no_utilisateur = a.no_utilisateur) INNER JOIN CATEGORIES c ON (c.no_categorie = a.no_categorie) WHERE a.no_article IN (SELECT a.no_article FROM ENCHERES e INNER JOIN ARTICLES_VENDUS a ON e.no_article = a.no_article WHERE date_debut_encheres <= GETDATE() AND GETDATE() < date_fin_encheres AND e.no_utilisateur = ?);";
+	private static final String LISTER_MES_ENCHERES_REMPORTEES = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente, u.no_utilisateur, c.no_categorie, c.libelle, u.pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON (u.no_utilisateur = a.no_utilisateur) INNER JOIN CATEGORIES c ON (c.no_categorie = a.no_categorie) INNER JOIN ENCHERES e ON (e.no_article = a.no_article AND e.no_utilisateur = u.no_utilisateur) INNER JOIN (SELECT no_article, MAX(date_enchere) AS date_enchere_max FROM ENCHERES WHERE no_utilisateur = ? GROUP BY no_article) dmax ON e.no_article = dmax.no_article AND e.date_enchere = dmax.date_enchere_max WHERE e.no_utilisateur = ?;";
 	private static final String LISTER_MES_VENTES_EN_COURS = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente, u.no_utilisateur, c.no_categorie, c.libelle, u.pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON (u.no_utilisateur = a.no_utilisateur) INNER JOIN CATEGORIES c ON (c.no_categorie = a.no_categorie) WHERE date_debut_encheres <= GETDATE() AND GETDATE() <= date_fin_encheres AND u.no_utilisateur = ?;";
 	private static final String LISTER_VENTES_NON_DEBUTEES = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente, u.no_utilisateur, c.no_categorie, c.libelle, u.pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON (u.no_utilisateur = a.no_utilisateur) INNER JOIN CATEGORIES c ON (c.no_categorie = a.no_categorie) WHERE date_debut_encheres > GETDATE();";
 	private static final String LISTER_VENTES_TERMINEES = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente, u.no_utilisateur, c.no_categorie, c.libelle, u.pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON (u.no_utilisateur = a.no_utilisateur) INNER JOIN CATEGORIES c ON (c.no_categorie = a.no_categorie) WHERE GETDATE() >= date_fin_encheres;";
@@ -135,17 +135,52 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 
 
 	@Override
-	public List<ArticleVendu> listerMesEncheresEnCours() throws BusinessException {
+	public List<ArticleVendu> listerMesEncheresEnCours(Utilisateur utilisateur) throws BusinessException {
 		List<ArticleVendu> articles = new ArrayList<>();
-		// TODO Auto-generated method stub
+
+		try {
+			Connection cnx = ConnectionProvider.getConnection();
+			PreparedStatement pstmt = cnx.prepareStatement(LISTER_MES_ENCHERES_EN_COURS);
+			
+			pstmt.setInt(1, utilisateur.getNoUtilisateur());
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ArticleVendu article = creerArticleVenduDepuisResultSet(rs);
+				articles.add(article);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return articles;
 	}
 
 
 	@Override
-	public List<ArticleVendu> listerMesEncheresRemportees() throws BusinessException {
+	public List<ArticleVendu> listerMesEncheresRemportees(Utilisateur utilisateur) throws BusinessException {
 		List<ArticleVendu> articles = new ArrayList<>();
-		// TODO Auto-generated method stub
+
+		try {
+			Connection cnx = ConnectionProvider.getConnection();
+			PreparedStatement pstmt = cnx.prepareStatement(LISTER_MES_ENCHERES_REMPORTEES);
+			
+			pstmt.setInt(1, utilisateur.getNoUtilisateur());
+			pstmt.setInt(2, utilisateur.getNoUtilisateur());
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ArticleVendu article = creerArticleVenduDepuisResultSet(rs);
+				articles.add(article);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return articles;
 	}
 
