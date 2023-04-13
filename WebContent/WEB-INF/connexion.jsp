@@ -10,13 +10,11 @@
 	<title>Connexion</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 	<link href="styles/global-style.css" rel="stylesheet">
+	<script type="text/javascript" src="js/utils.js"></script>
 </head>
-<body>
-	<header>
-		<h1 class="title">ENI-Enchères</h1>
-	</header>
-	
-	<section class="centered">
+<body>	
+	<section class="mx-auto p-2" style="width: 300px; margin-top: 150px">
+		<img src="images/logoENIEncheres.png" style="margin-bottom: 50px">
 		<form method="post" action="connexion">
 			<div class="mb-3">
 			  <label class="form-label">Login (adresse mail ou pseudo)</label>
@@ -27,6 +25,7 @@
 			  <input required type="password" name="motDePasse" class="form-control">
 			</div>
 
+			<button class="btn btn-secondary" style="margin: 20px 0; border: none" onclick="retourAction()">Retour</button>
 			<button class="btn btn-primary orange-background" style="margin: 20px 0; border: none" type="submit">Connexion</button>
 		</form>
 		<c:if test="${not empty requestScope['erreurConnexion']}">
