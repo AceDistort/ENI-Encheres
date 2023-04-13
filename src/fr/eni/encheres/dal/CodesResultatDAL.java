@@ -128,4 +128,11 @@ public abstract class CodesResultatDAL {
 	 */
 	public static final int OBJET_NULL_AFFICHER_ENCHERE_PAR_IDUTIL_ET_IDART = 10028;
 	public static final int AUTRE_ERREUR_AFFICHAGE_ENCHERE_PAR_IDUTIL_ET_IDART = 10029;
+	
+	/**
+	 * Echec général quand tentative d'une enchere d'un objet null
+	 * + Autre erreur non gérée d'une enchere
+	 */
+	public static final int OBJET_NULL_ENCHERIR_ENCHERE = 10030;
+	public static final int AUTRE_ERREUR_ENCHERIR_ENCHERE = 10031;
 }
