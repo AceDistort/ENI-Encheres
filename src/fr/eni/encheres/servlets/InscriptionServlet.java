@@ -59,6 +59,7 @@ public class InscriptionServlet extends HttpServlet {
 			utilisateur.setVille(request.getParameter("ville"));
 			if (!request.getParameter("motDePasse").equals(request.getParameter("confirmation"))) {
 				businessException.ajouterErreur(CodesResultatServlet.MOTS_DE_PASSE_NON_IDENTIQUES);
+				throw businessException;
 			}
 			else
 			{
