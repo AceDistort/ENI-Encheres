@@ -25,15 +25,15 @@ public class RetraitManager {
 		retraitDAO.creer(retrait);
 	}
 	
-	public Retrait afficher(ArticleVendu article) throws BusinessException {
-		if(article == null) {
+	public Retrait afficher(Retrait retrait) throws BusinessException {
+		if(retrait == null) {
 			BusinessException be = new BusinessException();
 			be.ajouterErreur(CodesResultatBLL.OBJET_NULL_AFFICHER_RETRAIT_PAR_ID);
 			throw be;
 		}
 		
 		try {
-			return retraitDAO.selectionnerParNoArticle(article);
+			return retraitDAO.selectionnerParNoArticle(retrait);
 		} catch (BusinessException e) {
 			e.ajouterErreur(CodesResultatBLL.AUTRE_ERREUR_AFFICHER_RETRAIT_PAR_ID);
 			throw e;

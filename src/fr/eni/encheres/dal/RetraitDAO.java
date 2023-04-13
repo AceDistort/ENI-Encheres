@@ -8,5 +8,5 @@ public interface RetraitDAO {
 	
 	public void creer(Retrait retrait) throws BusinessException;
 	
-	public Retrait selectionnerParNoArticle(ArticleVendu article) throws BusinessException;
+	public Retrait selectionnerParNoArticle(Retrait retrait) throws BusinessException;
 }

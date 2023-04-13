@@ -3,7 +3,6 @@ package fr.eni.encheres.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.List;
 
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.BusinessException;
@@ -15,7 +14,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private static final String CREER="INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (?,?,?,?);";
 	private static final String MODIFIER="UPDATE ENCHERES SET montant_enchere=? WHERE no_utilisateur=? AND no_article=?;";
 	private static final String SUPPRIMER="DELETE FROM ENCHERE WHERE no_utilisateur=? AND no_article=?;";
-	private static final String AFFICHER_PAR_UTIL_ET_ARTICLE = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere WHERE no_utilisateur=? AND no_article=?;";
+	private static final String AFFICHER_PAR_UTIL_ET_ARTICLE = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES WHERE no_utilisateur=? AND no_article=?;";
 
 	@Override
 	public void creerEnchere(Enchere enchere) throws BusinessException {
