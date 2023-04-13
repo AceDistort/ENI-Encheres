@@ -42,10 +42,10 @@ public class AfficherVenteServlet extends HttpServlet {
 			((HttpServletResponse) response).sendRedirect("encheres");
 		}
 		else {
-			Utilisateur utilisateur = new Utilisateur();
-			utilisateur.setNoUtilisateur(Integer.parseInt(request.getParameter("noUtilisateur")));
 			ArticleVendu article = new ArticleVendu();
 			article.setNoArticle(Integer.parseInt(request.getParameter("noArticle")));
+			Utilisateur utilisateur = new Utilisateur();
+			utilisateur.setNoUtilisateur(article.getVend().getNoUtilisateur());
 			Enchere enchere = new Enchere();
 			enchere.setUtilisateur(utilisateur);
 			enchere.setArticle(article);
