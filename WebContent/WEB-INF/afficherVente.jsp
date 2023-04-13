@@ -1,3 +1,6 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.DateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -16,7 +19,7 @@
 	</header>
 	
 	<section class="centered" style="margin: 0 50px">
-		<form method="post" action="encherir">
+		<div>
 			<input hidden name="noArticle" value="${requestScope['articleProfil'].getNoArticle()}">
 			<div class="input-label-box">
 				<label>Nom article : </label>
@@ -66,12 +69,21 @@
 				<label name="valeur">${requestScope['enchereProfil'].getMontantEnchere()}</label>
 			</div>
 			
-			<div class="input-label-box">
-				<label>Ma proposition : </label>
-				<label name="valeur">${requestScope['enchereProfil'].getMontantEnchere()}</label>
-			</div>
-			<input class="button green-background" style="border: none" type="submit" value="Enchérir" >
-		</form>
+			<% 
+				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+				Date dateAjdUtil = new Date();
+				java.sql.Date dateAjdSql = new java.sql.Date(dateAjdUtil.getTime()); 
+			%>
+			<c:if test="${sessionScope['sessionUtilisateur'] != requestScope['utilisateurProfil'] and sessionScope['sessionUtilisateur'] != requestScope['enchereProfil'].getUtilisateur() and dateAjdSql <= requestScope['enchereProfil'].getArticle().getDateFinEncheres() and dateAjdSql >= requestScope['enchereProfil'].getArticle().getDateDebutEncheres() }">
+			<form method="post" action="encherir">
+				<div class="input-label-box">
+					<label for="valeur">Ma proposition : </label>
+					<input id="valeur" name="valeur" type="number" value="${requestScope['enchereProfil'].getMontantEnchere()}"/>
+				</div>
+				<input class="button green-background" style="border: none" type="submit" value="Enchérir" >
+			</form>
+			</c:if>
+		</div>
 	</section>
 </body>
 </html>
