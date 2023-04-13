@@ -14,75 +14,34 @@
 	<link href="styles/page-inscription.css" rel="stylesheet">
 </head>
 <body>
-	<header>
-		<h1 class="title">ENI Enchères</h1>
-	</header>
-	
-	<section class="centered" style="margin: 0 50px">
+
+	<section class="mx-auto p-2" style="width: 80%; max-width: 450px; margin-top: 50px">
+		<img src="images/logoENIEncheres.png" style="margin-bottom: 50px; width: 230px">
+
+		<img src="images/article-exemple.png" style="width: 80%; max-width: 200px; margin: 10px; border-radius: 10px; object-fit: cover">
 		<div>
-			<input hidden name="noArticle" value="${requestScope['articleProfil'].getNoArticle()}">
-			<div class="input-label-box">
-				<label>Nom article : </label>
-				<label name="nom_article">${requestScope['articleProfil'].getNomArticle()}</label>
-			</div>
+			<p name="nom_article" style="font-size: xx-large; font-weight: 600">${requestScope['articleProfil'].getNomArticle()}</p>
+			<p name="nom_categorie" style="color: #363636;">${requestScope['categorieProfil'].getLibelle()}</p>
 			
-			<div class="input-label-box">
-				<label>Description : </label>
-				<label name="description_article">${requestScope['articleProfil'].getDescription()}</label>
-			</div>
+			<p name="description_article" style="color: grey;">${requestScope['articleProfil'].getDescription()}</p>
 			
-			<input hidden name="noCategorie" value="${requestScope['categorieProfil'].getNoCategorie()}">
-			<div class="input-label-box">
-				<label>Catégorie : </label>
-				<label name="nom_categorie">${requestScope['categorieProfil'].getLibelle()}</label>
-			</div>
+			<p>Vendu par <span name="utilisateur_vendeur"><a href="profil?id=${requestScope['utilisateurProfil'].getNoUtilisateur()}">${requestScope['utilisateurProfil'].getPseudo()}</a></span></p>
+		
+			<p>Fin le <span name="date_fin_encheres">${requestScope['articleProfil'].getDateFinEncheres()}</span></p>
 			
-			<div hidden class="input-label-box">
-				<label>Meilleure offre : </label>
-				<label name="max_enchere">${requestScope['enchereProfil'].getMaxEnchere()}</label><!-- TODO !!!! -->
-			</div>
-			
-			<div class="input-label-box">
-				<label>Mise à prix : </label>
-				<label name="prix_initial">${requestScope['articleProfil'].getPrixInitial()} points</label>
-			</div>
-			
-			<div class="input-label-box">
-				<label>Fin de l'enchere : </label>
-				<label name="date_fin_encheres">${requestScope['articleProfil'].getDateFinEncheres()}</label>
-			</div>
-			
-			<div hidden class="input-label-box">
-				<label>Retrait : </label>
-				<label name="rue_retrait">${requestScope['retraitProfil'].getRue()}</label>
-				<label name="codePostal_retrait">${requestScope['retraitProfil'].getCodePostal()}</label>
-				<label name="ville_retrait">${requestScope['retraitProfil'].getVille()}</label>
-			</div>
-			
-			<div class="input-label-box">
-				<label>Vendeur : </label>
-				<label name="utilisateur_vendeur">${requestScope['utilisateurProfil'].getPseudo()}</label>
-			</div>
-			
-			<div class="input-label-box">
-				<label>Ma proposition : </label>
-				<label name="valeur">${requestScope['enchereProfil'].getMontantEnchere()}</label>
-			</div>
-			
-			<% 
-				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-				Date dateAjdUtil = new Date();
-				java.sql.Date dateAjdSql = new java.sql.Date(dateAjdUtil.getTime()); 
-			%>
-			<c:if test="${sessionScope['sessionUtilisateur'] != requestScope['utilisateurProfil'] and sessionScope['sessionUtilisateur'] != requestScope['enchereProfil'].getUtilisateur() and dateAjdSql <= requestScope['enchereProfil'].getArticle().getDateFinEncheres() and dateAjdSql >= requestScope['enchereProfil'].getArticle().getDateDebutEncheres() }">
-			<form method="post" action="encherir">
-				<div class="input-label-box">
-					<label for="valeur">Ma proposition : </label>
-					<input id="valeur" name="valeur" type="number" value="${requestScope['enchereProfil'].getMontantEnchere()}"/>
+			<!-- Placement d'enchère  -->
+			<div class="d-flex flex-wrap flex-row align-items-center" style="width: 100%; border-radius: 10px">
+				<div style="flex: 1; min-width: 200px">
+					<p style="margin: 0; font-size: 45px; font-weight: 600" name="prix_initial">${requestScope['articleProfil'].getPrixInitial()}</p>
+					<p>points</p>
 				</div>
-				<input class="button green-background" style="border: none" type="submit" value="Enchérir" >
-			</form>
-			</c:if>
+				<div style="flex: 3; min-width: 200px; margin-top: 20px">
+					<form method="post" action="encherir">
+						<input class="form-control" type="number" min="0">
+						<button class="btn btn-primary orange-background" style="margin: 20px 0; border: none" type="submit">Placer l'offre</button>
+					</form>
+				</div>
+			</div>
 		</div>
 	</section>
 </body>

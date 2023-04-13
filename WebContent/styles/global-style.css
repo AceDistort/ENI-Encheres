@@ -11,6 +11,10 @@ input, textarea, select, .ombreInputs{
 	box-shadow: 1px 1px 5px 1px #b5b5b5
 }
 
+p{
+	text-align: justify;
+}
+
 .header-nav{
 	margin: 30px;
 	display: flex;

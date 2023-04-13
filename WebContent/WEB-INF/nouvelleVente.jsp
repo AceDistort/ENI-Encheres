@@ -15,7 +15,7 @@
 <body>
 
 	<main class="mx-auto p-2" style="width: 80%; max-width: 700px; margin-top: 50px">
-		<img src="images/logoENIEncheres.png" style="margin-bottom: 50px; width: 230px">
+		<img src="images/logoENIEncheres.png" style="margin-bottom: 50px; width: 230px; margin-left: 40px">
 		<p style="font-size: xx-large; font-weight: 600; margin-left: 40px">Créer une vente</p>
 		<form method="post" action="vendre">
 		
