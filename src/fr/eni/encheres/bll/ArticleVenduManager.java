@@ -55,6 +55,7 @@ public class ArticleVenduManager {
 			throw be;
 		}
 		return articleVenduDAO.listerMesVentesEnCours(utilisateur);
+	}
 	public ArticleVendu afficherArticle(ArticleVendu article) throws BusinessException {
 		BusinessException businessException = new BusinessException();
 		if(article == null) {
