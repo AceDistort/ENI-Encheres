@@ -54,7 +54,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 		article.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
 		article.setDateFinEncheres(rs.getDate("date_fin_encheres"));
 		article.setPrixInitial(rs.getInt("prix_initial"));
-		article.setPrixVente(rs.getInt("prix_vente"));
+		article.setPrixVente(rs.getInt("prix_initial"));
 		article.setVend(utilisateur);
 		article.setCategorie(categorie);
 		return article;
