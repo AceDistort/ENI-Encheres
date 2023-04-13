@@ -7,6 +7,10 @@ header{
 	align-items: center;
 }
 
+input, textarea, select, .ombreInputs{
+	box-shadow: 1px 1px 5px 1px #b5b5b5
+}
+
 .header-nav{
 	margin: 30px;
 	display: flex;
