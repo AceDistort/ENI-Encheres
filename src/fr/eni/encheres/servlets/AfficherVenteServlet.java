@@ -42,31 +42,22 @@ public class AfficherVenteServlet extends HttpServlet {
 			((HttpServletResponse) response).sendRedirect("encheres");
 		}
 		else {
-			ArticleVendu article = new ArticleVendu();
-			article.setNoArticle(Integer.parseInt(request.getParameter("noArticle")));
-			Utilisateur utilisateur = new Utilisateur();
-			utilisateur.setNoUtilisateur(article.getVend().getNoUtilisateur());
-			Enchere enchere = new Enchere();
-			enchere.setUtilisateur(utilisateur);
-			enchere.setArticle(article);
-			Retrait retrait = new Retrait();
-			retrait.setConcerne(article);
-		
 			try {
-				Utilisateur utilisateurProfil = UtilisateurManager.getUtilisateurManager().afficher(utilisateur);
-				request.setAttribute("utilisateurProfil", utilisateurProfil);
+				ArticleVendu article = new ArticleVendu();
+				article.setNoArticle(Integer.parseInt(request.getParameter("id")));
+				article = ArticleVenduManager.getArticleVenduManager().afficherArticle(article);
 				
-				ArticleVendu articleProfil = ArticleVenduManager.getArticleVenduManager().afficherArticle(article);
-				request.setAttribute("articleProfil", articleProfil);
+				Utilisateur utilisateur = new Utilisateur();
+				utilisateur.setNoUtilisateur(article.getVend().getNoUtilisateur());
+				utilisateur = UtilisateurManager.getUtilisateurManager().afficher(utilisateur);
 				
-				Retrait retraitProfil = RetraitManager.getRetraitManager().afficher(retrait);
-				request.setAttribute("retraitProfil", retraitProfil);
-				
-				Categorie categorieProfil = CategoriesManager.getCategorieManager().afficherCategorie(articleProfil.getCategorie());
-				request.setAttribute("categorieProfil", categorieProfil);
-				
-				Enchere enchereProfil = EnchereManager.getEnchereManager().afficherEnchere(enchere);
-				request.setAttribute("EnchereProfil", enchereProfil);
+				Categorie categorie = new Categorie();
+				categorie.setNoCategorie(article.getCategorie().getNoCategorie());
+				categorie = CategoriesManager.getCategorieManager().afficherCategorie(categorie);
+		
+				request.setAttribute("utilisateurProfil", utilisateur);
+				request.setAttribute("articleProfil", article);
+				request.setAttribute("categorieProfil", categorie);
 				
 				request.getRequestDispatcher("/WEB-INF/afficherVente.jsp").forward(request, response);
 				
