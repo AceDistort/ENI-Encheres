@@ -92,7 +92,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 			if(request.getParameter("dateDebutEncheres") == null) {
 				//TODO
 			}
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			java.util.Date d = sdf.parse(request.getParameter("dateDebutEncheres"));
 			Date dateDebutEncheres = new Date(d.getTime());
 			
@@ -128,11 +128,6 @@ public class NouvelleVenteServlet extends HttpServlet {
 			ArticleVenduManager.getCategorieManager().nouvelleVente(article);
 			
 			Retrait retrait = new Retrait(rue,codePostal,ville,article);
-			System.out.println("Retrait");
-			System.out.println(retrait.getRue());
-			System.out.println(retrait.getCodePostal());
-			System.out.println(retrait.getVille());
-			System.out.println(retrait.getConcerne().getNoArticle());
 			
 			RetraitManager.getRetraitManager().creer(retrait);
 			

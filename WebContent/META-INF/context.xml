@@ -11,8 +11,4 @@
 	maxWaitMillis="10000" 
 /> 
 
-<session-config>
-    <session-timeout>5</session-timeout>
-</session-config>
-
 </Context> 

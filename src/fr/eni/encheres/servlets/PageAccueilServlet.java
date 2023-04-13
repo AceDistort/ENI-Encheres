@@ -3,7 +3,9 @@ package fr.eni.encheres.servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +18,7 @@ import fr.eni.encheres.bll.CategoriesManager;
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.BusinessException;
 import fr.eni.encheres.bo.Categorie;
+import fr.eni.encheres.bo.Utilisateur;
 
 /**
  * Servlet implementation class ServletPageAccueil
@@ -40,29 +43,55 @@ public class PageAccueilServlet extends HttpServlet {
 			List<Categorie> categories = CategoriesManager.getCategorieManager().lister();
 			request.setAttribute("categories", categories);
 			
-			List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
+			Set<ArticleVendu> articles = new HashSet<ArticleVendu>();
 			
 			if (request.getSession().getAttribute("sessionUtilisateur") != null) {
 				String[] achats = request.getParameterValues("achats");
 				String[] mesVentes = request.getParameterValues("mesVentes");
 				if(achats != null) {
 					for(String achat: achats) {
-						
+						switch (achat) {
+						case "0":
+							articles.addAll(ArticleVenduManager.getCategorieManager().listerEncheresOuvertes());
+							break;
+							
+						case "1":
+							
+							break;
+
+						case "2":
+							
+							break;
+						}
 					}
 				} else if(mesVentes != null) {
-					
+					for(String vente: mesVentes) {
+						switch (vente) {
+						case "0":
+							articles.addAll(ArticleVenduManager.getCategorieManager().listerMesVentesEnCours((Utilisateur)request.getSession().getAttribute("sessionUtilisateur")));
+							break;
+							
+						case "1":
+							articles.addAll(ArticleVenduManager.getCategorieManager().listerVentesNonDebutees());
+							break;
+							
+						case "2":
+							articles.addAll(ArticleVenduManager.getCategorieManager().listerVentesTerminees());
+							break;
+						}
+					}
 				} else {
-					articles = ArticleVenduManager.getCategorieManager().listerVentesDeconnecte();
+					articles = new HashSet<>(ArticleVenduManager.getCategorieManager().listerVentesDeconnecte());
 				}
 			} else {
-				articles = ArticleVenduManager.getCategorieManager().listerVentesDeconnecte();
+				articles = new HashSet<>(ArticleVenduManager.getCategorieManager().listerVentesDeconnecte());
 			}
 			
 			List<ArticleVendu> articlesFiltres = new ArrayList<ArticleVendu>(articles);
 
 			for(ArticleVendu article: articles) {
 				if(request.getParameter("texte") != null) {
-					if(!article.getNomArticle().contains(request.getParameter("texte"))) {
+					if(!article.getNomArticle().toUpperCase().contains(request.getParameter("texte").toUpperCase())) {
 						articlesFiltres.remove(article);
 					}
 				}
