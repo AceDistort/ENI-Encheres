@@ -35,7 +35,7 @@
 		
 		<div style="display: flex; flex-direction: row; flex-wrap: wrap">
 			<!-- Section filtres et recherche -->
-			<section class="mx-3" style="min-width: 300px; flex: 1">
+			<section class="mx-3" style="min-width: 300px; margin-bottom: 10px; flex: 1">
 				<form method="POST" action="encheres">
 					<div class="mb-3">
 						<label class="form-label" for="texte">Le nom de l'article contient</label>
@@ -52,96 +52,98 @@
 					</div>
 					<div>
 					<c:if test="${not empty sessionScope['sessionUtilisateur']}">
-						<div>
-							<input id="achats" name="gestionBtn" type="radio" ${not empty paramValues.achats or empty paramValues.mesVentes ? "checked" : ""}/>
-							<label for="achats">Achats</label>
-							<div>
-								<div>
-									<%  
-										boolean checked = false;
-										String[] achats = request.getParameterValues("achats");
-										if(achats != null) {
-											for(String achat: achats) {
-												checked = checked || achat.equals("0");
+						<div class="my-3">
+							<div class="form-check">
+								<input class="form-check-input" id="achats" name="gestionBtn" type="radio" ${not empty paramValues.achats or empty paramValues.mesVentes ? "checked" : ""}/>
+								<label class="form-check-label" for="achats">Achats</label>
+								<div style="margin-left: 20px">
+									<div>
+										<%  
+											boolean checked = false;
+											String[] achats = request.getParameterValues("achats");
+											if(achats != null) {
+												for(String achat: achats) {
+													checked = checked || achat.equals("0");
+												}
 											}
-										}
-									%>
-									<input id="achats0" name="achats" type="checkbox" value="0" <%= checked ? "checked" : "" %>/>
-									<label for="achats">enchères ouvertes</label>
-								</div>
-								<div>
-									<%  
-										checked = false;
-										if(achats != null) {
-											for(String achat: achats) {
-												checked = checked || achat.equals("1");
+										%>
+										<input class="form-check-input id="achats0" name="achats" type="checkbox" value="0" <%= checked ? "checked" : "" %>/>
+										<label class="form-check-label" for="achats">enchères ouvertes</label>
+									</div>
+									<div>
+										<%  
+											checked = false;
+											if(achats != null) {
+												for(String achat: achats) {
+													checked = checked || achat.equals("1");
+												}
 											}
-										}
-									%>
-									<input id="achats1" name="achats" type="checkbox" value="1" <%= checked ? "checked" : "" %>/>
-									<label for="achats">mes enchères en cours</label>
-								</div>
-								<div>
-									<%  
-										checked = false;
-										if(achats != null) {
-											for(String achat: achats) {
-												checked = checked || achat.equals("2");
+										%>
+										<input class="form-check-input id="achats1" name="achats" type="checkbox" value="1" <%= checked ? "checked" : "" %>/>
+										<label class="form-check-label" for="achats">mes enchères en cours</label>
+									</div>
+									<div>
+										<%  
+											checked = false;
+											if(achats != null) {
+												for(String achat: achats) {
+													checked = checked || achat.equals("2");
+												}
 											}
-										}
-									%>
-									<input id="achats2" name="achats" type="checkbox" value="2" <%= checked ? "checked" : "" %>/>
-									<label for="achats">mes enchères remportées</label>
+										%>
+										<input class="form-check-input id="achats2" name="achats" type="checkbox" value="2" <%= checked ? "checked" : "" %>/>
+										<label class="form-check-label" for="achats">mes enchères remportées</label>
+									</div>
 								</div>
 							</div>
-						</div>
-				
-						<div>
-							<input id="mesVentes" name="gestionBtn" type="radio" ${not empty paramValues.mesVentes ? "checked" : ""}/>
-							<label for="mesVente">Mes ventes</label>
-							<div>
-								<div>
-									<%  
-										checked = false;
-										String[] mesVentes = request.getParameterValues("mesVentes");
-										if(mesVentes != null) {
-											for(String vente: mesVentes) {
-												checked = checked || vente.equals("0");
+					
+							<div class="form-check">
+								<input class="form-check-input" id="mesVentes" name="gestionBtn" type="radio" ${not empty paramValues.mesVentes ? "checked" : ""}/>
+								<label class="form-check-label" for="mesVente">Mes ventes</label>
+								<div style="margin-left: 20px">
+									<div>
+										<%  
+											checked = false;
+											String[] mesVentes = request.getParameterValues("mesVentes");
+											if(mesVentes != null) {
+												for(String vente: mesVentes) {
+													checked = checked || vente.equals("0");
+												}
 											}
-										}
-									%>
-									<input id="mesVente0" name="mesVentes" type="checkbox" value="0" <%= checked ? "checked" : "" %>/>
-									<label for="mesVentes">mes ventes en cours</label>
-								</div>
-								<div>
-									<%  
-										checked = false;
-										if(mesVentes != null) {
-											for(String vente: mesVentes) {
-												checked = checked || vente.equals("1");
+										%>
+										<input class="form-check-input id="mesVente0" name="mesVentes" type="checkbox" value="0" <%= checked ? "checked" : "" %>/>
+										<label class="form-check-label" for="mesVentes">mes ventes en cours</label>
+									</div>
+									<div>
+										<%  
+											checked = false;
+											if(mesVentes != null) {
+												for(String vente: mesVentes) {
+													checked = checked || vente.equals("1");
+												}
 											}
-										}
-									%>
-									<input id="mesVente1" name="mesVentes" type="checkbox" value="1" <%= checked ? "checked" : "" %>/>
-									<label for="mesVentes">ventes non débutées</label>
-								</div>
-								<div>
-									<%  
-										checked = false;
-										if(mesVentes != null) {
-											for(String vente: mesVentes) {
-												checked = checked || vente.equals("2");
+										%>
+										<input class="form-check-input id="mesVente1" name="mesVentes" type="checkbox" value="1" <%= checked ? "checked" : "" %>/>
+										<label class="form-check-label" for="mesVentes">ventes non débutées</label>
+									</div>
+									<div>
+										<%  
+											checked = false;
+											if(mesVentes != null) {
+												for(String vente: mesVentes) {
+													checked = checked || vente.equals("2");
+												}
 											}
-										}
-									%>
-									<input id="mesVente2" name="mesVentes" type="checkbox" value="2" <%= checked ? "checked" : "" %>/>
-									<label for="mesVentes">ventes terminées</label>
+										%>
+										<input class="form-check-input id="mesVente2" name="mesVentes" type="checkbox" value="2" <%= checked ? "checked" : "" %>/>
+										<label class="form-check-label" for="mesVentes">ventes terminées</label>
+									</div>
 								</div>
 							</div>
 						</div>
 					</c:if>
 					</div>
-					<button class="btn btn-primary blue-background" style="margin-top: 20px; border: none" type="submit">Rechercher</button>
+					<button class="btn btn-primary blue-background" style="margin-top: 10px; border: none" type="submit">Rechercher</button>
 				</form>
 			</section>
 			
@@ -149,21 +151,21 @@
 			<section class="mx-3" style="flex: 2">
 				<div class="card-group">
 					<c:forEach var="article" items="${requestScope['articles']}">
-					<a style="text-decoration:none;color:inherit" href="vente?id=${article.getNoArticle()}">
-						<div class="card mb-3 d-flex flex-row flex-nowrap" style="max-width: 400px; min-width: 350px;">
-						    <div class="flex-1">
-						      <img src="https://picsum.photos/127/164" class="img-fluid rounded-start" style="height: 100%; object-fit: cover">
-						    </div>
-						    <div class="flex-2">
-						      <div class="card-body">
-						        <h5 class="card-title">${article.getNomArticle()}</h5>
-						        <p class="card-text">${article.getPrixVente()} points</p>
-						        <p class="card-text"><small class="text-body-secondary">Fin le ${article.getDateFinEncheres()}</small></p>
-						        <p class="card-text">Vendu par <a href="profil?id=${article.getVend().getNoUtilisateur()}">${article.getVend().getPseudo()}</a></p>
-						      </div>
-						    </div>
-						</div>
-					</a>
+						<a style="text-decoration:none;color:inherit" href="vente?id=${article.getNoArticle()}">
+							<div class="card mb-3 mx-2 d-flex flex-row flex-nowrap" style="max-width: 400px; min-width: 350px; flex: 1">
+							    <div class="flex-1">
+							      <img src="https://picsum.photos/127/164" class="img-fluid rounded-start" style="height: 100%; object-fit: cover">
+							    </div>
+							    <div class="flex-2">
+							      <div class="card-body">
+							        <h5 class="card-title">${article.getNomArticle()}</h5>
+							        <p class="card-text">${article.getPrixVente()} points</p>
+							        <p class="card-text"><small class="text-body-secondary">Fin le ${article.getDateFinEncheres()}</small></p>
+							        <p class="card-text">Vendu par <a href="profil?id=${article.getVend().getNoUtilisateur()}">${article.getVend().getPseudo()}</a></p>
+							      </div>
+							    </div>
+							</div>
+						</a>
 					</c:forEach>
 				</div>
 			</section>
