@@ -36,8 +36,9 @@
 					<p>points</p>
 				</div>
 				<div style="flex: 3; min-width: 200px; margin-top: 20px">
-					<form method="post" action="encherir">
-						<input class="form-control" type="number" min="0">
+					<form method="post" action="vente">
+						<input hidden name="noArticle" value="${requestScope['articleProfil'].getNoArticle()}">
+						<input class="form-control" type="number" min="0" name="montantEnchere">
 						<button class="btn btn-primary orange-background" style="margin: 20px 0; border: none" type="submit">Placer l'offre</button>
 					</form>
 				</div>

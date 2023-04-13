@@ -53,6 +53,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			CallableStatement callstmt = cnx.prepareCall(ENCHERIR_PROCEDURE);
 			callstmt.setInt(1, enchere.getArticle().getNoArticle());
 			callstmt.setInt(2, enchere.getUtilisateur().getNoUtilisateur());
+			callstmt.setInt(3, enchere.getMontantEnchere());
 			callstmt.execute();
 			
 		} catch(Exception e) {
