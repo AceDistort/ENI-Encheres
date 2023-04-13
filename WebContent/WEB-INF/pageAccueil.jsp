@@ -20,7 +20,7 @@
 		<ul class="header-nav">
 			<c:if test="${empty sessionScope['sessionUtilisateur']}">
 				<li><a class="no-text-decoration text" href="connexion">Se connecter</a></li>
-				<li class="button orange-background"><a href="inscription">S'inscrire</a></li>
+				<li><a href="inscription"><button class="btn btn-primary orange-background" style="margin: 20px 0; border: none">S'inscrire</button></a></li>
 			</c:if>
 			<c:if test="${not empty sessionScope['sessionUtilisateur']}">
 				<li><a class="no-text-decoration text" href="">Enchères</a></li>
