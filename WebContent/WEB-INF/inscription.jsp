@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="js/utils.js"></script>
 </head>
 <body>
-	<section class="mx-auto p-2" style="width: 80%; max-width: 500px; margin-top: 100px">
+	<section class="mx-auto p-2" style="width: 80%; max-width: 500px; margin-top: 50px">
 		<img src="images/logoENIEncheres.png" style="margin-bottom: 50px">
 		<form method="post" action="inscription">
 			<div class="mb-3">
@@ -35,7 +35,7 @@
 			
 			<div class="mb-3">
 			  <label class="form-label">Email <span class="red">*</span> </label>
-			  <input required type="text" name="email" pattern="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{​​​2,}​​​​​​​​​​​​​​​​​​​​​​​​\b" class="form-control">
+			  <input required type="email" name="email" class="form-control">
 			</div>
 			<c:if test="${not empty requestScope['erreurEmail']}">
 				<p class="error-text">${requestScope['erreurEmail']}</p>
@@ -51,27 +51,30 @@
 			  <input required type="text" name="rue" pattern="^\d+\s+[a-zA-Z]+(?:\s+[a-zA-Z]+)*$" class="form-control">
 			</div>
 			
-			<div class="mb-3">
-			  <label class="form-label">Code Postal <span class="red">*</span></label>
-			  <input required type="text" name="codePostal" input="^\d{​​​​​​​​​​​​​​​​​​5}​​​​​​​​​​​​​​​​​​(?:[\s-]\w{​​​​​​​​​​​​​​​​​​2}​​​​​​​​​​​​​​​​​​)?$" class="form-control">
+			<div class="row mb-3">
+			  <div class="col">
+			    <label class="form-label">Ville <span class="red">*</span> </label>
+			  	<input required type="text" name="ville" pattern="^[a-zA-ZÀ-ÖØ-öø-ÿ]+(?:[\s-']+[a-zA-ZÀ-ÖØ-öø-ÿ]+)*$" class="form-control">
+			  </div>
+			  <div class="col">
+			    <label class="form-label">Code Postal <span class="red">*</span></label>
+			  	<input required type="text" name="codePostal" pattern="^[0-9]{5}$" class="form-control">
+			  	<c:if test="${not empty requestScope['erreurCodePostal']}">
+					<p class="error-text">${requestScope['erreurCodePostal']}</p>
+				</c:if>
+			  </div>
 			</div>
-			<c:if test="${not empty requestScope['erreurCodePostal']}">
-				<p class="error-text">${requestScope['erreurCodePostal']}</p>
-			</c:if>
 			
-			<div class="mb-3">
-			  <label class="form-label">Ville <span class="red">*</span> </label>
-			  <input required type="text" name="ville" pattern="^[a-zA-ZÀ-ÖØ-öø-ÿ]+(?:[\s-']+[a-zA-ZÀ-ÖØ-öø-ÿ]+)*$" class="form-control">
-			</div>
+			<div class="mx-auto" style="width: 95%; height: 1px; background-color: #ebebeb; margin-bottom: 20px"></div>
 			
 			<div class="row mb-3">
 			  <div class="col">
 			    <label class="form-label">Mot de passe <span class="red">*</span> </label>
-			  	<input required type="password" name="motDePasse" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\s]).{​​​​​​​​​​​​​​​​​​​​​​​​12,50}​​​​​​​​​​​​​​​​​​​​​​​​$" class="form-control">
+			  	<input required type="password" name="motDePasse" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{12,30}$" class="form-control">
 			  </div>
 			  <div class="col">
 			    <label class="form-label">Confirmation <span class="red">*</span> </label>
-			  	<input required type="password" name="confirmation" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\s]).{​​​​​​​​​​​​​​​​​​​​​​​​12,50}​​​​​​​​​​​​​​​​​​​​​​​​$" class="form-control">
+			  	<input required type="password" name="confirmation" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{12,30}$" class="form-control">
 			  </div>
 			</div>
 			<p class="info-text">** 12 caractères minimum, au moins une majuscule, au moins une minuscule, au moins un chiffre, au moins un caractère spécial<p>
@@ -80,7 +83,8 @@
 			</c:if>
 
 			<!-- Boutons -->
-			<button class="btn btn-secondary" style="margin: 20px 0; border: none" onclick="retourAction()">Retour</button>
+			<p style="margin-top: 30px; margin-bottom: 5px"" class="info-text"><span class="red">*</span> Champs obligatoires</p>
+			<button class="btn btn-secondary" style="margin: 20px 0; border: none" onclick="retourAction()" type="button">Retour</button>
 			<button class="btn btn-primary orange-background" style="margin: 20px 0; border: none" type="submit">Inscription</button>
 		</form>		
 	</section>
