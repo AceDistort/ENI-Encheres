@@ -218,6 +218,8 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 		}
 		
 		return articles;
+	}
+	
 	public ArticleVendu afficherArticleParID(ArticleVendu article) throws BusinessException {
 		if (article == null) {
 			BusinessException businessException = new BusinessException();

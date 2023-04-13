@@ -52,7 +52,7 @@ public class PageAccueilServlet extends HttpServlet {
 					for(String achat: achats) {
 						switch (achat) {
 						case "0":
-							articles.addAll(ArticleVenduManager.getCategorieManager().listerEncheresOuvertes());
+							articles.addAll(ArticleVenduManager.getArticleVenduManager().listerEncheresOuvertes());
 							break;
 							
 						case "1":
@@ -68,23 +68,23 @@ public class PageAccueilServlet extends HttpServlet {
 					for(String vente: mesVentes) {
 						switch (vente) {
 						case "0":
-							articles.addAll(ArticleVenduManager.getCategorieManager().listerMesVentesEnCours((Utilisateur)request.getSession().getAttribute("sessionUtilisateur")));
+							articles.addAll(ArticleVenduManager.getArticleVenduManager().listerMesVentesEnCours((Utilisateur)request.getSession().getAttribute("sessionUtilisateur")));
 							break;
 							
 						case "1":
-							articles.addAll(ArticleVenduManager.getCategorieManager().listerVentesNonDebutees());
+							articles.addAll(ArticleVenduManager.getArticleVenduManager().listerVentesNonDebutees());
 							break;
 							
 						case "2":
-							articles.addAll(ArticleVenduManager.getCategorieManager().listerVentesTerminees());
+							articles.addAll(ArticleVenduManager.getArticleVenduManager().listerVentesTerminees());
 							break;
 						}
 					}
 				} else {
-					articles = new HashSet<>(ArticleVenduManager.getCategorieManager().listerVentesDeconnecte());
+					articles = new HashSet<>(ArticleVenduManager.getArticleVenduManager().listerVentesDeconnecte());
 				}
 			} else {
-				articles = new HashSet<>(ArticleVenduManager.getCategorieManager().listerVentesDeconnecte());
+				articles = new HashSet<>(ArticleVenduManager.getArticleVenduManager().listerVentesDeconnecte());
 			}
 			
 			List<ArticleVendu> articlesFiltres = new ArrayList<ArticleVendu>(articles);
