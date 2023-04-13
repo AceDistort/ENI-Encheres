@@ -186,4 +186,11 @@ public abstract class CodesResultatBLL {
 	 */
 	public static final int OBJET_NULL_AFFICHER_ENCHERE_PAR_IDS = 20040;
 	public static final int AUTRE_ERREUR_AFFICHER_ENCHERE_PAR_IDS = 20041;
+	
+	/**
+	 * Echec général quand tentative d'une enchere d'un objet null
+	 * + Autre erreur non gérée lors de  par IDS d'un objet
+	 */
+	public static final int OBJET_NULL_ENCHERIR_ENCHERE = 20042;
+	public static final int AUTRE_ERREUR_ENCHERIR_ENCHERE = 20043;
 }
