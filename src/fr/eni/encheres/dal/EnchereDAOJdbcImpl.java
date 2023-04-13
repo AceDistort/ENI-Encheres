@@ -16,7 +16,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private static final String MODIFIER="UPDATE ENCHERES SET montant_enchere=? WHERE no_utilisateur=? AND no_article=?;";
 	private static final String SUPPRIMER="DELETE FROM ENCHERE WHERE no_utilisateur=? AND no_article=?;";
 	private static final String AFFICHER_PAR_UTIL_ET_ARTICLE = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES WHERE no_utilisateur=? AND no_article=?;";
-	private static final String ENCHERIR_PROCEDURE="{ call ajout_enchere(?, ?, ?) }";
+	private static final String ENCHERIR_PROCEDURE="{ CALL dbo.ajout_enchere(?, ?, ?) }";
 
 	@Override
 	public void creerEnchere(Enchere enchere) throws BusinessException {
