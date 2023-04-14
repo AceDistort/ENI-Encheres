@@ -9,7 +9,6 @@ import java.sql.Date;
 public class ArticleVendu implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	
 	private int noArticle;
 	private String nomArticle;
 	private String description;

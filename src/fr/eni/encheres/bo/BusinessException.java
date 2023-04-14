@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
  * Cette classe permet de recenser l'ensemble des erreurs (par leur code) pouvant survenir lors d'un traitement
  * quel que soit la couche à l'origine.
  */
@@ -17,7 +18,7 @@ public class BusinessException extends Exception {
 	}
 	
 	/**
-	 * 
+	 * Méthode permettant d'ajoutant 
 	 * @param code Code de l'erreur. Doit avoir un message associé dans un fichier properties.
 	 */
 	public void ajouterErreur(int code)
@@ -28,6 +29,10 @@ public class BusinessException extends Exception {
 		}
 	}
 	
+	/**
+	 * Méthode permettant de savoir s'il existe une erreur dans la liste d'erreur
+	 * @return si une erreur existe
+	 */
 	public boolean hasErreurs()
 	{
 		return this.listeCodesErreur.size()>0;
