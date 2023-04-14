@@ -161,7 +161,13 @@ public class UtilisateurManager {
 				throw be;
 			}
 		} catch (NoSuchAlgorithmException e) {
+			BusinessException be = new BusinessException();
+			be.ajouterErreur(4000);
+			throw be;
 		} catch (InvalidKeySpecException e) {
+			BusinessException be = new BusinessException();
+			be.ajouterErreur(4000);
+			throw be;
 		}
 		
 	    utilisateur = utilisateurBDD;

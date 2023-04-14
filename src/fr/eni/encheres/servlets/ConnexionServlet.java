@@ -71,8 +71,8 @@ public class ConnexionServlet extends HttpServlet {
 				request.setAttribute("erreurConnexion", LecteurMessage.getMessageErreur(CodesResultatBLL.OBJET_NULL_AFFICHER_UTILISATEUR_PAR_ID));
 				request.getRequestDispatcher("WEB-INF/connexion.jsp").forward(request, response);
 			} else {
-				//TODO
-				((HttpServletResponse) response).sendError(1);
+				request.setAttribute("erreurConnexion", LecteurMessage.getMessageErreur(40000));
+				request.getRequestDispatcher("WEB-INF/connexion.jsp").forward(request, response);
 			}
 		}
 	}
