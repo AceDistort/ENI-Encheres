@@ -4,6 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.BusinessException;
@@ -56,7 +57,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			callstmt.setInt(3, enchere.getMontantEnchere());
 			callstmt.execute();
 			
-		} catch(Exception e) {
+		} catch(SQLException e) {
+			System.out.println(e.getMessage());
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.AUTRE_ERREUR_ENCHERIR_ENCHERE);
 			throw businessException;

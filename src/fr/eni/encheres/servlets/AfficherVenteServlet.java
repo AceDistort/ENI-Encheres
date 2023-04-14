@@ -88,7 +88,7 @@ public class AfficherVenteServlet extends HttpServlet {
 				
 				((HttpServletResponse) response).sendRedirect("encheres");
 			} catch (BusinessException e) {
-				e.printStackTrace();
+				((HttpServletResponse) response).sendRedirect("encheres?id=" + request.getParameter("noArticle"));
 			}
 		}
 	}
