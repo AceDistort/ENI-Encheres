@@ -47,7 +47,7 @@
 			
 			<div class="mb-3">
 			  <label class="form-label">Rue <span class="red">*</span> </label>
-			  <input required type="text" name="rue" pattern="^\d+\s+[a-zA-Z]+(?:\s+[a-zA-Z]+)*$" class="form-control">
+			  <input required type="text" name="rue" class="form-control">
 			</div>
 			
 			<div class="row mb-3">
