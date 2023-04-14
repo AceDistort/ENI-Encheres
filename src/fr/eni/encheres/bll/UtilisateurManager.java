@@ -81,7 +81,6 @@ public class UtilisateurManager {
 		{	
 			//validation des donnees
 			controlerUtilisateur(utilisateur);
-			utilisateur.setMotDePasse(HashMotDePasse.generateStorngPasswordHash(utilisateur.getMotDePasse()));
 			//modification en BDD
 			utilisateurDAO.modifierUtilisateur(utilisateur);
 			
