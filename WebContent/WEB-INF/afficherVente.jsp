@@ -32,13 +32,13 @@
 			<!-- Placement d'enchère  -->
 			<div class="d-flex flex-wrap flex-row align-items-center" style="width: 100%; border-radius: 10px">
 				<div style="flex: 1; min-width: 200px">
-					<p style="margin: 0; font-size: 45px; font-weight: 600" name="prix_initial">${requestScope['articleProfil'].getPrixInitial()}</p>
+					<p style="margin: 0; font-size: 45px; font-weight: 600" name="prix_vente">${requestScope['articleProfil'].getPrixVente()}</p>
 					<p>points</p>
 				</div>
 				<div style="flex: 3; min-width: 200px; margin-top: 20px">
 					<form method="post" action="vente">
 						<input hidden name="noArticle" value="${requestScope['articleProfil'].getNoArticle()}">
-						<input class="form-control" type="number" min="0" name="montantEnchere">
+						<input class="form-control" type="number" min="${requestScope['articleProfil'].getPrixVente()+1}" name="montantEnchere" value="${requestScope['articleProfil'].getPrixVente()+1}">
 						<button class="btn btn-primary orange-background" style="margin: 20px 0; border: none" type="submit">Placer l'offre</button>
 					</form>
 				</div>
