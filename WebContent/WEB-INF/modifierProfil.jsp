@@ -54,7 +54,7 @@
 		  	<input required type="password" name="confirmation" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\s]).{​​​​​​​​​​​​​​​​​​​​​​​​12,50}​​​​​​​​​​​​​​​​​​​​​​​​$" class="form-control">
 		  </div>
 		  <c:if test="${not empty requestScope['erreurConfirmation']}">
-				<p class="error-text">Mauvais mot de passe de confirmation</p>
+				<p style="margin-top: 10px" class="error-text">${requestScope['erreurConfirmation']}</p>
 			</c:if>
 			
 			<button class="btn btn-secondary" style="margin: 20px 0; border: none" onclick="retourAction()" type="button">Retour</button>
