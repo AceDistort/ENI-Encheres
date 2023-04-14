@@ -136,8 +136,9 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 				articles.add(article);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.ajouterErreur(CodesResultatDAL.AUTRE_ERREUR_AFFICHER_ARTICLE);
+			throw be;
 		}
 		
 		return articles;

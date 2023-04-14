@@ -63,12 +63,14 @@ public class ModifierProfilServlet extends HttpServlet {
 					BusinessException businessException = new BusinessException();
 					throw businessException;
 				}
+				
 				utilisateur.setPseudo(request.getParameter("pseudo"));
 				utilisateur.setTelephone(request.getParameter("telephone"));
 				utilisateur.setRue(request.getParameter("rue"));
 				utilisateur.setCodePostal(request.getParameter("codePostal"));
 				utilisateur.setVille(request.getParameter("ville"));
-				utilisateur.setMotDePasse(request.getParameter("motDePasse"));
+				
+				UtilisateurManager.getUtilisateurManager().modifier(utilisateur);
 				
 				((HttpServletResponse) response).sendRedirect("/ENI-Encheres/encheres");
 			} catch (NoSuchAlgorithmException e) {

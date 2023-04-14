@@ -15,7 +15,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 	//Attributs d'instance
 	private static final String AJOUTER = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe) VALUES (?,?,?,?,?,?,?,?,?);";
-	private static final String MODIFIER = "UPDATE UTILISATEURS SET pseudo=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=?;";
+	private static final String MODIFIER = "UPDATE UTILISATEURS SET pseudo=?, telephone=?, rue=?, code_postal=?, ville=? WHERE no_utilisateur=?;";
 	private static final String SUPPRIMER = "DELETE FROM UTILISATEURS WHERE no_utilisateur=?;";
 	private static final String AFFICHER_UTILISATEUR_PAR_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE no_utilisateur=?;";
 	private static final String AFFICHER_TOUS_LES_UTILISATEURS = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS;";
@@ -72,8 +72,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			pstmt.setString(3, utilisateur.getRue());
 			pstmt.setString(4, utilisateur.getCodePostal());
 			pstmt.setString(5, utilisateur.getVille());
-			pstmt.setString(6, utilisateur.getMotDePasse());
-			pstmt.setInt(7, utilisateur.getNoUtilisateur());
+			pstmt.setInt(6, utilisateur.getNoUtilisateur());
 			pstmt.executeUpdate();
 		}
 		catch(Exception e)
