@@ -29,6 +29,12 @@
 				<p class="col-7">${requestScope['profil'].getPrenom()}</p>
 			</div>
 			<c:if test="${requestScope['profil'].equals(sessionScope['sessionUtilisateur']) || sessionScope['sessionUtilisateur'].isAdministrateur()}">
+			
+			<div class="row">
+				<p class="col-5">Crédits</p>
+				<p class="col-7">${sessionScope['sessionUtilisateur'].getCredit()} points</p>
+			</div>
+			
 			<div class="row">
 				<p class="col-5">Email</p>
 				<p class="col-7">${requestScope['profil'].getEmail()}</p>

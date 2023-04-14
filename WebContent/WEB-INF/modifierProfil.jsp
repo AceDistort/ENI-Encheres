@@ -53,6 +53,9 @@
 		    <label class="form-label">Confirmer votre mot de passe <span class="red">*</span> </label>
 		  	<input required type="password" name="confirmation" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\s]).{​​​​​​​​​​​​​​​​​​​​​​​​12,50}​​​​​​​​​​​​​​​​​​​​​​​​$" class="form-control">
 		  </div>
+		  <c:if test="${not empty requestScope['erreurConfirmation']}">
+				<p class="error-text">Mauvais mot de passe de confirmation</p>
+			</c:if>
 			
 			<button class="btn btn-secondary" style="margin: 20px 0; border: none" onclick="retourAction()" type="button">Retour</button>
 			<button disabled="disabled" class="btn btn-secondary" style="margin: 20px 0; border: none" type="button">Modifier le mot de passe</button>

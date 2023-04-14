@@ -90,8 +90,8 @@ public class ModifierProfilServlet extends HttpServlet {
 					request.setAttribute("erreurMotDePasse", LecteurMessage.getMessageErreur(CodesResultatServlet.MOTS_DE_PASSE_NON_IDENTIQUES));
 					request.getRequestDispatcher("WEB-INF/inscription.jsp").forward(request, response);
 				} else {
-					//TODO
-					((HttpServletResponse) response).sendError(1);
+					request.setAttribute("erreurConfirmation", LecteurMessage.getMessageErreur(CodesResultatServlet.MAUVAIS_MOT_DE_PASSE_CONFIRMATION));
+					request.getRequestDispatcher("../WEB-INF/modifierProfil.jsp").forward(request, response);
 				}
 			}
 		}
