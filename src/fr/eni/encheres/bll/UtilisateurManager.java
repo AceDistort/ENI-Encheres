@@ -13,6 +13,9 @@ import fr.eni.encheres.util.HashMotDePasse;
 import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.UtilisateurDAO;
 
+/**
+ * Classe en charge de gérer les utilisateurs
+ */
 public class UtilisateurManager {
 	//Attributs d'instance
 	private static UtilisateurManager utilisateurManager;
@@ -34,6 +37,12 @@ public class UtilisateurManager {
 	}
 	
 	//Autres méthodes
+
+	/**
+	 * Méthode en charge de créer un nouvel utilisateur
+	 * @param utilisateur
+	 * @throws BusinessException
+	 */
 	public void creer(Utilisateur utilisateur) throws SQLException, BusinessException {
 		if (utilisateur == null) {
 			BusinessException businessException = new BusinessException();
@@ -48,7 +57,6 @@ public class UtilisateurManager {
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatBLL.AUTRE_ERREUR_AJOUT_UTILISATEUR);
 			throw businessException;
@@ -56,6 +64,11 @@ public class UtilisateurManager {
 		
 	}
 	
+	/**
+	 * Méthode en charge de modifier les données d'un utilisateur
+	 * @param utilisateur
+	 * @throws BusinessException
+	 */
 	public void modifier(Utilisateur utilisateur) throws BusinessException {
 		//controle des champs passes en parametre
 		BusinessException businessException = new BusinessException();
@@ -81,6 +94,11 @@ public class UtilisateurManager {
 		}
 	}
 	
+	/**
+	 * Méthode en charge de supprimer les données d'un utilisateur
+	 * @param utilisateur
+	 * @throws BusinessException
+	 */
 	public void supprimer(Utilisateur utilisateur) throws BusinessException {
 		BusinessException businessException = new BusinessException();
 		if (utilisateur==null) {
@@ -94,7 +112,6 @@ public class UtilisateurManager {
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
 			businessException.ajouterErreur(CodesResultatBLL.AUTRE_ERREUR_SUPPRESSION_UTILISATEUR);
 			throw businessException;
 		}
@@ -102,6 +119,11 @@ public class UtilisateurManager {
 		
 	}
 	
+	/**
+	 * Méthode en charge d'afficher les données d'un utilisateur
+	 * @param utilisateur
+	 * @throws BusinessException
+	 */
 	public Utilisateur afficher(Utilisateur utilisateur) throws BusinessException {
 		if(utilisateur == null) {
 			BusinessException be = new BusinessException();
@@ -140,11 +162,7 @@ public class UtilisateurManager {
 				throw be;
 			}
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (InvalidKeySpecException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 	    utilisateur = utilisateurBDD;
@@ -152,6 +170,11 @@ public class UtilisateurManager {
 		
 	}
 	
+	/**
+	 * Méthode en charge de contrôler les données d'un utilisateur
+	 * @param utilisateur
+	 * @throws BusinessException
+	 */
 	public void controlerUtilisateur(Utilisateur utilisateur) {
 		String RegexEmail = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" 
 		        + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
@@ -194,11 +217,14 @@ public class UtilisateurManager {
 		if (utilisateur.getCredit() == 0) {
 			businessException.ajouterErreur(CodesResultatBLL.CREDIT_UTILISATEUR_INCORRECT);
 		}
-//		if (utilisateur.isAdministrateur() == false) {
-//			businessException.ajouterErreur(CodesResultatBLL.STATUT_ADMIN_UTILISATEUR_INEXISTANT);
-//		}
 	}
 	
+	/**
+	 * Méthode en charge de vérifier si une chaine de caractères correspond à un pattern
+	 * @param chaineDeCaracteres
+	 * @param pattern
+	 * @return Vrai si la chaine de caractères correspond au pattern
+	 */
 	public static boolean patternMatches(String chaineDeCaracteres, String pattern) {
 	    return Pattern.compile(pattern).matcher(chaineDeCaracteres).matches();
 	}

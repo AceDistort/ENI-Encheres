@@ -105,8 +105,6 @@ public class PageAccueilServlet extends HttpServlet {
 			request.setAttribute("articles", articlesFiltres);
 		
 		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		request.getRequestDispatcher("WEB-INF/pageAccueil.jsp").forward(request, response);
 	}

@@ -3,6 +3,9 @@ package fr.eni.encheres.bo;
 import java.io.Serializable;
 import java.sql.Date;
 
+/**
+ * Classe en charge de gérer les articles vendus
+ */
 public class ArticleVendu implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -20,6 +23,16 @@ public class ArticleVendu implements Serializable {
 	
 	public ArticleVendu() {}
 	
+	/**
+	 * Constructeur pour la création d'un article
+	 * @param nomArticle
+	 * @param description
+	 * @param dateDebutEncheres
+	 * @param dateFinEncheres
+	 * @param prixInitial
+	 * @param vend
+	 * @param categorie
+	 */
 	public ArticleVendu(String nomArticle, String description, Date dateDebutEncheres, Date dateFinEncheres,
 			Utilisateur vend, Categorie categorie) {
 		this.setNomArticle(nomArticle);

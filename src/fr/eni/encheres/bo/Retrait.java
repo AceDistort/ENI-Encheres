@@ -2,6 +2,9 @@ package fr.eni.encheres.bo;
 
 import java.io.Serializable;
 
+/**
+ * Classe en charge de gérer les retraits
+ */
 public class Retrait implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -12,6 +15,13 @@ public class Retrait implements Serializable {
 
 	public Retrait() {}
 	
+	/**
+	 * Constructeur pour la création d'un retrait
+	 * @param rue
+	 * @param codePostal
+	 * @param ville
+	 * @param concerne
+	 */
 	public Retrait(String rue, String codePostal, String ville, ArticleVendu concerne) {
 		this.setRue(rue);
 		this.setCodePostal(codePostal);

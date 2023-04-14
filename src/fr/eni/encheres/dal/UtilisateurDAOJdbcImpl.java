@@ -50,7 +50,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.AUTRE_ERREUR_AJOUT_UTILISATEUR);
 			throw businessException;
@@ -79,7 +78,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.AUTRE_ERREUR_MODIF_UTILISATEUR);
 			throw businessException;
@@ -102,7 +100,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.AUTRE_ERREUR_SUPPRESSION_UTILISATEUR);
 			throw businessException;
@@ -142,7 +139,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.AUTRE_ERREUR_AFFICHER_UTILISATEUR_PAR_ID);
 			throw businessException;
@@ -181,7 +177,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.AUTRE_ERREUR_AFFICHER_TOUS_LES_UTILISATEURS);
 			throw businessException;

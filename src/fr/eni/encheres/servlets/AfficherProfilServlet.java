@@ -27,6 +27,7 @@ public class AfficherProfilServlet extends HttpServlet {
     }
 
 	/**
+	 * Servlet d'affichage du profil d'un utilisateur
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -56,6 +57,7 @@ public class AfficherProfilServlet extends HttpServlet {
 	}
 
 	/**
+	 * Servlet d'affichage du profil d'un utilisateur
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -58,7 +58,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			callstmt.execute();
 			
 		} catch(SQLException e) {
-			System.out.println(e.getMessage());
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.AUTRE_ERREUR_ENCHERIR_ENCHERE);
 			throw businessException;

@@ -6,23 +6,54 @@ import java.util.List;
 import fr.eni.encheres.bo.BusinessException;
 import fr.eni.encheres.bo.Utilisateur;
 
+/**
+ * Interface pour la DAO Utilisateur
+ *
+ */
 public interface UtilisateurDAO {
 	
-	//Créer un utilisateur 
+	/**
+	 * Méthode pour créer un nouvel utilisateur
+	 * @param utilisateur
+	 * @throws SQLException
+	 * @throws BusinessException
+	 */ 
 	public void creerUtilisateur(Utilisateur utilisateur) throws SQLException, BusinessException;
 	
-	//Modifier un utilisateur
+	/**
+	 * Méthode pour modifier un utilisateur
+	 * @param utilisateur
+	 * @throws BusinessException
+	 */
 	public void modifierUtilisateur(Utilisateur utilisateur) throws BusinessException;
 	
-	//Supprimer un utilisateur
+	/**
+	 * Méthode pour supprimer un utilisateur
+	 * @param utilisateur
+	 * @throws BusinessException
+	 */
 	public void supprimerUtilisateur(Utilisateur utilisateur) throws BusinessException;
 	
-	//Afficher un utilisateur par ID
+	/**
+	 * Méthode pour afficher un utilisateur par ID
+	 * @param utilisateur
+	 * @return Utilisateur
+	 * @throws BusinessException
+	 */
 	public Utilisateur selectionnerParId(Utilisateur utilisateur) throws BusinessException;
 	
-	//Lister tous les utilisateurs
+	/**
+	 * Méthode pour lister les utilisateurs
+	 * @return List<Utilisateur>
+	 * @throws BusinessException
+	 */
 	public List<Utilisateur> lister() throws BusinessException;
 	
-	//Afficher un utilisateur par pseudo
+	/**
+	 * Méthode pour afficher un utilisateur par pseudo
+	 * @param utilisateur
+	 * @return Utilisateur
+	 * @throws BusinessException
+	 */
 	public Utilisateur selectionnerParPseudo(Utilisateur utilisateur) throws BusinessException; 
 }

@@ -3,20 +3,44 @@ package fr.eni.encheres.dal;
 import fr.eni.encheres.bo.BusinessException;
 import fr.eni.encheres.bo.Enchere;
 
+/**
+ * Interface pour les méthodes de la DAO Enchere
+ */
 public interface EnchereDAO {
 	
-	//Création d'une enchère
+	/**
+	 * Méthode pour créer une nouvelle enchère
+	 * @param enchere
+	 * @throws BusinessException
+	 */
 	public void creerEnchere(Enchere enchere) throws BusinessException;
 	
-	//Modification d'une enchère
+	/**
+	 * Méthode pour modifier une enchère par ID
+	 * @param enchere
+	 * @throws BusinessException
+	 */
 	public void modifierEnchere(Enchere enchere) throws BusinessException;
 	
-	//Suppression d'une enchère
+	/**
+	 * Méthode pour supprimer une enchère par ID
+	 * @param enchere
+	 * @throws BusinessException
+	 */
 	public void supprimerEnchere(Enchere enchere) throws BusinessException;
 	
-	//Affichage de la dernière enchère par Utilisateur et Article
+	/**
+	 * Méthode pour afficher une enchère par ID utilisateur et numéro d'article
+	 * @param enchere
+	 * @return Enchere
+	 * @throws BusinessException
+	 */
 	public Enchere afficherParUtilEtArt(Enchere enchere) throws BusinessException;
 	
-	//Enchérir by Procédure stockée
+	/**
+	 * Méthode pour enchérir
+	 * @param enchere
+	 * @throws BusinessException
+	 */
 	public void encherir(Enchere enchere) throws BusinessException;
 }

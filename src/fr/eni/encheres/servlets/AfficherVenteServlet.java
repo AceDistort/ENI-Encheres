@@ -86,9 +86,9 @@ public class AfficherVenteServlet extends HttpServlet {
 				enchere.setMontantEnchere(Integer.parseInt(request.getParameter("montantEnchere")));
 				EnchereManager.getEnchereManager().encherir(enchere);
 				
-				((HttpServletResponse) response).sendRedirect("encheres");
+				((HttpServletResponse) response).sendRedirect("vente?id=" + article.getNoArticle());
 			} catch (BusinessException e) {
-				((HttpServletResponse) response).sendRedirect("encheres?id=" + request.getParameter("noArticle"));
+				((HttpServletResponse) response).sendRedirect("vente?id=" + request.getParameter("noArticle"));
 			}
 		}
 	}

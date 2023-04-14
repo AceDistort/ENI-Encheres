@@ -5,6 +5,9 @@ import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.EnchereDAO;
 
+/**
+ * Classe en charge de gérer les enchères
+ */
 public class EnchereManager {
 	//Attributs d'instances
 	private static EnchereManager enchereManager;
@@ -23,6 +26,11 @@ public class EnchereManager {
 		return enchereManager;
 	}
 	
+	/**
+	 * Méthode en charge de créer une nouvelle enchère
+	 * @param enchere
+	 * @throws BusinessException
+	 */
 	public void creer (Enchere enchere) throws BusinessException {
 		if (enchere == null) {
 			BusinessException businessException = new BusinessException();
@@ -39,6 +47,11 @@ public class EnchereManager {
 		}	
 	}
 	
+	/**
+	 * Méthode en charge d'enchérir sur une enchère
+	 * @param enchere
+	 * @throws BusinessException
+	 */
 	public void encherir(Enchere enchere) throws BusinessException {
 		if (enchere == null) {
 			BusinessException businessException = new BusinessException();
@@ -56,6 +69,12 @@ public class EnchereManager {
 		}	
 	}
 	
+	/**
+	 * Méthode en charge de modifier une enchère par son ID
+	 * @param enchere
+	 * @return Enchere
+	 * @throws BusinessException
+	 */
 	public void modifier (Enchere enchere) throws BusinessException {
 		if (enchere == null) {
 			BusinessException businessException = new BusinessException();
@@ -71,6 +90,12 @@ public class EnchereManager {
 		}	
 	}
 	
+	/**
+	 * Méthode en charge de supprimer une enchère par son ID
+	 * @param enchere
+	 * @return Enchere
+	 * @throws BusinessException
+	 */
 	public void supprimer (Enchere enchere) throws BusinessException {
 		if (enchere == null) {
 			BusinessException businessException = new BusinessException();
@@ -86,6 +111,12 @@ public class EnchereManager {
 		}	
 	}
 	
+	/**
+	 * Méthode en charge d'afficher une enchère par son ID
+	 * @param enchere
+	 * @return Enchere
+	 * @throws BusinessException
+	 */
 	public Enchere afficherEnchere(Enchere enchere) throws BusinessException {
 		BusinessException businessException = new BusinessException();
 		if(enchere == null) {

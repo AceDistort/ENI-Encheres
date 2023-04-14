@@ -2,6 +2,9 @@ package fr.eni.encheres.bo;
 
 import java.io.Serializable;
 
+/**
+ * Classe en charge de gérer les utilisateurs
+ */
 public class Utilisateur implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -23,11 +26,29 @@ public class Utilisateur implements Serializable {
 	public Utilisateur() {
 	}
 	
+	/**
+	 * Constructeur pour la création d'un utilisateur
+	 * @param pseudo
+	 * @param motDePasse
+	 */
 	public Utilisateur(String pseudo, String motDePasse) {
 		setPseudo(pseudo);
 		setMotDePasse(motDePasse);
 	}
 	
+	/**
+	 * Constructeur pour la création d'un utilisateur
+	 * @param pseudo
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param rue
+	 * @param codePostal
+	 * @param ville
+	 * @param motDePasse
+	 * @param credit
+	 * @param administrateur
+	 */
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String rue, String codePostal,
 			String ville, String motDePasse, int credit, boolean administrateur) {
 		setPseudo(pseudo);

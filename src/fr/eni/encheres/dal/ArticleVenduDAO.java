@@ -17,7 +17,7 @@ public interface ArticleVenduDAO {
 	
 	/**
 	 * Méthode pour lister toutes les ventes en mode déconnecté
-	 * @return une liste d'articleVendu
+	 * @return List<ArticleVendu>
 	 * @throws BusinessException 
 	 */
 	public List<ArticleVendu> listerVentesDeconnecte() throws BusinessException;
@@ -25,21 +25,50 @@ public interface ArticleVenduDAO {
 	/**
 	 * Méthode pour afficher un article par ID
 	 * @param article
-	 * @param utilisateur
-	 * @param categorie
-	 * @return
+	 * @return List<ArticleVendu>
 	 * @throws BusinessException
 	 */
 	public ArticleVendu afficherArticleParID(ArticleVendu article) throws BusinessException;
 	public List<ArticleVendu> listerEncheresOuvertes() throws BusinessException;
 	
+	/**
+	 * Méthode pour lister les ventes en cours
+	 * @param utilisateur
+	 * @return List<ArticleVendu>
+	 * @throws BusinessException
+	 */
 	public List<ArticleVendu> listerMesEncheresEnCours(Utilisateur utilisateur) throws BusinessException;
 	
+	/**
+	 * Méthode pour lister les ventes remportées
+	 * @param utilisateur
+	 * @return List<ArticleVendu>
+	 * @throws BusinessException
+	 */
 	public List<ArticleVendu> listerMesEncheresRemportees(Utilisateur utilisateur) throws BusinessException;
 	
+
+	/**
+	 * Méthode pour lister les ventes en cours
+	 * @param utilisateur
+	 * @return List<ArticleVendu>
+	 * @throws BusinessException
+	 */
 	public List<ArticleVendu> listerMesVentesEnCours(Utilisateur utilisateur) throws BusinessException;
 	
+	/**
+	 * Méthode pour lister les ventes non débutées
+	 * @param utilisateur
+	 * @return List<ArticleVendu>
+	 * @throws BusinessException
+	 */
 	public List<ArticleVendu> listerVentesNonDebutees() throws BusinessException;
 	
+	/**
+	 * Méthode pour lister les ventes terminées
+	 * @param utilisateur
+	 * @return List<ArticleVendu>
+	 * @throws BusinessException
+	 */
 	public List<ArticleVendu> listerVentesTerminees() throws BusinessException;
 }

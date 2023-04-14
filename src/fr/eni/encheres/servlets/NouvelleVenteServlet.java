@@ -35,7 +35,6 @@ public class NouvelleVenteServlet extends HttpServlet {
      */
     public NouvelleVenteServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -50,8 +49,6 @@ public class NouvelleVenteServlet extends HttpServlet {
 				List<Categorie> categories = CategoriesManager.getCategorieManager().lister();
 				request.setAttribute("categories", categories);
 			} catch (BusinessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 			request.getRequestDispatcher("WEB-INF/nouvelleVente.jsp").forward(request, response);
 		}
@@ -65,32 +62,27 @@ public class NouvelleVenteServlet extends HttpServlet {
 		try {
 			// NOM ARTICLE
 			if(request.getParameter("nomArticle") == null) {
-				//TODO
 			}
 			String nomArticle = request.getParameter("nomArticle");
 			
 			// DESCRIPTION
 			if(request.getParameter("description") == null) {
-				//TODO
 			}
 			String description = request.getParameter("description");
 			
 			// CATEGORIE
 			if(request.getParameter("categorie") == null) {
-				//TODO
 			}
 			Categorie categorie = new Categorie();
 			categorie.setNoCategorie(Integer.parseInt(request.getParameter("categorie")));
 			
 			// PRIX INITIAL
 			if(request.getParameter("prixInitial") == null) {
-				//TODO
 			}
 			int prixInitial = Integer.parseInt(request.getParameter("prixInitial"));
 			
 			// DATE DEBUT ENCHERE
 			if(request.getParameter("dateDebutEncheres") == null) {
-				//TODO
 			}
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			java.util.Date d = sdf.parse(request.getParameter("dateDebutEncheres"));
@@ -98,26 +90,22 @@ public class NouvelleVenteServlet extends HttpServlet {
 			
 			// DATE FIN ENCHERE
 			if(request.getParameter("dateFinEncheres") == null) {
-				//TODO
 			}
 			d = sdf.parse(request.getParameter("dateFinEncheres"));
 			Date dateFinEncheres = new Date(d.getTime());
 			
 			// RUE
 			if(request.getParameter("rue") == null) {
-				//TODO
 			}
 			String rue = request.getParameter("rue");
 			
 			// CODE POSTAL
 			if(request.getParameter("codePostal") == null) {
-				//TODO
 			}
 			String codePostal = request.getParameter("codePostal");
 			
 			// VILLE
 			if(request.getParameter("ville") == null) {
-				//TODO
 			}
 			String ville = request.getParameter("ville");
 			
@@ -135,14 +123,8 @@ public class NouvelleVenteServlet extends HttpServlet {
 			((HttpServletResponse) response).sendRedirect("encheres");
 			
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 	}

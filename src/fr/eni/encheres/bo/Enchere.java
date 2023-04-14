@@ -3,6 +3,9 @@ package fr.eni.encheres.bo;
 import java.io.Serializable;
 import java.sql.Date;
 
+/**
+ * Classe en charge de gérer les enchères
+ */
 public class Enchere implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -16,6 +19,13 @@ public class Enchere implements Serializable {
 	public Enchere() {
 	}
 	
+	/**
+	 * Constructeur pour la création d'une enchère
+	 * @param utilisateur
+	 * @param article
+	 * @param dateEnchere
+	 * @param montantEnchere
+	 */
 	public Enchere(Utilisateur utilisateur, ArticleVendu article, Date dateEnchere, int montantEnchere) {
 		setDateEnchere(dateEnchere);
 		setMontantEnchere(montantEnchere);

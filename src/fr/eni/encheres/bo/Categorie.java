@@ -2,6 +2,9 @@ package fr.eni.encheres.bo;
 
 import java.io.Serializable;
 
+/**
+ * Classe en charge de gérer les catégories
+ */
 public class Categorie implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -10,6 +13,10 @@ public class Categorie implements Serializable {
 	
 	public Categorie() {}
 
+	/**
+	 * Constructeur pour la création d'une catégorie
+	 * @param libelle
+	 */
 	public Categorie(String libelle) {
 		this.setLibelle(libelle);
 	}
