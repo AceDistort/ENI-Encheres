@@ -124,6 +124,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 			Utilisateur vend = (Utilisateur) request.getSession().getAttribute("sessionUtilisateur");
 			ArticleVendu article = new ArticleVendu(nomArticle, description, dateDebutEncheres, dateFinEncheres, vend, categorie);
 			article.setPrixInitial(prixInitial);
+			article.setPrixVente(prixInitial);
 			
 			ArticleVenduManager.getArticleVenduManager().nouvelleVente(article);
 			

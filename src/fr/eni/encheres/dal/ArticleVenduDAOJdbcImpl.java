@@ -16,7 +16,7 @@ import fr.eni.encheres.bo.Utilisateur;
 
 public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	
-	private static final String CREER_VENTE_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,no_utilisateur,no_categorie) VALUES (?,?,?,?,?,?,?);";
+	private static final String CREER_VENTE_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie) VALUES (?,?,?,?,?,?,?,?);";
 	private static final String LISTER_VENTES_ARTICLE = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente, u.no_utilisateur, c.no_categorie, c.libelle, u.pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON (u.no_utilisateur = a.no_utilisateur) INNER JOIN CATEGORIES c ON (c.no_categorie = a.no_categorie);";
 	private static final String AFFICHER_ARTICLE_PAR_ID = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente,\r\n" + 
 			"u.no_utilisateur, u.pseudo, u.nom, u.prenom, u.email, u.telephone, u.rue as u_rue, u.code_postal as u_code_postal, u.ville as u_ville, u.mot_de_passe, u.credit, u.administrateur,\r\n" + 
@@ -51,7 +51,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 		article.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
 		article.setDateFinEncheres(rs.getDate("date_fin_encheres"));
 		article.setPrixInitial(rs.getInt("prix_initial"));
-		article.setPrixVente(rs.getInt("prix_initial"));
+		article.setPrixVente(rs.getInt("prix_vente"));
 		article.setVend(utilisateur);
 		article.setCategorie(categorie);
 		return article;
@@ -77,8 +77,9 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			pstmt.setDate(3, article.getDateDebutEncheres());
 			pstmt.setDate(4, article.getDateFinEncheres());
 			pstmt.setInt(5, article.getPrixInitial());
-			pstmt.setInt(6, article.getVend().getNoUtilisateur());
-			pstmt.setInt(7, article.getCategorie().getNoCategorie());
+			pstmt.setInt(6, article.getPrixVente());
+			pstmt.setInt(7, article.getVend().getNoUtilisateur());
+			pstmt.setInt(8, article.getCategorie().getNoCategorie());
 			
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
