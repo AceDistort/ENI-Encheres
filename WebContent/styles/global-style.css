@@ -1,0 +1,110 @@
+@charset "ISO-8859-1";
+
+header{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+input, textarea, select, .ombreInputs{
+	box-shadow: 1px 1px 5px 1px #b5b5b5
+}
+
+p{
+	text-align: justify;
+}
+
+.header-nav{
+	margin: 30px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	list-style: none;
+}
+
+.header-nav li{
+	margin: 0 15px
+}
+
+.title{
+	font-size: 27px;
+	font-family: sans-serif;
+	margin: 50px
+}
+
+.centered{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.button{
+	border-radius: 5px;
+	padding: 8px 20px 
+}
+
+.button a,.button p{
+	text-decoration: none;
+}
+
+.blue-background{
+	background-color: #3e8ed0;
+}
+
+.orange-background{
+	background-color: #fb8537;
+	color: #fff;
+}
+
+.orange-background:hover{
+	background-color: #dd7530;
+	cursor: pointer
+}
+
+.orange-background a,.orange-background p{
+	color: #fff;
+}
+
+.orange-background{
+	background-color: #fb8537;
+}
+
+.no-text-decoration{
+	text-decoration: none;
+}
+
+.text{
+	color: #000;
+}
+.info-text{
+	font-size: 10px;
+	color: #939393
+}
+.red{
+	color: red
+}
+
+.input-label-box{
+	margin: 15px 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.input-label-box label{
+	margin-right: 20px;
+	flex: 1
+}
+
+.input-label-box input{
+	flex: 1
+}
+
+.error-text{
+	color: red;
+	font-size: 15px;
+}
