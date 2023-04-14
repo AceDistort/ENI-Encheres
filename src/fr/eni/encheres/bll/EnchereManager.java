@@ -43,6 +43,7 @@ public class EnchereManager {
 		if (enchere == null) {
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatBLL.OBJET_NULL_ENCHERIR_ENCHERE);
+			throw businessException;
 		}
 		
 		try {
